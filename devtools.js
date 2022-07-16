@@ -1,0 +1,1 @@
+chrome.devtools.panels.create('SolidJS', './panel.html', () => {});
