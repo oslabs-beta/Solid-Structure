@@ -1,14 +1,18 @@
-import { colors } from "../theme";
+import { orientationIcon } from "./orientationIcon";
 import '../styles/components/_header.scss';
-import { orientationIcon } from './orientationIcon';
 
 export const Header = () => {
   return(
     <div id="header">
         <h2>Solid Structure (SolidJS)</h2>
         <div id="iconbox">
-            <orientationIcon />
+          <orientationIcon />
+          {/* <div class="orientationIcon">
+              <div class="obox1">Hello</div>
+              <div class="obox2"></div>
+          </div> */}
         </div>
     </div>
   )
 };
+

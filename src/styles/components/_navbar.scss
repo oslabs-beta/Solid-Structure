@@ -1,32 +1,30 @@
+@use "../main.scss" as m;
+
 #navbar{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 38px;
-    background-color: #D9DBDE;
+    position:absolute;
+    bottom:0;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    width:100%;
+    height:m.$obj-height;
+    background-color: m.$primary-color;
 }
 
 #navbar-btns{
-    display: flex;
-    justify-content: space-around;
-    width: 80%;
-    height: 20px;
+    display:flex;
+    justify-content:space-around;
+    width:80%;
 
     .tab {
-        font-size:1.2rem;
-        align-self: center;
-        color: gray;
-        transition: color 0.2s linear;
-        
-        &:hover{
-            color: black;
-            cursor: pointer;
-        }
+        font-size: m.$main-font;
+        align-self:center;
+        transition:color 0.15s ease-out;
+        &:hover{ color:black; cursor:pointer; }
         &.active {
-            color: black;
-            font-weight: bold; 
-            text-decoration: underline;
+            color:black;
+            font-weight:bold; 
+            text-decoration:underline;
         }
     }
 }

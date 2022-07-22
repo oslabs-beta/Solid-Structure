@@ -1,5 +1,4 @@
 import { createSignal } from "solid-js";
-import { colors } from "../theme";
 import '../styles/components/_inspector.scss';
 
 export const Inspect = (props) => {

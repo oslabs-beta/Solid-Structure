@@ -4,7 +4,6 @@ import { Inspect } from "./components/Inspect";
 import { Graph } from "./components/Graph";
 import { LogMonitor } from "./components/LogMonitor";
 import { Navbar } from "./components/Navbar";
-import { colors } from "./theme";
 import './styles/main.scss';
 
 export const SolidStructure = (props) => {
@@ -13,9 +12,8 @@ export const SolidStructure = (props) => {
   const [cache, setCache] = createSignal({}); //creating signal for inspect, need to act as a reset or refresh or all graphs 
 
   return (
-    <div id="main">
+    <>
       <Header />
-
       <div id="display">
         <Show when={tab() === "inspector"}>
           <Inspect cache={cache()} setCache={setCache}/>
@@ -31,8 +29,7 @@ export const SolidStructure = (props) => {
           <LogMonitor />
         </Show> */}
       </div>
-
       <Navbar setTab={setTab}/> 
-    </div>
+    </>
   )
 }
