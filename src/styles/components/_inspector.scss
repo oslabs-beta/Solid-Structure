@@ -16,6 +16,32 @@
         width:100%;
         height:m.$obj-height;
         background-color:#506165;
+
+        #recordButton {
+            font-size:0;
+            width:24px;
+            height:24px;
+            background-color:lightgray;
+            border-radius: 100%;
+
+            &::after {
+                content:"";
+                display:block;
+                margin:0 auto;
+                text-align:center;
+                width:14px;
+                height:14px;
+                border-radius:100%;
+                background-color: red;
+            }
+            &.active { }
+        }
+        #resetButton {
+            font-size: m.$main-font;
+            padding:0 4px;
+            border-radius: 5px;
+            background-color: lightgray;
+        }
     }
     #history {
         padding-top:m.$obj-height;
