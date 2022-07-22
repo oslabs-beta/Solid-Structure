@@ -1,6 +1,5 @@
-import { colors } from "../theme";
-import {createSignal} from 'solid-js';
-import '../styles/components/_navbar.scss'
+import { createSignal } from 'solid-js';
+import '../styles/components/_navbar.scss';
 
 export const Navbar = (props) => {
     const handleClick = (e) => {
