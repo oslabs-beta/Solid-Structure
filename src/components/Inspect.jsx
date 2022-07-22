@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import '../styles/components/_inspector.scss';
+import '../styles/components/_inspect.scss';
 
 export const Inspect = (props) => {
     const [record, setRecord] = createSignal(false);

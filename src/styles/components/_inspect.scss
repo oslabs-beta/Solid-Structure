@@ -34,7 +34,6 @@
                 border-radius:100%;
                 background-color: red;
             }
-            &.active { }
         }
         #resetButton {
             font-size: m.$main-font;
@@ -49,26 +48,3 @@
         height:100%;
     }
 }
-
-
-// Graph.jsx
-#graphContainer {
-    position:relative;
-    float:left;
-    width:70%;
-    height:100%;
-    background-color: m.$secondary-color;
-
-    #containerDep {
-        width:100%;
-        height:50%;
-        // border:1px solid #000;
-    }
-    #containerStr {
-        width:100%;
-        height:50%;
-        background-color:#fff;
-        // border:1px solid #000;
-    }
-}
-

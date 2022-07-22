@@ -1,5 +1,32 @@
 // import '../styles/components/_inspector.scss';
 // import * as d3 from 'd3'
+import '../styles/components/_graph.scss';
+
+export const Graph = (props) => {
+  const { tab, orientation } = props.tab;
+
+  /* 
+
+    STILL WORKING ON IT 
+
+    if 'tab' is equal to "graph", <style> width:100%, height:50%;
+    if not, <style> width:50%, height:100%;      (when tab is "inspector")
+
+    if 'orientation' is equal to 'horizontal', <style> width:100%, height:50%;
+    if 'orientation' is equal to 'vertical', <style> width:50%, height:100%;
+
+  */
+
+  return(
+    <div id="graphContainer">
+      <div id="containerDep" style={{}}></div>
+      <div id="containerStr" style={{}}></div>
+    </div>
+  )
+};
+
+
+
 
 // //import { Node } from 'd3-hierarchy';
 
@@ -218,14 +245,3 @@
 //     .attr('y', (d) => (d.children && d.depth !== 0 ? -(d.data.value + 5) : d))
 //     .style('text-anchor', (d) => (d.children ? 'end' : 'start'))
 //     .text((d) => d.data.name);
-
-
-export const Graph = () => {
-
-  return(
-    <div id="graphContainer">
-      <div id="containerDep"></div>
-      <div id="containerStr"></div>
-    </div>
-  )
-};
