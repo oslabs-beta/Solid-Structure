@@ -19,7 +19,7 @@
     .tab {
         font-size: m.$main-font;
         align-self:center;
-        transition:color 0.2s linear;
+        transition:color 0.15s ease-out;
         &:hover{ color:black; cursor:pointer; }
         &.active {
             color:black;

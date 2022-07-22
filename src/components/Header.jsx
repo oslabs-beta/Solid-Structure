@@ -7,6 +7,10 @@ export const Header = () => {
         <h2>Solid Structure (SolidJS)</h2>
         <div id="iconbox">
           <orientationIcon />
+          {/* <div class="orientationIcon">
+              <div class="obox1">Hello</div>
+              <div class="obox2"></div>
+          </div> */}
         </div>
     </div>
   )
