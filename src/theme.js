@@ -9,6 +9,3 @@ export const colors = {
   borderColor: "#222430",
 };
 
-export const font = {
-  
-}

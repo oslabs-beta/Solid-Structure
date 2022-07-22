@@ -1,0 +1,30 @@
+#header {
+    float:left;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    width: 100%;
+    height: 30px;
+    background-color: #D9DBDE;
+    color: #A0A0A0;
+
+    h2 {
+        float:left;
+        font-size:1.2rem;
+        font-weight: normal;
+    }
+
+    #iconbox {
+        float:right;
+        width:16px;
+        height:16px;
+        border:1px solid #000;
+    }
+}
+
+.orientationIcon {
+    width: 10px;
+    height: 10px;
+    border: 3px solid blue;
+}
