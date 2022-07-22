@@ -1,12 +1,10 @@
 #navbar{
-    position: absolute;
-    bottom: 0px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
     height: 38px;
-    background-color: #22232C;
+    background-color: #D9DBDE;
 }
 
 #navbar-btns{
@@ -18,13 +16,15 @@
     .tab {
         font-size:1.2rem;
         align-self: center;
-        color: #0f80d1;
-
+        color: gray;
+        transition: color 0.2s linear;
+        
         &:hover{
-            cursor:pointer;
+            color: black;
+            cursor: pointer;
         }
-
         &.active {
+            color: black;
             font-weight: bold; 
             text-decoration: underline;
         }
