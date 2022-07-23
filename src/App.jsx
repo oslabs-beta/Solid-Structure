@@ -6,15 +6,18 @@ import { LogMonitor } from "./components/LogMonitor";
 import { Navbar } from "./components/Navbar";
 import './styles/main.scss';
 
+
 export const SolidStructure = (props) => {
   // const [children, root] = createRoot(() => [props.children, getOwner()!]); 
-  const [tab, setTab] = createSignal("inspector"); // "inspector", "graph", "logmonitor"
+  const [tab, setTab] = createSignal("inspector"); 
   const [orientation, setOrientation] = createSignal("horizontal");
-  const [cache, setCache] = createSignal({}); //creating signal for inspect, need to act as a reset or refresh or all graphs 
+  const [cache, setCache] = createSignal({}); 
+  // creating signal for inspect, need to act as a reset or refresh or all graphs 
+
 
   return (
     <>
-      <Header orientation={setOrientation()} />
+      <Header setOrientation={setOrientation} />
       <div id="display">
         <Show when={tab() === "inspector"}>
           <Inspect cache={cache()} setCache={setCache}/>

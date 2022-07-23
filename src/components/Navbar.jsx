@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js';
+// import { createSignal } from 'solid-js';
 import '../styles/components/_navbar.scss';
 
 export const Navbar = (props) => {
@@ -20,9 +20,9 @@ export const Navbar = (props) => {
     return (
         <div id="navbar">
             <div id="navbar-btns">
-                <div class="tab active" type="button" id="inspector" onClick={handleClick}>Inspector</div>
-                <div class="tab" type="button" id="graph" onClick={handleClick}>Graph</div>
-                <div class="tab" type="button" id="logmonitor" onClick={handleClick}>Log Monitor</div>
+                <div class="tab active" id="inspector" onClick={handleClick}>Inspector</div>
+                <div class="tab" id="graph" onClick={handleClick}>Graph</div>
+                <div class="tab" id="logmonitor" onClick={handleClick}>Log Monitor</div>
             </div>
         </div>
     )

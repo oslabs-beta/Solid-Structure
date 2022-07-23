@@ -1,4 +1,5 @@
 @use "../main.scss" as m;
+$icon-size: 24px;
 
 // Inspect.jsx
 #inspect {
@@ -12,38 +13,43 @@
         position:absolute;
         display:flex;
         justify-content:space-between;
+        align-items: center;
         padding:6px m.$side-padding;
         width:100%;
-        height:m.$obj-height;
-        background-color:#506165;
+        height:m.$box-height;
+        background-color: m.$active-color;
 
         #recordButton {
             font-size:0;
-            width:24px;
-            height:24px;
+            width:$icon-size;
+            height:$icon-size;
             background-color:lightgray;
             border-radius: 100%;
 
+            &:hover{ cursor: pointer }
             &::after {
                 content:"";
                 display:block;
                 margin:0 auto;
                 text-align:center;
-                width:14px;
-                height:14px;
+                width:70%;
+                height:70%;
                 border-radius:100%;
                 background-color: red;
             }
         }
         #resetButton {
             font-size: m.$main-font;
+            height:$icon-size;
             padding:0 4px;
             border-radius: 5px;
             background-color: lightgray;
+            
+            &:hover{ cursor: pointer }
         }
     }
     #history {
-        padding-top:m.$obj-height;
+        padding-top:m.$box-height;
         width:100%;
         height:100%;
     }

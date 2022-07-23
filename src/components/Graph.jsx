@@ -1,5 +1,5 @@
 // import '../styles/components/_inspector.scss';
-// import * as d3 from 'd3'
+import * as d3 from 'd3'
 import '../styles/components/_graph.scss';
 
 export const Graph = (props) => {
