@@ -1,22 +1,14 @@
-import { Component, JSX } from 'solid-js';
+import type { Component, JSX } from 'solid-js';
 
 import '../styles/components/_navbar.scss';
-
-// type PropTypes = {
-//   setTab: (fn: (btn: string) => string) => void;
-// };
-// type Component<P = { setTab: (fn: (btn: string) => string) => void }> = (
-//   props: P
-// ) => JSX.Element;
-type Component<P = { setTab: (fn: (btn: string) => string) => void }> = (
-  props: P
-) => {};
 
 type TabStrings = 'inspector' | 'graph' | 'logmonitor';
 
 type TabArray = TabStrings[];
 
-export const Navbar: Component = (props) => {
+export const Navbar: Component<{
+  setTab: (fn: (btn: string) => string) => void;
+}> = (props) => {
   const handleClick: JSX.EventHandler<HTMLInputElement, MouseEvent> = (e) => {
     const tabs: TabArray = [];
     props.setTab((btn) => {
