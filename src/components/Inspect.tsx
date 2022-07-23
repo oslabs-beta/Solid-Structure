@@ -1,10 +1,14 @@
-import { createSignal } from "solid-js";
+import { createSignal} from "solid-js"
+import type {JSX, Component} from "solid-js";
 import '../styles/components/_inspector.scss';
 
-export const Inspect = (props) => {
-    const [record, setRecord] = createSignal(false);
-    const [resetOff, resetOn] = createSignal(false);
-    const handleRecordClick = (e) => {
+
+// type Component <P = {setCache: () => {}}> = (props: P) => {};
+
+export const Inspect: Component<{setCache: () => {}}> = (props) => {
+    const [record, setRecord] = createSignal<boolean>(false);
+    const [resetOff, resetOn] = createSignal<boolean>(false); //added bool tag to these
+    const handleRecordClick: JSX.EventHandler<HTMLInputElement, MouseEvent> = (e) => { 
        //when record button is triggered, all signals and application interaction is stored in cache;
        e.preventDefault();
        if(record()) {
@@ -24,7 +28,7 @@ export const Inspect = (props) => {
          //if reset is truthy, reassing props.cache to empty cache
             //change reset to falsy
          //else return 
-    const handleResetClick = (e) => {
+    const handleResetClick: JSX.EventHandler<HTMLInputElement, MouseEvent> = (e) => {
         if(resetOff()){
             resetOn(false);
         } else {
