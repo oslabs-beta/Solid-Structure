@@ -1,10 +1,11 @@
-import { createSignal, JSX, Component } from "solid-js";
+import { createSignal} from "solid-js"
+import type {JSX, Component} from "solid-js";
 import '../styles/components/_inspector.scss';
 
 
-type Component <P = {setCache: () => {}}> = (props: P) => {};
+// type Component <P = {setCache: () => {}}> = (props: P) => {};
 
-export const Inspect: Component = (props) => {
+export const Inspect: Component<{setCache: () => {}}> = (props) => {
     const [record, setRecord] = createSignal<boolean>(false);
     const [resetOff, resetOn] = createSignal<boolean>(false); //added bool tag to these
     const handleRecordClick: JSX.EventHandler<HTMLInputElement, MouseEvent> = (e) => { 
