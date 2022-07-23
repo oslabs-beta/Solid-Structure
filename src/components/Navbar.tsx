@@ -30,18 +30,13 @@ export const Navbar: Component<{
   return (
     <div id="navbar">
       <div id="navbar-btns">
-        <div
-          class="tab active"
-          type="button"
-          id="inspector"
-          onClick={handleClick}
-        >
+        <div class="tab active" id="inspector" onClick={handleClick}>
           Inspector
         </div>
-        <div class="tab" type="button" id="graph" onClick={handleClick}>
+        <div class="tab" id="graph" onClick={handleClick}>
           Graph
         </div>
-        <div class="tab" type="button" id="logmonitor" onClick={handleClick}>
+        <div class="tab" id="logmonitor" onClick={handleClick}>
           Log Monitor
         </div>
       </div>
