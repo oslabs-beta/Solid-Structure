@@ -4,7 +4,7 @@ import type { Component } from 'solid-js';
 
 //afaik this should work
 
-export const Graph: Component = () => {
+const Graph: Component = () => {
 
   return(
     <div id="graphContainer">
@@ -13,3 +13,5 @@ export const Graph: Component = () => {
     </div>
   )
 };
+
+export default Graph;
