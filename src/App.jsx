@@ -17,15 +17,19 @@ export const SolidStructure = (props) => {
 
   return (
     <>
-      <Header setOrientation={setOrientation} />
+      <Header 
+        tab={tab}
+        orientation={orientation} 
+        setOrientation={setOrientation}
+      />
       <div id="display">
         <Show when={tab() === "inspector"}>
           <Inspect cache={cache()} setCache={setCache}/>
-          <Graph tab={tab()} orientation={orientation()}/>
+          <Graph tab={tab()} orientation={orientation}/>
         </Show>
 
         <Show when={tab() === "graph"}>
-          <Graph tab={tab()} orientation={orientation()}/>
+          <Graph tab={tab()} orientation={orientation}/>
         </Show>
 
         <Show when={tab() === "logmonitor"}>

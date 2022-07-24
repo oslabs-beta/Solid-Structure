@@ -1,11 +1,13 @@
 @use "../main.scss" as m;
 
 @mixin orientation-box($w, $h) {
+    content:"";
+    display:block;
     float:left;
     background-color: m.$active-color;
     width: $w;
     height: $h;
-    border-radius:2px;
+    border-radius:1px;
 }
 
 #mainHead {
@@ -30,18 +32,23 @@
     width:18px;
     height:18px;
     margin-left:8px;
-    opacity: 0.2;
-    transition: opacity 0.3s ease;
-    cursor:pointer; // NOT WORKING!!!
-    // border:1px solid #000;
+    cursor:pointer;
+    opacity:0.2;
+    transition: opacity 0.25s ease;
 
+    &:hover{ opacity:0.3; }
     &.active{ opacity:1; }
-    .hbox {
-        @include orientation-box(100%, 47%);
-        &:nth-child(1){ margin-bottom:6%; }
+
+    &.hbox{
+        &::before { margin-bottom:2px; }
+        &::before, &::after {
+            @include orientation-box(100%, 8px);
+        }
     }
-    .vbox {
-        @include orientation-box(47%, 100%);
-        &:nth-child(1){ margin-right:6%; }
+    &.vbox{
+        &::before { margin-right:2px; }
+        &::before, &::after {
+            @include orientation-box(8px, 100%);
+        }
     }
 }

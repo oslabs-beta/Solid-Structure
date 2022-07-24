@@ -1,26 +1,32 @@
-// import '../styles/components/_inspector.scss';
+import { createEffect } from 'solid-js';
 import * as d3 from 'd3'
 import '../styles/components/_graph.scss';
 
 export const Graph = (props) => {
-  const { tab, orientation } = props.tab;
+  let displayStyle;
 
-  /* 
-
-    STILL WORKING ON IT 
-
-    if 'tab' is equal to "graph", <style> width:100%, height:50%;
-    if not, <style> width:50%, height:100%;      (when tab is "inspector")
-
-    if 'orientation' is equal to 'horizontal', <style> width:100%, height:50%;
-    if 'orientation' is equal to 'vertical', <style> width:50%, height:100%;
-
-  */
+  createEffect(() => {
+    console.log(props.orientation());
+    if (props.orientation() === "horizontal") {
+      displayStyle = { "width":"100%", "height":"50%" }
+      document.getElementById("containerDep").style.width = "100%";
+      document.getElementById("containerDep").style.height = "50%";
+      document.getElementById("containerStr").style.width = "100%";
+      document.getElementById("containerStr").style.height = "50%";
+    }
+    else if (props.orientation() === "vertical") {
+      displayStyle = { "width":"50%", "height":"100%" }
+      document.getElementById("containerDep").style.width = "50%";
+      document.getElementById("containerDep").style.height = "100%";
+      document.getElementById("containerStr").style.width = "50%";
+      document.getElementById("containerStr").style.height = "100%";
+    }
+  });
 
   return(
     <div id="graphContainer">
-      <div id="containerDep" style={{}}></div>
-      <div id="containerStr" style={{}}></div>
+      <div id="containerDep"></div>
+      <div id="containerStr"></div>
     </div>
   )
 };
