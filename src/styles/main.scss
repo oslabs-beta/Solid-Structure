@@ -29,11 +29,12 @@ $box-height: 34px;
 
 
 /* App.tsx */
-#display {
-    position:absolute; top:0;
-    padding-top:30px;
-    padding-bottom:$box-height;
+#mainApp {
+    position:fixed;
+    top:0; left:0;
+    display:grid;
+    grid-template-rows: 30px auto 34px;
     width:100%;
     height:100%;
-    z-index:-1;
 }
+#display { display:grid;  }

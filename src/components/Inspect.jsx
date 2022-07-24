@@ -1,51 +1,129 @@
-import { createSignal } from "solid-js";
+import { createSignal, createEffect } from "solid-js";
 import '../styles/components/_inspect.scss';
 
 export const Inspect = (props) => {
-    const [record, setRecord] = createSignal(false);
-    const [resetOff, resetOn] = createSignal(false);
-    const handleRecordClick = (e) => {
-       //when record button is triggered, all signals and application interaction is stored in cache;
-       e.preventDefault();
-       if(record()) {
-        //conditonal that checks if record is truthy then toggle back to falsly
-           setRecord(false);
-           
-    } else {
-        setRecord((true));
-        //need to update cache object to reflect the current state of the page
-       }
-    };
 
+createEffect(() => {
+  props.record() ? 
+    document.querySelector("#recordButton > span").style.backgroundColor = "#2F2F33" : 
+    document.querySelector("#recordButton > span").style.backgroundColor = "#D4D6D9";
+});
 
+const handleRecordClick = (e) => {
+  //when record button is triggered, all signals and application interaction is stored in cache;
+  e.preventDefault();
 
-    //if falsy toggle to truthy and capture window data from browser
-       //when reset button is triggered, cache storage is cleared 
-         //if reset is truthy, reassing props.cache to empty cache
-            //change reset to falsy
-         //else return 
-    const handleResetClick = (e) => {
-        if(resetOff()){
-            resetOn(false);
-        } else {
-            resetOn(true);
-            props.setCache(() => {});
-        }
-    };
+  //conditonal that checks if record is truthy then toggle back to falsly
+  props.setRecord(!props.record())
+  //need to update cache object to reflect the current state of the page
+};
+
+const handleResetClick = (e) => {
+  console.log('Reset');
+  props.setCache(() => {});
+};
+  //if falsy toggle to truthy and capture window data from browser
+    //when reset button is triggered, cache storage is cleared 
+        //if reset is truthy, reassing props.cache to empty cache
+        //change reset to falsy
+        //else return 
     
-
-    return (
-        <div id="inspect">
-            <div id="logHead">
-                <button id="recordButton" onClick={handleRecordClick}>Record</button>
-                <button id="resetButton" onClick={handleResetClick}>Reset</button>
-            </div>
-            <div id="history">
-                <div id="Update_Location"> </div>
-                {/* <div id=""> </div> */}
-                {/* ^^^^ this is going contain the update location aspects that are updated by a loop pushing into an array*/}
-                <div id="Update_Location"> </div>
-            </div>
-        </div>
-    );
+  return (
+    <div id="inspect">
+      <div id="logHead">
+        <div id="recordButton" onClick={handleRecordClick}><span></span></div>
+        <div id="resetButton" onClick={handleResetClick}>Reset</div>
+      </div>
+      <div id="history">
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">HI</div>
+        <div class="Update_Location">Hello</div>
+        <div class="Update_Location">Hello</div>
+        {/* <div id=""> </div> */}
+        {/* ^^^^ this is going contain the update location aspects that are updated by a loop pushing into an array*/}
+      </div>
+    </div>
+  );
 };

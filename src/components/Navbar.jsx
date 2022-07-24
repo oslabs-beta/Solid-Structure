@@ -13,8 +13,9 @@ export const Navbar = (props) => {
                 btn = "logmonitor";
             }
             tabs.forEach(tab => btn !== tab ? 
-                document.getElementById(tab).classList.remove("active") : document.getElementById(tab).classList.add("active"));
-                return btn;
+                document.getElementById(tab).classList.remove("active") : document.getElementById(tab).classList.add("active")
+            );
+            return btn;
         })
     }
     

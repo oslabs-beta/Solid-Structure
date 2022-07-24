@@ -1,32 +1,18 @@
-import { createEffect } from 'solid-js';
 import * as d3 from 'd3'
 import '../styles/components/_graph.scss';
 
 export const Graph = (props) => {
-  let displayStyle;
-
-  createEffect(() => {
-    console.log(props.orientation());
-    if (props.orientation() === "horizontal") {
-      displayStyle = { "width":"100%", "height":"50%" }
-      document.getElementById("containerDep").style.width = "100%";
-      document.getElementById("containerDep").style.height = "50%";
-      document.getElementById("containerStr").style.width = "100%";
-      document.getElementById("containerStr").style.height = "50%";
-    }
-    else if (props.orientation() === "vertical") {
-      displayStyle = { "width":"50%", "height":"100%" }
-      document.getElementById("containerDep").style.width = "50%";
-      document.getElementById("containerDep").style.height = "100%";
-      document.getElementById("containerStr").style.width = "50%";
-      document.getElementById("containerStr").style.height = "100%";
-    }
-  });
 
   return(
     <div id="graphContainer">
-      <div id="containerDep"></div>
-      <div id="containerStr"></div>
+      <div id="containerDep">
+        <p>Dependency</p>
+        <div class="graphBox"></div>
+      </div>
+      <div id="containerStr">
+        <p>Structural</p>
+        <div class="graphBox"></div>
+      </div>
     </div>
   )
 };
