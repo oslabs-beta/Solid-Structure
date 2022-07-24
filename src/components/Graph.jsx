@@ -1,7 +1,21 @@
+import { createEffect } from 'solid-js';
 import * as d3 from 'd3'
 import '../styles/components/_graph.scss';
 
 export const Graph = (props) => {
+
+  /* Graph Container Orientaion Changing By 'orientation' Signal Update */ 
+  createEffect(() => {
+    const graphContainerStyle = document.getElementById("graphContainer").style;
+    if (props.orientation() === "horizontal") {
+      graphContainerStyle.gridTemplateColumns = null;
+      graphContainerStyle.gridTemplateRows = "50% 50%";
+    }
+    else if (props.orientation() === "vertical") {
+      graphContainerStyle.gridTemplateRows = null;
+      graphContainerStyle.gridTemplateColumns = "50% 50%";
+    }
+  });
 
   return(
     <div id="graphContainer">

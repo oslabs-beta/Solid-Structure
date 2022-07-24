@@ -1,9 +1,9 @@
-import { Show, createEffect } from 'solid-js';
+import { createEffect } from 'solid-js';
 import '../styles/components/_header.scss';
 
 export const Header = (props) => {
 
-  /* Graph Box Display Orientation Control with Icon */ 
+  /* Graph Container Display Orientation Control with Icons */ 
   const changeOrientation = (e) => {
     if (e.target.id === "orientH") props.setOrientation("horizontal");
     else if (e.target.id === "orientV") props.setOrientation("vertical");
@@ -18,19 +18,9 @@ export const Header = (props) => {
       classH.remove("active");
       classV.add("active");
     };
-
-    const graphContainerStyle = document.getElementById("graphContainer").style;
-    if (props.orientation() === "horizontal") {
-      graphContainerStyle.gridTemplateColumns = null;
-      graphContainerStyle.gridTemplateRows = "50% 50%";
-    }
-    else if (props.orientation() === "vertical") {
-      graphContainerStyle.gridTemplateRows = null;
-      graphContainerStyle.gridTemplateColumns = "50% 50%";
-    }
   }
 
-  /* Header Iconbox Visibility Control by 'tab'*/ 
+  /* Iconbox Visibility Control with 'tab' */ 
   createEffect(() => {
     if (props.tab() === "inspector" || props.tab() === "graph") {
       document.getElementById("iconbox").style.visibility = "";

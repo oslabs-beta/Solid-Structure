@@ -14,10 +14,10 @@ export const SolidStructure = (props) => {
   const [cache, setCache] = createSignal({}); 
   // creating signal for inspect, need to act as a reset or refresh or all graphs 
 
-  /* Display Size by 'tab' */
+  /* Different 'mainDisplay' Content Size by 'tab' signal */
   createEffect(() => {
-    if (tab() === "inspector") document.getElementById("display").style.gridTemplateColumns = "30% 70%";
-    else document.getElementById("display").style.gridTemplateColumns = "100%";
+    if (tab() === "inspector") document.getElementById("mainDisplay").style.gridTemplateColumns = "30% 70%";
+    else document.getElementById("mainDisplay").style.gridTemplateColumns = "100%";
   })
 
   return (
@@ -27,14 +27,14 @@ export const SolidStructure = (props) => {
         orientation={orientation} 
         setOrientation={setOrientation}
       />
-      <div id="display">
+      <div id="mainDisplay">
         <Show when={tab() === "inspector"}>
           <Inspect record={record} setRecord={setRecord} cache={cache()} setCache={setCache}/>
-          <Graph />
+          <Graph tab={tab} orientation={orientation}/>
         </Show>
 
         <Show when={tab() === "graph"}>
-          <Graph />
+          <Graph tab={tab} orientation={orientation}/>
         </Show>
 
         <Show when={tab() === "logmonitor"}>

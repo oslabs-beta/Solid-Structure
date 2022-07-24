@@ -18,7 +18,7 @@ table { border-collapse:collapse; }
 $primary-color: #D4D6D9;
 $secondary-color: #EFEFEF;
 $active-color: #2F2F33;
-$font-color: #000;
+$lightblue: #199fccff;
 
 /* Font Sizes */
 $main-font: 1.2rem;
@@ -31,10 +31,13 @@ $box-height: 34px;
 /* App.tsx */
 #mainApp {
     position:fixed;
-    top:0; left:0;
-    display:grid;
-    grid-template-rows: 30px auto 34px;
+    top:0;
     width:100%;
     height:100%;
 }
-#display { display:grid;  }
+#mainDisplay { 
+    display:grid; 
+    height:100%;
+    padding-top:30px;
+    padding-bottom:$box-height;
+}
