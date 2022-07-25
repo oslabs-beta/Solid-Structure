@@ -1,14 +1,23 @@
 @use "../main.scss" as m;
 
 @mixin graphName {
-    position: relative;
+    position:relative;
+    width:100%;
+    height:100%;
+
+    svg{
+        position:absolute;
+        width:100%;
+        height:100%;
+        // background-color: skyblue;
+    }
     p {
         position:absolute;
         width:100%;
         text-align:center;
-        line-height:2rem;
+        line-height:2.4rem;
         opacity:0.5;
-        z-index:100;
+        z-index:0;
     }
 }
 
@@ -20,18 +29,11 @@
 
     #containerDep {
         @include graphName;
-        // border:2px solid blue;
+        // border:1px solid blue;
     }
     #containerStr {
         @include graphName;
         background-color:#fff;
-        // border:2px solid orange;
+        // border:1px solid orange;
     }
-}
-.graphBox{
-    position:relative;
-    width:100%;
-    height:100%;
-    z-index:10;
-    overflow:hidden;
 }

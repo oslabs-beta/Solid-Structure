@@ -3,7 +3,7 @@ import '../styles/components/_header.scss';
 
 export const Header = (props) => {
 
-  /* Graph Container Display Orientation Control with Icons */ 
+  /* Controlling inner display orientation of '#graphContainer' with '.orientationIcon'. */ 
   const changeOrientation = (e) => {
     if (e.target.id === "orientH") props.setOrientation("horizontal");
     else if (e.target.id === "orientV") props.setOrientation("vertical");
@@ -20,7 +20,7 @@ export const Header = (props) => {
     };
   }
 
-  /* Iconbox Visibility Control with 'tab' */ 
+  /* Altering '#iconbox' visibility based on 'tab' signal. */ 
   createEffect(() => {
     if (props.tab() === "inspector" || props.tab() === "graph") {
       document.getElementById("iconbox").style.visibility = "";

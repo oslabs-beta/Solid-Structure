@@ -1,22 +1,59 @@
-import { createEffect } from 'solid-js';
-import * as d3 from 'd3'
+import { createSignal, createEffect } from 'solid-js';
+import { GraphBox } from './GraphBox';
 import '../styles/components/_graph.scss';
+// import * as d3 from 'd3';
 
 export const Graph = (props) => {
 
-  /* Graph Container Orientaion Changing By 'orientation' Signal Update */ 
+  /* Updating 'graphContainer' box size with user-input(drag). */
+  const [boxsize, setBoxsize] = createSignal(50);
+  const [onDrag, setOnDrag] = createSignal(false);
+  const onMouseMove = (e) => {
+    if (props.orientation() === "horizontal") {
+      const h = window.innerHeight - e.clientY - 34;
+      const hp = Math.floor((h / (window.innerHeight - 38))*100);
+      if (hp < 20 || hp > 80) return;
+      setBoxsize(hp);
+    }
+    else if (props.orientation() === "vertical") {
+      const leftbox = (props.boxsize 
+        ? (100 - props.boxsize())/100 * window.innerWidth + 4 
+        : 0
+      );
+      const w = e.clientX - leftbox;
+      const wp = 100 - Math.floor((w / (window.innerWidth - leftbox))*100);      
+      if (wp < 15 || wp > 85) return;
+      setBoxsize(wp);
+    }
+  }
+  const onMouseUp = (e) => setOnDrag(false);
+  createEffect(() => {
+    if (onDrag()) {
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mouseup", onMouseUp);
+    }
+    else {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    }
+  });
+
+  /* 
+    Changing inner display orientation of '#graphContainer' based on 'orientation' signal update. 
+    Size of containers inside '#graphContainer' is adjusted based on user-input(drag).
+  */ 
   createEffect(() => {
     const graphContainerStyle = document.getElementById("graphContainer").style;
     const line = document.querySelector("#graphContainer > .line").classList;
     if (props.orientation() === "horizontal") {
       graphContainerStyle.gridTemplateColumns = null;
-      graphContainerStyle.gridTemplateRows = "1fr 4px 1fr";
+      graphContainerStyle.gridTemplateRows = `1fr 4px ${boxsize()}%`;
       line.remove("v");
       line.add("h");
     }
     else if (props.orientation() === "vertical") {
       graphContainerStyle.gridTemplateRows = null;
-      graphContainerStyle.gridTemplateColumns = "1fr 4px 1fr";
+      graphContainerStyle.gridTemplateColumns = `1fr 4px ${boxsize()}%`;
       line.remove("h");
       line.add("v");
     }
@@ -26,234 +63,13 @@ export const Graph = (props) => {
     <div id="graphContainer">
       <div id="containerDep">
         <p>Dependency</p>
-        <div class="graphBox"></div>
+        <GraphBox />
       </div>
-      <div class="line h"></div>
+      <div class="line h" onMouseDown={() => setOnDrag(true)}></div>
       <div id="containerStr">
         <p>Structural</p>
-        <div class="graphBox"></div>
+        <GraphBox />
       </div>
     </div>
   )
 };
-
-
-
-
-// //import { Node } from 'd3-hierarchy';
-
-// // var siteData = {
-// //     "name": "App",
-// //     "parent": "null",
-// //     "children": [
-// //       {
-// //         "name": "NavBar",
-// //         "parent": "App",
-// //         "children": [
-// //           {
-// //             "name": "Logo",
-// //             "parent": "NavBar"
-// //           },
-// //           {
-// //             "name": "Buttons",
-// //             "parent": "NavBar",
-// //             "children": [
-// //               {
-// //                 "name": "Home",
-// //                 "parent": "Buttons"
-// //               },
-// //               {
-// //                 "name": "Login",
-// //                 "parent": "Buttons"
-// //               },
-// //               {
-// //                 "name": "SignUp",
-// //                 "parent": "Buttons"
-// //               }
-// //             ]
-// //           }
-// //         ]
-// //       },
-// //       {
-// //         "name": "Body",
-// //         "parent": "App",
-// //         "children": [
-// //           {
-// //             "name": "TodoList",
-// //             "parent": "Body"
-// //           }
-// //         ]
-// //       },
-// //       {
-// //         "name": "Footer",
-// //         "parent": "App",
-// //         "children": [
-// //           {
-// //             "name": "ContactInfo",
-// //             "parent": "Footer"
-// //           },
-// //           {
-// //             "name": "OtherButtons",
-// //             "parent": "Footer"
-// //           }
-// //         ]
-// //       }
-// //     ]
-// //   };
-  
-// //   children(siteData);
-  
-// //   function children(d) {
-// //     //check if data is a map
-// //     if(d instanceof Map){
-// //       return Array.isArray(d) ? d[1] : null;
-// //     } else {
-// //       return d.children;
-// //     }
-// //   }
-
-// const treeData = {
-//     name: 'App',
-//     value: 10,
-//     type: 'yellow',
-//     level: 'yellow',
-//     children: [
-//       {
-//         name: 'Navbar',
-//         value: 10,
-//         type: 'grey',
-//         level: 'red',
-//       },
-//       {
-//         name: 'Body',
-//         value: 10,
-//         type: 'grey',
-//         level: 'red',
-//         children: [
-//           {
-//             name: 'ToDoList',
-//             value: 7.5,
-//             type: 'grey',
-//             level: 'purple',
-//           },
-//           {
-//             name: 'Buttons',
-//             value: 7.5,
-//             type: 'grey',
-//             // "level": "purple"
-//           },
-//         ],
-//       },
-//       {
-//         name: 'Footer',
-//         value: 10,
-//         type: 'grey',
-//         level: 'blue',
-//       },
-//       {
-//         name: 'Popup',
-//         value: 10,
-//         type: 'grey',
-//         level: 'green',
-//         children: [
-//           {
-//             name: 'Form',
-//             value: 7.5,
-//             type: 'grey',
-//             level: 'orange',
-//           },
-//         ],
-//       },
-//       {
-//         name: 'Advertisement',
-//         value: 10,
-//         type: 'grey',
-//         level: 'green',
-//       },
-//     ],
-//   };
-  
-//   // set the dimensions and margins of the diagram
-//   const margin = { top: 20, right: 90, bottom: 30, left: 90 },
-//     width = 660 - margin.left - margin.right,
-//     height = 500 - margin.top - margin.bottom;
-  
-//   // declares a tree layout and assigns the size
-//   const treemap = d3.tree().size([height, width]);
-  
-//   //  assigns the data to a hierarchy using parent-child relationships
-//   let nodes = d3.hierarchy(treeData, (d) => d.children);
-  
-//   // maps the node data to the tree layout
-//   nodes = treemap(nodes);
-  
-//   // append the svg object to the body of the page
-//   // appends a 'group' element to 'svg'
-//   // moves the 'group' element to the top left margin
-//   // const graphArea = document.getElementById('containerDep');
-//   // const graphArea = document.getElementById('body');
-//   const svg = d3
-//       .select("body")
-//       .append('svg')
-//       .attr('width', width + margin.left + margin.right)
-//       .attr('height', height + margin.top + margin.bottom),
-//     g = svg
-//       .append('g')
-//       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-  
-//   // adds the links between the nodes
-//   const link = g
-//     .selectAll('.link')
-//     .data(nodes.descendants().slice(1))
-//     .enter()
-//     .append('path')
-//     .attr('class', 'link')
-//     .style('stroke', (d) => d.data.level)
-//     .attr('d', (d) => {
-//       return (
-//         'M' +
-//         d.y +
-//         ',' +
-//         d.x +
-//         'C' +
-//         (d.y + d.parent.y) / 2 +
-//         ',' +
-//         d.x +
-//         ' ' +
-//         (d.y + d.parent.y) / 2 +
-//         ',' +
-//         d.parent.x +
-//         ' ' +
-//         d.parent.y +
-//         ',' +
-//         d.parent.x
-//       );
-//     });
-  
-//   // adds each node as a group
-//   const node = g
-//     .selectAll('.node')
-//     .data(nodes.descendants())
-//     .enter()
-//     .append('g')
-//     .attr(
-//       'class',
-//       (d) => 'node' + (d.children ? ' node--internal' : ' node--leaf')
-//     )
-//     .attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')');
-  
-//   // adds the circle to the node
-//   node
-//     .append('circle')
-//     .attr('r', (d) => d.data.value)
-//     .style('stroke', (d) => d.data.type)
-//     .style('fill', (d) => d.data.level);
-  
-//   // adds the text to the node
-//   node
-//     .append('text')
-//     .attr('dy', '.35em')
-//     .attr('x', (d) => (d.children ? (d.data.value + 5) * -1 : d.data.value + 5))
-//     .attr('y', (d) => (d.children && d.depth !== 0 ? -(d.data.value + 5) : d))
-//     .style('text-anchor', (d) => (d.children ? 'end' : 'start'))
-//     .text((d) => d.data.name);
