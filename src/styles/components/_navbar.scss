@@ -3,11 +3,11 @@
 #navbar{
     position:absolute;
     bottom:0;
+    height: m.$headbox-height;
     display:flex;
     justify-content:space-around;
     align-items:center;
     width:100%;
-    height:m.$obj-height;
     background-color: m.$primary-color;
 }
 
@@ -20,9 +20,9 @@
         font-size: m.$main-font;
         align-self:center;
         transition:color 0.15s ease-out;
-        &:hover{ color:black; cursor:pointer; }
+        &:hover{ color: m.$active-color; cursor:pointer; }
         &.active {
-            color:black;
+            color: m.$active-color;
             font-weight:bold; 
             text-decoration:underline;
         }
