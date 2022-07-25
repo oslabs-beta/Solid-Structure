@@ -18,7 +18,11 @@ table { border-collapse:collapse; }
 $primary-color: #D4D6D9;
 $secondary-color: #EFEFEF;
 $active-color: #2F2F33;
+$darkcolor: #2f2f33c6;
 $lightblue: #199fccff;
+
+// E7E7E7
+// F1F1F1
 
 /* Font Sizes */
 $main-font: 1.2rem;
@@ -40,4 +44,14 @@ $box-height: 34px;
     height:100%;
     padding-top:30px;
     padding-bottom:$box-height;
+}
+
+.line {
+    &.inspc{
+        background-color: $primary-color;
+        // border-left:1px solid $darkcolor;
+        cursor:col-resize;
+    }
+    &.v{ cursor:col-resize; }
+    &.h{ cursor:row-resize; }
 }

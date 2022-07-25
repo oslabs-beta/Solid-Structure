@@ -18,7 +18,7 @@ $icon-size: 22px;
     height:100%;
     display:grid;
     grid-template-rows: m.$box-height auto;
-    border-right:1px solid m.$primary-color;
+    z-index: 10;
     overflow:hidden;
 
     #logHead {
@@ -26,7 +26,7 @@ $icon-size: 22px;
         justify-content:space-between;
         align-items:center;
         padding:6px m.$side-padding;
-        background-color:gray;
+        background-color:m.$darkcolor;
 
         #recordButton {
             @include buttonStyle;
@@ -55,6 +55,6 @@ $icon-size: 22px;
     #history { 
         width:100%; 
         height:100%; 
-        overflow-y:scroll;
+        // overflow-y:scroll;
     }
 }

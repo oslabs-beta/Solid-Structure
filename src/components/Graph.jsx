@@ -7,13 +7,18 @@ export const Graph = (props) => {
   /* Graph Container Orientaion Changing By 'orientation' Signal Update */ 
   createEffect(() => {
     const graphContainerStyle = document.getElementById("graphContainer").style;
+    const line = document.querySelector("#graphContainer > .line").classList;
     if (props.orientation() === "horizontal") {
       graphContainerStyle.gridTemplateColumns = null;
-      graphContainerStyle.gridTemplateRows = "50% 50%";
+      graphContainerStyle.gridTemplateRows = "1fr 4px 1fr";
+      line.remove("v");
+      line.add("h");
     }
     else if (props.orientation() === "vertical") {
       graphContainerStyle.gridTemplateRows = null;
-      graphContainerStyle.gridTemplateColumns = "50% 50%";
+      graphContainerStyle.gridTemplateColumns = "1fr 4px 1fr";
+      line.remove("h");
+      line.add("v");
     }
   });
 
@@ -23,6 +28,7 @@ export const Graph = (props) => {
         <p>Dependency</p>
         <div class="graphBox"></div>
       </div>
+      <div class="line h"></div>
       <div id="containerStr">
         <p>Structural</p>
         <div class="graphBox"></div>

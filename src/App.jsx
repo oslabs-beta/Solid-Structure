@@ -16,7 +16,8 @@ export const SolidStructure = (props) => {
 
   /* Different 'mainDisplay' Content Size by 'tab' signal */
   createEffect(() => {
-    if (tab() === "inspector") document.getElementById("mainDisplay").style.gridTemplateColumns = "30% 70%";
+    // if (tab() === "inspector") document.getElementById("mainDisplay").style.gridTemplateColumns = "30% 70%";
+    if (tab() === "inspector") document.getElementById("mainDisplay").style.gridTemplateColumns = "2fr 3px 5fr";
     else document.getElementById("mainDisplay").style.gridTemplateColumns = "100%";
   })
 
@@ -30,6 +31,7 @@ export const SolidStructure = (props) => {
       <div id="mainDisplay">
         <Show when={tab() === "inspector"}>
           <Inspect record={record} setRecord={setRecord} cache={cache()} setCache={setCache}/>
+          <div class="line inspc"></div>
           <Graph tab={tab} orientation={orientation}/>
         </Show>
 
