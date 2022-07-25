@@ -1,6 +1,14 @@
 {
-    "compilerOptions": {
-      "jsx": "preserve",
-      "jsxImportSource": "solid-js"
-    }
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "target": "es6",
+  },
+  "include": ["src/**/*"]
 }

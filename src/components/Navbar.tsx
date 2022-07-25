@@ -10,7 +10,7 @@ export const Navbar: Component<{
   setTab: (fn: (btn: string) => string) => void;
 }> = (props) => {
   const handleClick: JSX.EventHandler<HTMLInputElement, MouseEvent> = (e) => {
-    const tabs: TabArray = [];
+    const tabs: TabArray = ['inspector', 'graph', 'logmonitor'];
     props.setTab((btn) => {
       if (e.target.id === 'inspector') {
         btn = 'inspector';
