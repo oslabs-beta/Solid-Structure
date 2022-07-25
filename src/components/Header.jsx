@@ -1,4 +1,5 @@
 import { orientationIcon } from "./orientationIcon";
+import {Component} from 'solid-js'
 import '../styles/components/_header.scss';
 
 export const Header = () => {
