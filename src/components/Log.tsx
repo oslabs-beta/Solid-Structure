@@ -1,7 +1,8 @@
+import { LogComponent } from "../types"
 import '../styles/components/_log.scss';
 
 
-export const Log = (props) => {
+export const Log:LogComponent = (props) => {
 
   return(
     <div class="logBox">

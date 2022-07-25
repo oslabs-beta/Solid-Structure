@@ -1,16 +1,16 @@
 import { createSignal, createEffect } from 'solid-js';
-import type { Component } from 'solid-js';
 import { GraphBox } from './GraphBox';
 import '../styles/components/_graph.scss';
+import { GraphComponent } from '../types';
 // import * as d3 from 'd3';
 
 
-export const Graph: Component = (props) => {
+export const Graph:GraphComponent = (props) => {
 
   /* Updating 'graphContainer' box size with user-input(drag). */
-  const [boxsize, setBoxsize] = createSignal(50);
-  const [onDrag, setOnDrag] = createSignal(false);
-  const onMouseMove = (e) => {
+  const [boxsize, setBoxsize] = createSignal<number>(50);
+  const [onDrag, setOnDrag] = createSignal<boolean>(false);
+  const onMouseMove = (e: any) => {
     if (props.orientation() === "horizontal") {
       const h = window.innerHeight - e.clientY - 34;
       const hp = Math.floor((h / (window.innerHeight - 38))*100);
@@ -23,12 +23,12 @@ export const Graph: Component = (props) => {
         : 0
       );
       const w = e.clientX - leftbox;
-      const wp = 100 - Math.floor((w / (window.innerWidth - leftbox))*100);      
+      const wp = 100 - Math.floor((w / (window.innerWidth - leftbox))*100);
       if (wp < 15 || wp > 85) return;
       setBoxsize(wp);
     }
   }
-  const onMouseUp = (e) => setOnDrag(false);
+  const onMouseUp = (e: any) => setOnDrag(false);
   createEffect(() => {
     if (onDrag()) {
       window.addEventListener("mousemove", onMouseMove);
@@ -65,12 +65,12 @@ export const Graph: Component = (props) => {
     <div id="graphContainer">
       <div id="containerDep">
         <p>Dependency</p>
-        <GraphBox />
+        <GraphBox type="dependency"/>
       </div>
       <div class="line h" onMouseDown={() => setOnDrag(true)}></div>
       <div id="containerStr">
         <p>Structural</p>
-        <GraphBox />
+        <GraphBox type="structural"/>
       </div>
     </div>
   )

@@ -1,11 +1,11 @@
 import type { Component, JSX } from 'solid-js';
-import { TabArray } from '../types';
+import { NavbarComponent, Tabs, HandleClick } from '../types';
 import '../styles/components/_navbar.scss';
 
 
-export const Navbar: Component<{setTab: (fn: (btn: string) => string) => void;}> = (props) => {
-  const handleClick: JSX.EventHandler<HTMLInputElement, MouseEvent> = (e) => {
-    const tabs: TabArray = ['inspector', 'graph', 'logmonitor'];
+export const Navbar:NavbarComponent = (props) => {
+  const handleClick:HandleClick = (e) => {
+    const tabs: Tabs = ['inspector', 'graph', 'logmonitor'];
     props.setTab((btn) => {
       if (e.target.id === "inspector") btn = "inspector";
       else if (e.target.id === "graph") btn = "graph";

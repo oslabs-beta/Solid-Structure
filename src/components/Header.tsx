@@ -1,10 +1,11 @@
 import { createEffect } from 'solid-js';
 import '../styles/components/_header.scss';
+import { HeaderComponent, HandleClick } from '../types';
 
-export const Header = (props) => {
-
+export const Header: HeaderComponent = (props) => {
+  
   /* Controlling inner display orientation of '#graphContainer' with '.orientationIcon'. */ 
-  const changeOrientation = (e) => {
+  const changeOrientation:HandleClick = (e) => {
     if (e.target.id === "orientH") props.setOrientation("horizontal");
     else if (e.target.id === "orientV") props.setOrientation("vertical");
 
