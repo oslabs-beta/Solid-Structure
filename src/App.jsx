@@ -1,9 +1,9 @@
 import { Show, createSignal, createRoot, getOwner } from 'solid-js';
 import { Header } from './components/Header';
-import { Inspect } from './components/Inspect';
-import { Graph } from './components/Graph';
-import { LogMonitor } from './components/LogMonitor';
-import { Navbar } from './components/Navbar';
+import { Inspect } from './components/Inspect.tsx';
+import { Graph } from './components/Graph.tsx';
+// import { LogMonitor } from './components/LogMonitor';
+import { Navbar } from './components/Navbar.tsx';
 import './styles/main.scss';
 
 export const SolidStructure = (props) => {
@@ -25,9 +25,9 @@ export const SolidStructure = (props) => {
           <Graph />
         </Show>
 
-        <Show when={tab() === 'logmonitor'}>
+        {/* <Show when={tab() === 'logmonitor'}>
           <LogMonitor />
-        </Show>
+        </Show> */}
       </div>
       <Navbar setTab={setTab} />
     </>
