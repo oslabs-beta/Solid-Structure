@@ -1,5 +1,6 @@
 import '../styles/components/_log.scss';
 
+
 export const Log = (props) => {
 
   return(

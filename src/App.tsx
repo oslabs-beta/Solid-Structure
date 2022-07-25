@@ -1,8 +1,8 @@
-import { Show, createSignal, createRoot, getOwner } from 'solid-js';
-import { Header } from './components/Header.tsx';
-import { Inspect } from './components/Inspect.tsx';
-import { Graph } from './components/Graph.tsx';
-import { Navbar } from './components/Navbar.tsx';
+import { Show, createSignal, createEffect, createRoot, getOwner } from 'solid-js';
+import { Header } from './components/Header';
+import { Inspect } from './components/Inspect';
+import { Graph } from './components/Graph';
+import { Navbar } from './components/Navbar';
 import './styles/main.scss';
 
 
