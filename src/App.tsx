@@ -1,4 +1,4 @@
-import { Show, createSignal, createEffect, createRoot, getOwner } from 'solid-js';
+import { createSignal, createEffect, createRoot, getOwner, Switch, Match } from 'solid-js';
 import { Header } from './components/Header';
 import { Inspect } from './components/Inspect';
 import { Graph } from './components/Graph';
@@ -12,7 +12,7 @@ export const SolidStructure:SolidComponent = () => {
   const [tab, setTab] = createSignal<TabType>("inspector");
   const [orientation, setOrientation] = createSignal<OrientType>("horizontal");
   const [record, setRecord] = createSignal<boolean>(true);
-  const [cache, setCache] = createSignal<object>({}); // creating signal for inspect, need to act as a reset or refresh or all graphs 
+  const [caches, setCaches] = createSignal<object[]>([{}, {}]); // creating signal for inspect, need to act as a reset or refresh or all graphs 
 
   /* Update 'Inspect' box width by user input (drag) */
   const [boxsize, setBoxsize] = createSignal<number>(65);
@@ -49,36 +49,38 @@ export const SolidStructure:SolidComponent = () => {
         setOrientation={setOrientation}
       />
       <div id="mainDisplay">
-        <Show when={tab() === "inspector"}>
-          <Inspect 
-            record={record} 
-            setRecord={setRecord} 
-            setCache={setCache}
-          />
-          <div class="line inspc" onMouseDown={() => setOnDrag(true)}></div>
-          <Graph 
-            tab={tab} 
-            orientation={orientation} 
-            boxsize={boxsize}
-          />
-        </Show>
-
-        <Show when={tab() === "graph"}>
-          <Graph 
-            tab={tab} 
-            orientation={orientation} 
-          />
-        </Show>
-
-        <Show when={tab() === "logmonitor"}>
-          <Inspect 
-            record={record} 
-            setRecord={setRecord} 
-            setCache={setCache}
-          />
-        </Show>
+        <Switch>
+          <Match when={tab() === "inspector"}>
+            <Inspect 
+              record={record} 
+              setRecord={setRecord} 
+              caches={caches}
+              setCaches={setCaches}
+            />
+            <div class="line inspc" onMouseDown={() => setOnDrag(true)}></div>
+            <Graph 
+              tab={tab} 
+              orientation={orientation} 
+              boxsize={boxsize}
+            />
+          </Match>
+          <Match when={tab() === "graph"}>
+            <Graph 
+              tab={tab} 
+              orientation={orientation} 
+            />
+          </Match>
+          <Match when={tab() === "logmonitor"}>
+            <Inspect 
+              record={record} 
+              setRecord={setRecord} 
+              caches={caches}
+              setCaches={setCaches}
+            />
+          </Match>
+        </Switch>
       </div>
-      <Navbar setTab={setTab}/> 
+      <Navbar tab={tab} setTab={setTab}/> 
     </div>
   )
 }

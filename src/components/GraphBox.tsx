@@ -4,9 +4,15 @@ import { GraphBoxComponent } from '../types';
 
 export const GraphBox: GraphBoxComponent = (props) => {
 
+  /* Create D3 Graph */
+  let svgDep;
+  let svgStr;
+
+
+
   return(
     <Show when={props.type === "dependency"} fallback={
-      <svg>
+      <svg ref={svgDep}>
         <g>
 
           {/* Dependency Graph */}
@@ -14,7 +20,7 @@ export const GraphBox: GraphBoxComponent = (props) => {
         </g>
       </svg>
     }>
-      <svg>
+      <svg ref={svgStr}>
         <g>
 
           {/* Structural Graph */}

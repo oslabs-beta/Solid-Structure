@@ -1,4 +1,4 @@
-import { createEffect } from "solid-js";
+import { createEffect, For } from "solid-js";
 import { Log } from "./Log";
 import { InspectComponent, HandleClick } from "../types";
 import '../styles/components/_inspect.scss';
@@ -24,7 +24,7 @@ export const Inspect: InspectComponent = (props) => {
   const handleResetClick: HandleClick = (e) => {
     e.preventDefault();
     console.log('Reset');
-    props.setCache(() => {return {}});
+    props.setCaches(() => {return {}});
 
     // (LOGIC: clear out 'cache' object )
   };
@@ -38,9 +38,9 @@ export const Inspect: InspectComponent = (props) => {
         <div id="resetButton" onClick={handleResetClick}>Reset</div>
       </div>
       <div id="history">
-        <Log />
-        <Log />
-        <Log />
+        <For each={props.caches()}>{(cache, i) =>
+          <Log cache={cache}/>
+        }</For>
       </div>
     </div>
   );
