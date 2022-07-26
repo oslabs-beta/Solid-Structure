@@ -7,7 +7,7 @@ export type OrientType = 'vertical' | 'horizontal';
 export type HandleClick = JSX.EventHandler<HTMLInputElement, MouseEvent>;
 
 /* App.tsx */
-export type SolidComponent = Component
+export type SolidComponent = Component;
 
 /* Header.tsx */
 type HeaderProps = {
@@ -47,4 +47,4 @@ export type NavbarComponent = Component<NavbarProps>;
 export type Tabs = TabType[];
 
 /* Log.tsx */
-export type LogComponent = Component
+export type LogComponent = Component;

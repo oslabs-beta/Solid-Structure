@@ -17,13 +17,13 @@ export const SolidStructure:SolidComponent = () => {
   /* Update 'Inspect' box width by user input (drag) */
   const [boxsize, setBoxsize] = createSignal<number>(65);
   const [onDrag, setOnDrag] = createSignal<boolean>(false);
-  const onMouseMove = (e: any) => {
+  const onMouseMove = (e:MouseEvent) => {
     const w = window.innerWidth - e.clientX;
     const wp = Math.floor(w/window.innerWidth*100);
     if (w < 200 || wp < 20 || wp > 90 ) return;
     setBoxsize(wp);
   }
-  const onMouseUp = (e: any) => setOnDrag(false);
+  const onMouseUp = (e:MouseEvent) => setOnDrag(false);
   createEffect(() => {
     if (onDrag()) {
       window.addEventListener("mousemove", onMouseMove);
@@ -44,7 +44,7 @@ export const SolidStructure:SolidComponent = () => {
   return (
     <div id="mainApp">
       <Header 
-        tab={tab}
+        tab={tab} 
         orientation={orientation} 
         setOrientation={setOrientation}
       />
@@ -73,8 +73,8 @@ export const SolidStructure:SolidComponent = () => {
         <Show when={tab() === "logmonitor"}>
           <Inspect 
             record={record} 
-            setRecord={setRecord}
-             setCache={setCache}
+            setRecord={setRecord} 
+            setCache={setCache}
           />
         </Show>
       </div>

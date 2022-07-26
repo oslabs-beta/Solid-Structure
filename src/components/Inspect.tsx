@@ -3,8 +3,8 @@ import { Log } from "./Log";
 import { InspectComponent, HandleClick } from "../types";
 import '../styles/components/_inspect.scss';
 
+export const Inspect: InspectComponent = (props) => {
 
-export const Inspect:InspectComponent = (props) => {
   /* Control "Record" Button */
   createEffect(() => {
     props.record() 
@@ -12,18 +12,20 @@ export const Inspect:InspectComponent = (props) => {
     : document.getElementById("recBtn").style.backgroundColor = "#D4D6D9";
   });
 
-  const handleRecordClick:HandleClick = (e) => {
+  const handleRecordClick: HandleClick = (e) => {
     e.preventDefault();
     props.setRecord(!props.record())
     console.log(props.record() ? 'Record' : 'StopRecord');
+
     // (LOGIC: update 'cache' object with all signals and application interaction & current state)
   };
 
   /* Control "Reset" Button */
-  const handleResetClick:HandleClick = (e) => {
+  const handleResetClick: HandleClick = (e) => {
     e.preventDefault();
     console.log('Reset');
     props.setCache(() => {return {}});
+
     // (LOGIC: clear out 'cache' object )
   };
     
