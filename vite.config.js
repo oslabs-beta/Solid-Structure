@@ -5,9 +5,9 @@ import { chromeExtension } from 'vite-plugin-chrome-extension';
 
 export default defineConfig({
   plugins: [chromeExtension(), solidPlugin({ dev: true })],
-  // alias: {
-  //   '@': path.resolve(__dirname, 'extension/src'),
-  // },
+  alias: {
+    '@': path.resolve(__dirname, 'extension/src'),
+  },
   build: {
     outDir: path.join(__dirname, 'extension/dist'),
     lib: {
