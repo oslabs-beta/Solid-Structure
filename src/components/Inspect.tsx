@@ -24,7 +24,7 @@ export const Inspect: InspectComponent = (props) => {
   const handleResetClick: HandleClick = (e) => {
     e.preventDefault();
     console.log('Reset');
-    props.setCaches(() => {return {}});
+    props.setCaches(() => {return []});
 
     // (LOGIC: clear out 'cache' object )
   };
