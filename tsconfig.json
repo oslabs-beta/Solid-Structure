@@ -9,6 +9,7 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "target": "es6",
+    "resolveJsonModule": true
   },
   "include": ["src/**/*"]
 }

@@ -1,13 +1,51 @@
-<<<<<<< HEAD
-// import '../styles/components/_inspector.scss';
-import * as d3 from "d3";
-import type { Component } from 'solid-js';
-import * as treeData from './random.json';
+import { createSignal, createEffect } from 'solid-js';
+import { GraphBox } from './GraphBox';
+import '../styles/components/_graph.scss';
+import { GraphComponent } from '../types';
+import * as d3 from 'd3';
+import * as treeData from "./random.json";
 
 
-var margin = {top: 20, right: 90, bottom: 30, left: 90},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+export const Graph:GraphComponent = (props) => {
+
+  // /* Updating 'graphContainer' box size with user-input(drag). */
+  // const [boxsize, setBoxsize] = createSignal<number>(50);
+  // const [onDrag, setOnDrag] = createSignal<boolean>(false);
+  // const onMouseMove = (e: any) => {
+  //   if (props.orientation() === "horizontal") {
+  //     const h = window.innerHeight - e.clientY - 34;
+  //     const hp = Math.floor((h / (window.innerHeight - 38))*100);
+  //     if (hp < 20 || hp > 80) return;
+  //     setBoxsize(hp);
+  //   }
+  //   else if (props.orientation() === "vertical") {
+  //     const leftbox = (props.boxsize 
+  //       ? (100 - props.boxsize())/100 * window.innerWidth + 4 
+  //       : 0
+  //     );
+  //     const w = e.clientX - leftbox;
+  //     const wp = 100 - Math.floor((w / (window.innerWidth - leftbox))*100);
+  //     if (wp < 15 || wp > 85) return;
+  //     setBoxsize(wp);
+  //   }
+  // }
+  // const onMouseUp = (e: any) => setOnDrag(false);
+  // createEffect(() => {
+  //   if (onDrag()) {
+  //     window.addEventListener("mousemove", onMouseMove);
+  //     window.addEventListener("mouseup", onMouseUp);
+  //   }
+  //   else {
+  //     window.removeEventListener("mousemove", onMouseMove);
+  //     window.removeEventListener("mouseup", onMouseUp);
+  //   }
+  // });
+
+
+// set the margins for the container
+var margin = {top: 20, right: 90, bottom: 30, left: 90};
+var width = 960 - margin.left - margin.right;
+var height = 500 - margin.top - margin.bottom;
 
 
 // everything revolves around this guy
@@ -18,21 +56,33 @@ var svg = d3.select("body").append("svg")
     .attr("transform", "translate("
           + margin.left + "," + margin.top + ")");
 
-var i = 0,
-    duration = 750,
-    root;
+var i = 0;
+var duration = 750;
+var root: any;
 
+
+// treemap is not the tree component, and we're borrowing the sizes listed earlier    
 var treemap = d3.tree().size([height, width]);
 
-root = d3.hierarchy(treeData, function(d) { return d.children; });
+// type dType = {
+//   children: object,
+//   _children?: any,
+//   id: any
+// }
+
+// now root becomes the hierarchy itself with treeData as the data and a function that defines the children
+// set the x0 and y0 axes
+root = d3.hierarchy(treeData, function(d: any) { return d.children; });
 root.x0 = height / 2;
 root.y0 = 0;
 
+// call the collapse function on each child
 root.children.forEach(collapse);
 
+//update the root by calling the update function on root
 update(root);
 
-function collapse(d) {
+function collapse(d: any) {
   if(d.children) {
     d._children = d.children
     d._children.forEach(collapse)
@@ -40,7 +90,7 @@ function collapse(d) {
   }
 }
 
-function update(source) {
+function update(source: any) {
   //redeclare
   var treeData = treemap(root);
 
@@ -52,7 +102,7 @@ function update(source) {
 
   // Update the nodes...
   var node = svg.selectAll('g.node')
-      .data(nodes, function(d) {return d.id || (d.id = ++i); });
+      .data(nodes, function(d: any) {return d.id || (d.id = ++i); });
 
   // Enter any new modes at the parent's previous position.
   var nodeEnter = node.enter().append('g')
@@ -66,20 +116,23 @@ function update(source) {
   nodeEnter.append('circle')
       .attr('class', 'node')
       .attr('r', 1e-6)
-      .style("fill", function(d) {
+      .style("fill", function(d: any) {
           return d._children ? "lightsteelblue" : "#fff";
       });
 
   // Add labels for the nodes
   nodeEnter.append('text')
       .attr("dy", ".35em")
-      .attr("x", function(d) {
+      .attr("x", function(d: any) {
           return d.children || d._children ? -13 : 13;
       })
-      .attr("text-anchor", function(d) {
+      .attr("text-anchor", function(d: any) {
           return d.children || d._children ? "end" : "start";
       })
-      .text(function(d) { return d.data.name; });
+      .text(function(d: any) { 
+        let data1: any = d.data;
+        return data1.name;
+      });
 
   // UPDATE
   var nodeUpdate = nodeEnter.merge(node);
@@ -94,7 +147,7 @@ function update(source) {
   // Update the node attributes and style
   nodeUpdate.select('circle.node')
     .attr('r', 10)
-    .style("fill", function(d) {
+    .style("fill", function(d: any) {
         return d._children ? "lightsteelblue" : "#fff";
     })
     .attr('cursor', 'pointer');
@@ -120,7 +173,7 @@ function update(source) {
 
   // Update the links...
   var link = svg.selectAll('path.link')
-      .data(links, function(d) { return d.id; });
+      .data(links, function(d: any) { return d.id; });
 
   // Enter any new links at the parent's previous position.
   var linkEnter = link.enter().insert('path', "g")
@@ -148,24 +201,24 @@ function update(source) {
       .remove();
 
   // Store the old positions for transition.
-  nodes.forEach(function(d){
+  nodes.forEach(function(d: any){
     d.x0 = d.x;
     d.y0 = d.y;
   });
 
   // Creates a curved (diagonal) path from parent to the child nodes
-  function diagonal(s, d) {
+  function diagonal(s: any, d: any) {
 
-    path = `M ${s.y} ${s.x}
+    let path = `M ${s.y} ${s.x}
             C ${(s.y + d.y) / 2} ${s.x},
               ${(s.y + d.y) / 2} ${d.x},
               ${d.y} ${d.x}`
 
-    return path
+    return path;
   }
 
   // Toggle children on click.
-  function click(event, d) {
+  function click(event: any, d: any) {
     if (d.children) {
         d._children = d.children;
         d.children = null;
@@ -176,51 +229,6 @@ function update(source) {
     update(d);
   }
 }
-
-
-=======
-import { createSignal, createEffect } from 'solid-js';
-import { GraphBox } from './GraphBox';
-import '../styles/components/_graph.scss';
-import { GraphComponent } from '../types';
-// import * as d3 from 'd3';
-
-
-export const Graph:GraphComponent = (props) => {
->>>>>>> dev
-
-  /* Updating 'graphContainer' box size with user-input(drag). */
-  const [boxsize, setBoxsize] = createSignal<number>(50);
-  const [onDrag, setOnDrag] = createSignal<boolean>(false);
-  const onMouseMove = (e: any) => {
-    if (props.orientation() === "horizontal") {
-      const h = window.innerHeight - e.clientY - 34;
-      const hp = Math.floor((h / (window.innerHeight - 38))*100);
-      if (hp < 20 || hp > 80) return;
-      setBoxsize(hp);
-    }
-    else if (props.orientation() === "vertical") {
-      const leftbox = (props.boxsize 
-        ? (100 - props.boxsize())/100 * window.innerWidth + 4 
-        : 0
-      );
-      const w = e.clientX - leftbox;
-      const wp = 100 - Math.floor((w / (window.innerWidth - leftbox))*100);
-      if (wp < 15 || wp > 85) return;
-      setBoxsize(wp);
-    }
-  }
-  const onMouseUp = (e: any) => setOnDrag(false);
-  createEffect(() => {
-    if (onDrag()) {
-      window.addEventListener("mousemove", onMouseMove);
-      window.addEventListener("mouseup", onMouseUp);
-    }
-    else {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
-    }
-  });
 
   /* 
     Changing inner display orientation of '#graphContainer' based on 'orientation' signal update. 
