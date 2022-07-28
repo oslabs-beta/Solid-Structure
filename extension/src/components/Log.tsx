@@ -1,11 +1,10 @@
-import { LogComponent } from "../types"
+import { LogComponent } from '../types';
 import '../styles/components/_log.scss';
 
 export const Log: LogComponent = (props) => {
-
-  return(
+  return (
     <div class="logBox">
-      <div class="logTitle">Signal Title</div>
+      <div class="logTitle">Title</div>
       <div class="logContent">
         <p>Updated computations only</p>
         <p>Updated computations only</p>
@@ -13,5 +12,5 @@ export const Log: LogComponent = (props) => {
         <p>Updated computations only</p>
       </div>
     </div>
-  )
+  );
 };
