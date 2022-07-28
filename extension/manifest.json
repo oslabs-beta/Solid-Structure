@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "manifest_version": 3,
   "devtools_page": "devtools.html",
-  "permissions": ["tabs", "activeTab", "*://localhost/*", "scripting"],
+  "permissions": ["tabs", "activeTab", "scripting"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "background": {
     "service_workers": "./background.js"
