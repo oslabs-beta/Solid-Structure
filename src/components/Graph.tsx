@@ -234,34 +234,34 @@ function update(source: any) {
     Changing inner display orientation of '#graphContainer' based on 'orientation' signal update. 
     Size of containers inside '#graphContainer' is adjusted based on user-input(drag).
   */ 
-  createEffect(() => {
-    const graphContainerStyle = document.getElementById("graphContainer").style;
-    const line = document.querySelector("#graphContainer > .line").classList;
-    if (props.orientation() === "horizontal") {
-      graphContainerStyle.gridTemplateColumns = null;
-      graphContainerStyle.gridTemplateRows = `1fr 4px ${boxsize()}%`;
-      line.remove("v");
-      line.add("h");
-    }
-    else if (props.orientation() === "vertical") {
-      graphContainerStyle.gridTemplateRows = null;
-      graphContainerStyle.gridTemplateColumns = `1fr 4px ${boxsize()}%`;
-      line.remove("h");
-      line.add("v");
-    }
-  });
-
-  return(
-    <div id="graphContainer">
-      <div id="containerDep">
-        <p>Dependency</p>
-        <GraphBox type="dependency"/>
+    createEffect(() => {
+      const graphContainerStyle = document.getElementById("graphContainer").style;
+      const line = document.querySelector("#graphContainer > .line").classList;
+      if (props.orientation() === "horizontal") {
+        graphContainerStyle.gridTemplateColumns = null;
+        graphContainerStyle.gridTemplateRows = `1fr 4px ${boxsize()}%`;
+        line.remove("v");
+        line.add("h");
+      }
+      else if (props.orientation() === "vertical") {
+        graphContainerStyle.gridTemplateRows = null;
+        graphContainerStyle.gridTemplateColumns = `1fr 4px ${boxsize()}%`;
+        line.remove("h");
+        line.add("v");
+      }
+    });
+  
+    return(
+      <div id="graphContainer">
+        <div id="containerDep">
+          <p>Dependency</p>
+          <GraphBox type="dependency"/>
+        </div>
+        <div class="line h" onMouseDown={() => setOnDrag(true)}></div>
+        <div id="containerStr">
+          <p>Structural</p>
+          <GraphBox type="structural"/>
+        </div>
       </div>
-      <div class="line h" onMouseDown={() => setOnDrag(true)}></div>
-      <div id="containerStr">
-        <p>Structural</p>
-        <GraphBox type="structural"/>
-      </div>
-    </div>
-  )
-};
+    )
+  };
