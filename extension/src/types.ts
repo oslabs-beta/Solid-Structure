@@ -7,7 +7,7 @@ export type OrientType = 'vertical' | 'horizontal';
 export type HandleClick = JSX.EventHandler<HTMLInputElement, MouseEvent>;
 
 /* App.tsx */
-export type SolidComponent = Component
+export type SolidComponent = Component;
 
 /* Header.tsx */
 type HeaderProps = {
@@ -19,9 +19,10 @@ export type HeaderComponent = Component<HeaderProps>;
 
 /* Inspect.tsx */
 type InspectProps = {
-    setCache: Setter<object>,
     record: Accessor<boolean>,
     setRecord: Setter<boolean>,
+    caches: Accessor<object[]>,
+    setCaches: Setter<object[]>,
 };
 export type InspectComponent = Component<InspectProps>;
 
@@ -41,10 +42,13 @@ export type GraphBoxComponent = Component<GraphBoxProps>;
 
 /* Navbar.tsx */
 type NavbarProps = {
+    tab: Accessor<TabType>,
     setTab: Setter<TabType>
 };
 export type NavbarComponent = Component<NavbarProps>;
-export type Tabs = TabType[];
 
 /* Log.tsx */
-export type LogComponent = Component
+type LogProps = {
+    cache: object
+}
+export type LogComponent = Component<LogProps>;
