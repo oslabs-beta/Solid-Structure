@@ -2,9 +2,18 @@
   "name": "SolidJS",
   "description": "SolidJS DevTool for debugging",
   "version": "1.0.0",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "devtools_page": "devtools.html",
-  "background": "./background.js",
-  "permissions": ["tabs", "activeTab", "*://localhost/*"],
-  "web_accessible_resources": ["./contentScript.js"]
+  "permissions": ["tabs", "activeTab", "*://localhost/*", "scripting"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "service_workers": "./background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["./contentScript.js"],
+      "run_at": "document_start"
+    }
+  ]
 }
