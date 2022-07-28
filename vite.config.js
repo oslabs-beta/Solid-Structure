@@ -1,22 +1,21 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 import solidPlugin from 'vite-plugin-solid';
-import { chromeExtension } from 'vite-plugin-chrome-extension';
+// import { chromeExtension } from 'vite-plugin-chrome-extension';
 
 export default defineConfig({
-  plugins: [chromeExtension(), solidPlugin({ dev: true })],
-  alias: {
-    '@': path.resolve(__dirname, 'extension/src'),
-  },
+  plugins: [solidPlugin({ dev: true })],
   build: {
-    outDir: path.join(__dirname, 'extension/dist'),
-    lib: {
-      entry: path.resolve(__dirname, './extension/manifest.json'),
-      name: 'Solid Structure DT',
-      formats: ['es'],
+    input: './extension/src/index.jsx',
+    output: {
+      sourcemap: false,
+      format: 'iife',
+      name: 'app',
+      dir: './extension/dist',
+      file: 'bundleSolid.js',
     },
     rollupOptions: {
-      external: ['chrome', 'solid-js'],
+      external: ['chrome'],
     },
   },
 });
