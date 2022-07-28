@@ -1,0 +1,22 @@
+@use "../main.scss" as m;
+
+.logBox{
+    font-size: m.$main-font;
+    width:100%;
+    // border:1px solid #000;
+
+    .logTitle {
+        padding:0 m.$side-padding;
+        line-height:2.8rem;
+        background-color: m.$secondary-color;
+        color: m.$active-color;
+    }
+    .logContent{
+        padding:10px m.$side-padding;
+        
+        p {
+            line-height:1.8rem;
+            // border:1px solid #000;
+        }
+    }
+}
