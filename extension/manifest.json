@@ -3,5 +3,17 @@
   "description": "SolidJS DevTool for debugging",
   "version": "1.0.0",
   "manifest_version": 3,
-  "devtools_page": "devtools.html"
+  "devtools_page": "devtools.html",
+  "permissions": ["tabs", "activeTab", "*://localhost/*", "scripting"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "service_workers": "./background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["./contentScript.js"],
+      "run_at": "document_start"
+    }
+  ]
 }

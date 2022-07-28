@@ -1,0 +1,64 @@
+@use "../main.scss" as m;
+
+@mixin orientation-box($w, $h) {
+  content: '';
+  display: block;
+  float: left;
+  background-color: m.$active-color;
+  width: $w;
+  height: $h;
+  border-radius: 1px;
+}
+
+#header {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 m.$side-padding;
+  width: 100%;
+  height: m.$mainheadbox-height;
+  background-color: m.$primary-color;
+
+  h2 {
+    font-size: m.$main-font;
+    font-weight: normal;
+  }
+}
+
+.orientationIcon {
+  float: left;
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+  cursor: pointer;
+  opacity: 0.2;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.35;
+  }
+  &.active {
+    opacity: 1;
+  }
+
+  &.hbox {
+    &::before {
+      margin-bottom: 2px;
+    }
+    &::before,
+    &::after {
+      @include orientation-box(100%, 8px);
+    }
+  }
+  &.vbox {
+    &::before {
+      margin-right: 2px;
+    }
+    &::before,
+    &::after {
+      @include orientation-box(8px, 100%);
+    }
+  }
+}
