@@ -56,8 +56,23 @@ const ToDo = () => {
         Add todo
         </button>
     </div>
-  )
-}
+    <For each = {todos}>
+      {(todo) => {
+        const { id, text } = todo; 
+        console.log(`creating {text}`)
+        return <div>
+          <input type = "checkbox"
+          checked = {todo.completed}
+          onchange = {[toggleTodo, id]}
+          />
+          <span 
+          style = {{"text-decoration": todo.completed ? "line-through" : "none"}}
+          >{text}</span>
+        </div>
+      }}
+    </For>
+  );
+};
 
 
 export const App = () => {
