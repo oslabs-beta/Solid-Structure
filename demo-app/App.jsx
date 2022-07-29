@@ -1,5 +1,6 @@
 import { createSignal } from "solid-js";
 import { createStore } from "solid-js/store";
+import '/style.css'
 // import { Show } from "solid-js/web";
 
 
@@ -11,10 +12,13 @@ const Counter = () => {
 
 
   return (
+    <>
     <div>
-      <button onClick={increment} type="button"> {count} </button>
-      <button onClick={decrement} type='button'> {count} </button>
+      <button onClick={increment} type="button"> Increment </button>
+      <button onClick={decrement} type='button'> Decrement </button>
     </div>
+    <div> {count}</div>
+    </>
   );
 };
 
@@ -44,6 +48,7 @@ const ToDo = () => {
   }
 
   return (
+    <>
     <div>
       <input ref={input} />
       <button
@@ -71,6 +76,7 @@ const ToDo = () => {
         </div>
       }}
     </For>
+    </>
   );
 };
 
@@ -78,12 +84,15 @@ const ToDo = () => {
 export const App = () => {
 
   return (
+    <>
     <div>
-      <App />
       <Counter />
+    </div>
+    <div>
       <ToDo />
     </div>
+    </>
   );
 };
 
-export default App;
+// export default App;

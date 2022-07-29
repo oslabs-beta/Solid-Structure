@@ -1,0 +1,13 @@
+body {
+    margin: 0; 
+    background-color: rgb(109, 119, 185)
+}
+
+.counter {
+    padding: 0 2.5%
+}
+
+.todo {
+    height: 100px;
+    width: 100px;
+}
