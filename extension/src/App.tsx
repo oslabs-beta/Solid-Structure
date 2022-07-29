@@ -13,8 +13,10 @@ import { Navbar } from './components/Navbar';
 import { SolidComponent, TabType, OrientType } from './types';
 import './styles/main.scss';
 
-export const SolidStructure: SolidComponent = () => {
-  // const [children, root] = createRoot(() => [props.children, getOwner()!]);
+export const SolidStructure: SolidComponent = (props) => {
+  // const [children, root] = createRoot(() => [props.children, getOwner()]);
+  // console.log(root);
+
   const [tab, setTab] = createSignal<TabType>('inspector');
   const [orientation, setOrientation] = createSignal<OrientType>('horizontal');
   const [record, setRecord] = createSignal<boolean>(true);
