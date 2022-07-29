@@ -24,16 +24,18 @@
 // Graph.tsx
 #graphContainer {
   display: grid;
-  background-color: m.$secondary-color;
   // border:2px solid yellow;
+  background-color: m.$secondary-color;
 
   #containerDep {
     @include graphName;
+    // border-bottom:2px solid m.$primary-color;
+    // background-color: m.$loghead-color;
     // border:1px solid blue;
   }
   #containerStr {
     @include graphName;
-    background-color: #fff;
+    // background-color: m.$secondary-color;
     // border:1px solid orange;
   }
 }

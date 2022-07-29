@@ -7,9 +7,9 @@ export const GraphBox: GraphBoxComponent = (props) => {
   let svgDep;
   let svgStr;
 
+
   return (
-    <Show
-      when={props.type === 'dependency'}
+    <Show when={props.type === 'structural'}
       fallback={
         <svg ref={svgDep}>
           <g>{/* Dependency Graph */}</g>

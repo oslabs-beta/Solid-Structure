@@ -5,6 +5,7 @@ import { GraphComponent } from '../types';
 // import * as d3 from 'd3';
 
 export const Graph: GraphComponent = (props) => {
+  
   /* Updating 'graphContainer' box size with user-input(drag). */
   const [boxsize, setBoxsize] = createSignal<number>(50);
   const [onDrag, setOnDrag] = createSignal<boolean>(false);

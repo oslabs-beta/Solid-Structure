@@ -18,7 +18,7 @@ export const SolidStructure: SolidComponent = () => {
   const [tab, setTab] = createSignal<TabType>('inspector');
   const [orientation, setOrientation] = createSignal<OrientType>('horizontal');
   const [record, setRecord] = createSignal<boolean>(true);
-  const [caches, setCaches] = createSignal<object[]>([{}, {}]); // creating signal for inspect, need to act as a reset or refresh or all graphs
+  const [caches, setCaches] = createSignal<object[]>([{}, {}, {}, {}, {}, {}, {}, {}]); // creating signal for inspect, need to act as a reset or refresh or all graphs
 
   /* Update 'Inspect' box width by user input (drag) */
   const [boxsize, setBoxsize] = createSignal<number>(65);

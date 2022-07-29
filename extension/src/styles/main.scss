@@ -1,121 +1,66 @@
 /* Reset */
-body,
-div,
-p,
-ul,
-ol,
-li,
-dl,
-dt,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-table,
-tr,
-th,
-td,
-form,
-fieldset,
-legend,
-input,
-label,
-select,
-textarea,
-button,
-header,
-footer,
-nav,
-aside,
-section,
-article,
-main,
-a,
-span,
-strong,
-em,
-b,
-i,
-address {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-  color: #a0a0a0;
+body,div,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,table,tr,th,td,form,fieldset,legend,input,label,select,textarea,button,header,footer,nav,aside,section,article,main,a,span,strong,em,b,i,address {
+  margin:0; padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', sans-serif;
+  color:#A0A0A0;
   line-height: 1;
 }
-html {
-  font-size: 0.625em;
-}
-a {
-  text-decoration: none;
-}
-ul,
-ol,
-li {
-  list-style: none;
-}
-img,
-fieldset {
-  border: none;
-  vertical-align: middle;
-}
-strong,
-em,
-b,
-i,
-address {
-  font-weight: normal;
-  font-style: normal;
-}
-table {
-  border-collapse: collapse;
-}
+html { font-size:0.625em;  }
+a { text-decoration:none; }
+ul,ol,li { list-style:none; }
+img,fieldset { border:none; vertical-align:middle; }
+strong,em,b,i,address { font-weight:normal; font-style:normal; }
+table { border-collapse:collapse; }
+
+
 
 /* Global Style Control */
 // Font Size
 $main-font: 1.2rem;
 
-// Default Side Padding
+// Side Padding
 $side-padding: 10px;
 
-// Colors
-$primary-color: #d4d6d9;
-$secondary-color: #efefef;
-$active-color: #2f2f33;
-$darkcolor: #2f2f33c6;
-// $lightblue: #199fccff;
+// Headbox Size 
+$headerbox-height: 34px;
+$footerbox-height: 40px;
 
-// Headbox Sizes
-$mainheadbox-height: 30px;
-$headbox-height: 34px;
+// BrightMode 
+$primary-color: #425F94;
+$secondary-color: #FFFFFF;
+$tertiary-color: #4F7CBF;
+$active-color: #FFFFFF;
+$recOut-color: #D4D6D9;
+$recIn-color: #2F2F33;
+
+// DarkMode 
+$secondary-color: #1F1F1F;
+$recOut-color: #3C3C3C;
+$recIn-color: $active-color;
+
+
 
 /* App.tsx */
 #mainApp {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  position:fixed;
+  top:0;
+  width:100%;
+  height:100%;
 }
-#mainDisplay {
-  display: grid;
-  height: 100%;
-  padding-top: $mainheadbox-height;
-  padding-bottom: $headbox-height;
+#mainDisplay { 
+  display:grid; 
+  height:100%;
+  padding-top:$headerbox-height;
+  padding-bottom:$footerbox-height;
 }
 
 .line {
-  &.inspc {
-    background-color: $primary-color;
-    cursor: col-resize;
+  background-color: $primary-color;
+  &.inspc{
+      cursor:col-resize;
   }
-  &.v {
-    cursor: col-resize;
-  }
-  &.h {
-    cursor: row-resize;
-  }
+  &.v{ cursor:col-resize; }
+  &.h{ cursor:row-resize; }
 }
+
