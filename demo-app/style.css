@@ -16,13 +16,14 @@ body {
     background-color: rgb(255, 255, 255);
     font-size: 100px;
     border:1px solid #000;
+    margin-top: 35px;
 }
 
 /* ------  COUNTER CHILD --------*/
 #counter{
     justify-content: center;
     align-items: center;
-    padding-top: 10%;
+    padding-top: 5%;
 }
 
 #counterBox {
@@ -58,7 +59,7 @@ margin-right: 5px;
 
 #todo {
     align-items: center;
-    padding-top: 15%;
+    padding-top: 8%;
     
 }
 
@@ -70,7 +71,7 @@ margin-right: 5px;
     justify-content: center;
     color:rgb(39, 33, 24);
     border:1px solid #000;
-    bottom: 20%;
+    /* bottom: 75%; */
 }
 
 #checkbox{
