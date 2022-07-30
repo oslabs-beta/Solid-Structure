@@ -26,7 +26,7 @@ $side-padding: 10px;
 $headerbox-height: 34px;
 $footerbox-height: 40px;
 
-// BrightMode 
+// LightMode 
 $primary-color: #425F94;
 $secondary-color: #F3F3F3;
 $tertiary-color: #4F7CBF;
@@ -35,9 +35,28 @@ $recOut-color: #D4D6D9;
 $recIn-color: #2F2F33;
 
 // DarkMode 
-$secondary-color: #1F1F1F;
-$recOut-color: #3C3C3C;
-$recIn-color: $active-color;
+@media (prefers-color-scheme: dark) {
+  $secondary-color: #1F1F1F;
+  $tertiary-color: #3C3C3C;
+  $recOut-color: #3C3C3C;
+  $recIn-color: $active-color;
+
+  #graphContainer { background-color: $secondary-color; }
+  #inspect { background-color: $secondary-color;
+    #logHead { background-color: $secondary-color;
+      #recordButton { background-color: $recOut-color; 
+        span { background-color: $secondary-color;
+          &.active { background-color: $recIn-color; }
+        }
+      }
+      #resetButton{
+        color: $recIn-color;
+        border:0.2rem solid $recIn-color;
+      }
+    }
+  }
+  .logBox{ .logTitle { background-color: $tertiary-color; } }
+}
 
 
 
@@ -63,4 +82,3 @@ $recIn-color: $active-color;
   &.v{ cursor:col-resize; }
   &.h{ cursor:row-resize; }
 }
-
