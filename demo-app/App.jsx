@@ -1,4 +1,5 @@
-import { createSignal } from "solid-js";
+import { color } from "d3";
+import { createSignal, For } from "solid-js";
 import { createStore } from "solid-js/store";
 import '/style.css'
 // import { Show } from "solid-js/web";
@@ -12,13 +13,13 @@ const Counter = () => {
 
 
   return (
-    <>
-    <div>
-      <button onClick={increment} type="button"> Increment </button>
-      <button onClick={decrement} type='button'> Decrement </button>
+    <div id='counter'>
+      <div id='counterBox'> {count}</div>
+      <div>
+        <button id="decrementBtn" onClick={decrement} type='button'> Decrement </button>
+        <button id="incrementBtn" onClick={increment} type="button"> Increment </button>
+      </div>
     </div>
-    <div> {count}</div>
-    </>
   );
 };
 
@@ -48,25 +49,25 @@ const ToDo = () => {
   }
 
   return (
-    <>
+    <div id="todo">
     <div>
-      <input ref={input} />
-      <button
+      <input id="textbox" ref={input} />
+      <button id="add"
         onClick = {(e) => {
           if(!input.value.trim()) return; 
           addTodo(input.value); 
           input.value = ""; 
         }}
         >
-        Add todo
+        Add ToDo
         </button>
     </div>
-    <For each = {todos}>
+    <For each = {todos} >
       {(todo) => {
         const { id, text } = todo; 
         console.log(`creating {text}`)
         return <div>
-          <input type = "checkbox"
+          <input id="checkbox" type = "checkbox"
           checked = {todo.completed}
           onchange = {[toggleTodo, id]}
           />
@@ -76,7 +77,7 @@ const ToDo = () => {
         </div>
       }}
     </For>
-    </>
+    </div>
   );
 };
 
@@ -84,14 +85,15 @@ const ToDo = () => {
 export const App = () => {
 
   return (
-    <>
-    <div>
-      <Counter />
+    <div id="page">
+      <div id="title"> Solid Structure Demo </div>
+        <div id="counter">
+          <Counter />
+        </div>
+        <div id="todo">
+          <ToDo />
+        </div>
     </div>
-    <div>
-      <ToDo />
-    </div>
-    </>
   );
 };
 
