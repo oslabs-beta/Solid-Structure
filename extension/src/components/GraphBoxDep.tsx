@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { GraphBoxComponent, DiagonalLink } from '../types';
 
 export const GraphBoxDep: GraphBoxComponent = (props) => {
-  let svgDep;
+  let svgDep: any;
   
   onMount(() => {
     /* Target where to load D3 Graph */
@@ -18,8 +18,8 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
 
     /* Convert Sample Data to data structure for D3 */
     const dataStructure = d3.stratify()
-                              .id(function(d) {return d.child;})
-                              .parentId(function(d){return d.parent;})
+                              .id(function(d: any) {return d.child;})
+                              .parentId(function(d: any){return d.parent;})
                               (data);
   
     /* Set D3 Graph Size */
@@ -69,9 +69,41 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
     const names = newSvg.append("g").selectAll("text")
                   .data(information.descendants());
     names.enter().append("text")
-                .text(function(d){return d.data.child;})
+                .text(function(d: any){return d.data.child;})
                 .attr("x", function(d){return d.y+10;})
                 .attr("y", function(d){return d.x+3;})
+
+    /*Implement zoom functionality on all the parts of the svg*/
+    newSvg.call(d3.zoom().on("zoom", zoomed));
+    
+    
+    // let c = 0;
+    // let l = 0;
+    // let t = 0;
+    /*Functionality for circles, links, and text behavior on zoom*/
+    function zoomed (e: any){
+      updateCircles(e);
+      updateLinks(e);
+      updateText(e);
+    }
+    function updateCircles(e: any){
+      // console.log(`zoom circle ${c++}`);
+
+      newSvg.selectAll('g').selectAll("circle")
+        .attr('transform', e.transform);
+    }
+    function updateLinks(e: any){
+      // console.log(`zoom link ${l++}`);
+
+      newSvg.selectAll('g').selectAll('path')
+        .attr('transform', e.transform);
+    }
+    function updateText(e: any){
+      // console.log(`zoom text ${t++}`);
+
+      newSvg.selectAll('g').selectAll('text')
+        .attr('transform', e.transform);
+    }
   })
 
   return (

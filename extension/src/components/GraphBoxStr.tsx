@@ -1,13 +1,18 @@
 import { Show, createSignal, onMount } from 'solid-js';
 import * as d3 from 'd3';
 import { GraphBoxComponent, DiagonalLink } from '../types';
+import { svg } from 'd3';
 
 export const GraphBoxStr: GraphBoxComponent = (props) => {
 
   const [visTransform, setTransform] = createSignal("");
-  let svgStr;
+  let svgStr: any;
   
   onMount(() => {
+    var margin: any = { top: 90, right: 20, bottom: 90, left: 20 }
+    var width: number = 800 - margin.left - margin.right;
+    var height: number = 500 - margin.top - margin.bottom;
+
      /* Sample Data */
     const data = [{"child":"Root", "parent":""},
                   {"child":"Layer_B1", "parent":"Layer_A1"},
@@ -23,21 +28,22 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
    
     /* Convert Sample Data to data structure for D3 */
     const dataStructure = d3.stratify()
-                              .id(function(d) {return d.child;})
-                              .parentId(function(d){return d.parent;})
+                              .id(function(d: any) {return d.child;})
+                              .parentId(function(d: any){return d.parent;})
                               (data);
-  
+    
     /* Set D3 Graph Size */
-    const treeStructure = d3.tree().size([300,250]);
-
+    const treeStructure = d3.tree().size([width,height]);
     /* Set data to be loaded in D3 Graph */
     const information = treeStructure(dataStructure);
     // console.log(information.descendants());
     // console.log(information.links());
   
     /* Draw circles for each descendants in hierarchy graph */
-    const circles = newSvg.append("g").selectAll("circle")
+    const circles = newSvg.append("g")
+                        .selectAll("circle")
                         .data(information.descendants());
+
     /* Horizontal
     circles.enter().append("circle")
       .attr("cx", function(d){return d.y;})
@@ -45,17 +51,22 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
       .attr("r", 5);  
     */
     /* Vertical (Default) */
-     circles.enter().append("circle")
-      .attr("cx", function(d){return d.x;})
-      .attr("cy", function(d){return d.y;})
-      .attr("r", 5);  
+    circles.enter().append("circle")
+    .attr("cx", function(d){return d.x;})
+    .attr("cy", function(d){return d.y;})
+    .attr("r", 5)
+    .attr('transform', 'translate('+ margin.left +','+margin.top+')');  
+
     
     /* Draw links (https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
     <path d="M 10 10 C 20 20, 40 20, 50 10" stroke="black" fill="transparent"/> */
     // links: source and target information 
-    const connections = newSvg.append("g").selectAll("path")
+    const connections = newSvg.append("g")
+                          .selectAll("path")
                           .data(information.links());
-    connections.enter().append("path")
+    connections.enter()
+        .append("path")
+        .attr('transform', 'translate('+ margin.left +','+margin.top+')')
         .attr("d", function(d) {
           /* Horizontal
           return "M" + d.source.y + "," + d.source.x + " C " + 
@@ -75,9 +86,44 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     const names = newSvg.append("g").selectAll("text")
                   .data(information.descendants());
     names.enter().append("text")
-                .text(function(d){return d.data.child;})
+                .text(function(d: any){return d.data.child;})
                 .attr("x", function(d){return d.x-10;})
                 .attr("y", function(d){return d.y-10;})
+                .attr('transform', 'translate('+ margin.left +','+margin.top+')');
+    
+
+    /*Implement zoom functionality on all the parts of the svg*/
+    newSvg.call(d3.zoom().on("zoom", zoomed));
+    
+    
+    // let c = 0;
+    // let l = 0;
+    // let t = 0;
+    /*Functionality for circles, links, and text behavior on zoom*/
+    function zoomed (e: any){
+      updateCircles(e);
+      updateLinks(e);
+      updateText(e);
+    }
+    function updateCircles(e: any){
+      // console.log(`zoom circle ${c++}`);
+
+      newSvg.selectAll('g').selectAll("circle")
+        .attr('transform', e.transform);
+    }
+    function updateLinks(e: any){
+      // console.log(`zoom link ${l++}`);
+
+      newSvg.selectAll('g').selectAll('path')
+        .attr('transform', e.transform);
+    }
+    function updateText(e: any){
+      // console.log(`zoom text ${t++}`);
+
+      newSvg.selectAll('g').selectAll('text')
+        .attr('transform', e.transform);
+    }
+
   })
 
   return (
