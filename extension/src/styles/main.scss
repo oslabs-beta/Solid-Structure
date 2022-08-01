@@ -4,7 +4,7 @@ body,div,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,table,tr,th,td,form,fieldset,lege
   box-sizing:border-box;
   font-family:'Inter', sans-serif;
   color:#A0A0A0;
-  line-height: 1;
+  line-height:1;
 }
 html { font-size:0.625em;  }
 a { text-decoration:none; }
@@ -13,7 +13,20 @@ img,fieldset { border:none; vertical-align:middle; }
 strong,em,b,i,address { font-weight:normal; font-style:normal; }
 table { border-collapse:collapse; }
 
-
+/* Scroll Bar Styling */
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-color: rgba(0,0,0,0.6);
+  background-clip: content-box;
+}
 
 /* Global Style Control */
 // Font Size
@@ -26,7 +39,7 @@ $side-padding: 10px;
 $headerbox-height: 34px;
 $footerbox-height: 40px;
 
-// LightMode 
+// Colors (LightMode) 
 $primary-color: #425F94;
 $secondary-color: #F3F3F3;
 $tertiary-color: #4F7CBF;
@@ -34,7 +47,7 @@ $active-color: #FFFFFF;
 $recOut-color: #D4D6D9;
 $recIn-color: #2F2F33;
 
-// DarkMode 
+// Colors (DarkMode) 
 @media (prefers-color-scheme: dark) {
   $secondary-color: #1F1F1F;
   $tertiary-color: #3C3C3C;
@@ -42,20 +55,22 @@ $recIn-color: #2F2F33;
   $recIn-color: $active-color;
 
   #graphContainer { background-color: $secondary-color; }
-  #inspect { background-color: $secondary-color;
-    #logHead { background-color: $secondary-color;
-      #recordButton { background-color: $recOut-color; 
-        span { background-color: $secondary-color;
-          &.active { background-color: $recIn-color; }
-        }
-      }
-      #resetButton{
-        color: $recIn-color;
-        border:0.2rem solid $recIn-color;
+  .inspectBox { background-color: $secondary-color;
+    .inspectHead { background-color: $secondary-color; }
+  }
+  #logboxHead {
+    #recordButton { background-color: $recOut-color; 
+      span { background-color: $secondary-color;
+        &.active { background-color: $recIn-color; }
       }
     }
+    #resetButton{
+      color: $recIn-color;
+      border:0.2rem solid $recIn-color;
+    }
   }
-  .logBox{ .logTitle { background-color: $tertiary-color; } }
+  #sigboxHead { h3 {color: $recIn-color;} }
+  .logBox{ .logTitle {background-color: $tertiary-color;} }
 }
 
 
@@ -76,9 +91,7 @@ $recIn-color: #2F2F33;
 
 .line {
   background-color: $primary-color;
-  &.inspc{
-      cursor:col-resize;
-  }
+  &.inspc{ cursor:col-resize; }
   &.v{ cursor:col-resize; }
   &.h{ cursor:row-resize; }
 }

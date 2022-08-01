@@ -3,8 +3,8 @@ import '../styles/components/_header.scss';
 import { HeaderComponent } from '../types';
 
 export const Header: HeaderComponent = (props) => {
+  
   /* Altering '#iconbox' visibility based on 'tab' signal. */
-
   createEffect(() => {
     if (props.tab() === 'inspector' || props.tab() === 'graph') {
       document.getElementById('iconbox').style.visibility = '';
