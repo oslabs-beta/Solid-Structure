@@ -162,18 +162,21 @@ onMount(() => {
       })
       .attr('cursor', 'pointer'); // changes cursor to pointer when hovered over
 
+    // upon exit request, .exit() is used to update tagged elements that were created before with the new data given
     var nodeExit = node
       .exit()
-      .transition()
-      .duration(duration)
+      .transition() // animation
+      .duration(duration) // duration
       .attr('transform', function(d) {
+        // what the animation is animating (the translation to source x and y)
         return 'translate('+source.y+','+source.x+')';
       })
-      .remove();
+      .remove(); // remove the exited data?
 
+    // make the nodeExit request, upon which you select circle and assign attribute of radius to zero
     nodeExit
       .select('circle')
-      .attr('r', 0);
+      .attr('r', 0); // this turns the disappearing circles into nothing as they fold back into parent node
 
     // create links between the nodes
     function diagonal(s: any, d: any){
@@ -184,7 +187,9 @@ onMount(() => {
       return path;
     }
 
+    // create links, which are descendants of the treeData, sliced starting with index 1 (exclude the zeroth index)
     var links = treeData.descendants().slice(1);
+    // link is the result of selecting all paths with link classes and assigning links data
     var link = svg.selectAll('path.link').data(links, function(d: any) {
       return d.id;
     });
@@ -219,6 +224,7 @@ onMount(() => {
       d.y0 = d.y;
     });
 
+    // on click function
     function click(event: any, d: any) {
       if(d.children) {
         d._children = d.children;
