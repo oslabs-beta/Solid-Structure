@@ -1,4 +1,4 @@
-# Solid-Structure
+# Solid Structure
 
 ## About
 Solid Structure is a chrome extension developer tool for SolidJS.
