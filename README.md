@@ -51,6 +51,11 @@ Contributions are what make the open source community such an amazing place to l
 5. Open a Pull Request
 <br></br>
 
+## Basic Rules
+* All types are managed in **types.ts** file
+* Overall color-scheme and basic stylings should be controlled in **main.scss** file
+<br></br>
+
 ## Authors
 * Matthew Yeon [@myeon7](https://github.com/myeon7)
 * Brandon Brighi [@Bbrighi2](https://github.com/Bbrighi2)
