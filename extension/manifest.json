@@ -1,13 +1,17 @@
 {
-  "name": "SolidJS",
-  "description": "SolidJS DevTool for debugging",
+  "name": "Solid Structure",
+  "description": "DevTool for SolidJS application",
   "version": "1.0.0",
   "manifest_version": 3,
   "devtools_page": "devtools.html",
-  "permissions": ["tabs", "activeTab", "*://localhost/*", "scripting"],
+  "permissions": ["tabs", "activeTab", "scripting"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "background": {
     "service_workers": "./background.js"
+  },
+  "icons":{
+    "48": "assets/logo48-off.png",
+    "128": "assets/logo128-off.png"
   },
   "content_scripts": [
     {
