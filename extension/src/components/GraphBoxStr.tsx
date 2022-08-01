@@ -4,14 +4,11 @@ import { GraphBoxComponent, DiagonalLink } from '../types';
 
 export const GraphBoxStr: GraphBoxComponent = (props) => {
 
-  // const [visTransform, setTransform] = createSignal("");
+  const [visTransform, setTransform] = createSignal("");
   let svgStr;
   
   onMount(() => {
-    /* Target where to load D3 Graph */
-    const newSvg = d3.select(svgStr);
-
-    /* Sample Data */
+     /* Sample Data */
     const data = [{"child":"Root", "parent":""},
                   {"child":"Layer_B1", "parent":"Layer_A1"},
                   {"child":"Layer_A1", "parent":"Root"},
@@ -21,6 +18,9 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
                   {"child":"Layer_A3", "parent":"Root"},
                   ];
 
+    /* Target where to load D3 Graph */
+    const newSvg = d3.select(svgStr);
+   
     /* Convert Sample Data to data structure for D3 */
     const dataStructure = d3.stratify()
                               .id(function(d) {return d.child;})
@@ -81,14 +81,13 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
                 .attr("y", function(d){return d.y-10;})
   })
 
-
   return (
     <>
       <svg ref={svgStr} width="100%" height="100%">
         {/* Structural Graph */}
-        {/* <g transform="translate(50,50)">
+        <g transform={visTransform()}>
           
-        </g> */}
+        </g>
       </svg>
     </>
   );
