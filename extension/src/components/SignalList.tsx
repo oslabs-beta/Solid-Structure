@@ -6,7 +6,7 @@ import '../styles/components/_inspect.scss';
 export const SignalList: SignalListComponent = (props) => {
 
   // TODO: Format "props.caches()" to "signals()" with desired data format
-  const [signals, setSignals] = createSignal(props.caches());
+  const [signals, setSignals] = createSignal([{}, {}, {}, {}, {}]);
 
   return (
     <div class="inspectBox">

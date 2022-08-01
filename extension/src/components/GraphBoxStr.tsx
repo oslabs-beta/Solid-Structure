@@ -28,7 +28,7 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
                               (data);
   
     /* Set D3 Graph Size */
-    const treeStructure = d3.tree().size([300,350]);
+    const treeStructure = d3.tree().size([300,250]);
 
     /* Set data to be loaded in D3 Graph */
     const information = treeStructure(dataStructure);
@@ -50,12 +50,11 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
       .attr("cy", function(d){return d.y;})
       .attr("r", 5);  
     
-
     /* Draw links (https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
     <path d="M 10 10 C 20 20, 40 20, 50 10" stroke="black" fill="transparent"/> */
+    // links: source and target information 
     const connections = newSvg.append("g").selectAll("path")
                           .data(information.links());
-    // links: source and target information 
     connections.enter().append("path")
         .attr("d", function(d) {
           /* Horizontal

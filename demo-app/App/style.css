@@ -1,0 +1,81 @@
+body {
+    margin: 0; 
+    background-color: rgb(107, 172, 216);
+}
+
+#page{
+    position:fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index:999;
+}
+
+#title{ 
+    justify-content: space-evenly;
+    align-items: center;
+    position: center;
+    background-color: rgb(255, 255, 255);
+    font-size: 60px;
+    border:1px solid #000;
+    margin-top: 35px;
+}
+
+/* ------  COUNTER CHILD --------*/
+#counter{
+    justify-content: center;
+    align-items: center;
+    padding-top: 5%;
+}
+
+#counterBox {
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(250, 250, 250);
+    position: center;
+    text-align: center;
+    font-size: 50px;
+    border: solid;
+    border-radius: 3px;
+    border-width: 1px;
+    margin-left: 50px;
+    margin-bottom: 30px;
+    top: 10%;
+    width: 40%;
+}
+
+#incrementBtn{
+ justify-content: space-between;
+ padding: 5px;
+ margin-left: 5px;
+}
+
+#decrementBtn{
+justify-content: space-between;
+padding: 5px;
+margin-right: 5px;
+}
+
+
+/* ------ TODO CHILD ------ */
+
+#todo {
+    align-items: center;
+    padding-top: 8%;
+    
+}
+
+#add{
+    margin-left: 2px;
+}
+#textbox{
+    align-items: center;
+    justify-content: center;
+    color:rgb(39, 33, 24);
+    border:1px solid #000;
+    /* bottom: 75%; */
+}
+
+#checkbox{
+    color: red;
+}

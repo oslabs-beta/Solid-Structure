@@ -3,8 +3,6 @@ import * as d3 from 'd3';
 import { GraphBoxComponent, DiagonalLink } from '../types';
 
 export const GraphBoxDep: GraphBoxComponent = (props) => {
-
-  // const [visTransform, setTransform] = createSignal("");
   let svgDep;
   
   onMount(() => {
@@ -25,7 +23,7 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
                               (data);
   
     /* Set D3 Graph Size */
-    const treeStructure = d3.tree().size([300,200]);
+    const treeStructure = d3.tree().size([200,100]);
 
     /* Set data to be loaded in D3 Graph */
     const information = treeStructure(dataStructure);
@@ -39,20 +37,19 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
     circles.enter().append("circle")
       .attr("cx", function(d){return d.y;})
       .attr("cy", function(d){return d.x;})
-      .attr("r", 5);  
-    
+      .attr("r", 5);
     /* Vertical (Default)
      circles.enter().append("circle")
       .attr("cx", function(d){return d.x;})
       .attr("cy", function(d){return d.y;})
-      .attr("r", 5);  
+      .attr("r", 5);
     */
 
     /* Draw links (https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
     <path d="M 10 10 C 20 20, 40 20, 50 10" stroke="black" fill="transparent"/> */
+    // links: source and target information 
     const connections = newSvg.append("g").selectAll("path")
                           .data(information.links());
-    // links: source and target information 
     connections.enter().append("path")
         .attr("d", function(d) {
           /* Horizontal */
@@ -60,7 +57,6 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
             (d.source.y + d.target.y)/2 + "," + d.source.x + " " + 
             (d.source.y + d.target.y)/2 + "," + d.target.x + " " + 
             d.target.y + "," + d.target.x;
-          
           /* Vertical (Default)
           return "M" + d.source.x + "," + d.source.y + " C " + 
             d.source.x + "," + (d.source.y + d.target.y)/2 + " " + 
@@ -69,23 +65,22 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
           */
         })
 
-    /* Include texts on each circles with specified text location */
+    /* Include texts on each circles with specified location (x, y) */
     const names = newSvg.append("g").selectAll("text")
                   .data(information.descendants());
     names.enter().append("text")
                 .text(function(d){return d.data.child;})
-                .attr("x", function(d){return d.y-10;})
-                .attr("y", function(d){return d.x-10;})
+                .attr("x", function(d){return d.y+10;})
+                .attr("y", function(d){return d.x+3;})
   })
-
 
   return (
     <>
       <svg ref={svgDep} width="100%" height="100%">
         {/* Depenendency Graph */}
-        {/* <g transform="translate(50,50)">
+        <g>
           
-        </g> */}
+        </g>
       </svg>
     </>
   );

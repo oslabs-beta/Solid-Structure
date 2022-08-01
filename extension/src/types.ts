@@ -1,4 +1,4 @@
-import type { Accessor, JSXElement, Setter } from 'solid-js';
+import type { Accessor, JSXElement, Setter, getOwner } from 'solid-js';
 import type { JSX, Component } from 'solid-js';
 
 /* GLOBAL TYPE */
@@ -19,8 +19,7 @@ export type HeaderComponent = Component<HeaderProps>;
 
 /* SignalList.tsx */
 type SignalListProps = {
-    caches: Accessor<object[]>,
-    setCaches: Setter<object[]>,
+    root: NonNullable<ReturnType<typeof getOwner>>,
 };
 export type SignalListComponent = Component<SignalListProps>;
 

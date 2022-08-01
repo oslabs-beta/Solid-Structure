@@ -8,9 +8,8 @@ import { SolidComponent, TabType, OrientType } from './types';
 import './styles/main.scss';
 
 export const SolidStructure: SolidComponent = (props) => {
-  // const [children, root] = createRoot(() => [props.children, getOwner()]);
-  // console.log(root);
-
+  const [children, root] = createRoot(() => [props.children, getOwner()]);
+  console.log(root);
   const [tab, setTab] = createSignal<TabType>('inspector');
   const [orientation, setOrientation] = createSignal<OrientType>('horizontal');
   const [record, setRecord] = createSignal<boolean>(true);
@@ -39,11 +38,8 @@ export const SolidStructure: SolidComponent = (props) => {
   /* Alter 'mainDisplay' size format with 'tab' signal */
   createEffect(() => {
     if (tab() === 'inspector')
-      document.getElementById(
-        'mainDisplay'
-      ).style.gridTemplateColumns = `1fr 3px ${boxsize()}%`;
-    else
-      document.getElementById('mainDisplay').style.gridTemplateColumns = '100%';
+      document.getElementById('mainDisplay').style.gridTemplateColumns = `1fr 3px ${boxsize()}%`;
+    else document.getElementById('mainDisplay').style.gridTemplateColumns = '100%';
   });
 
   return (
@@ -56,10 +52,7 @@ export const SolidStructure: SolidComponent = (props) => {
       <div id="mainDisplay">
         <Switch>
           <Match when={tab() === 'inspector'}>
-            <SignalList
-              caches={caches}
-              setCaches={setCaches}
-            />
+            <SignalList root={root} />
             <div class="line inspc" onMouseDown={() => setOnDrag(true)}></div>
             <Graph tab={tab} orientation={orientation} boxsize={boxsize} />
           </Match>
