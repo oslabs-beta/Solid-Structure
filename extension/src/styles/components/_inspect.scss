@@ -8,54 +8,90 @@ $icon-size: 22px;
     height:$icon-size;
     cursor:pointer;
     opacity:1;
-    transition: opacity 0.2s ease;
+}
+@mixin hoverButton {
+    transition: opacity 0.15s ease-out;
     &:hover{ opacity:0.75; }
 }
 
+<<<<<<< HEAD
 // Inspect.tsx
 #inspect {
+=======
+@keyframes recording {
+    0% {opacity:0.87}
+    60% {opacity:1}
+    100% {opacity:0.87}
+}
+
+/* SignalList.tsx, LogMonitor.tsx */
+.inspectBox {
+>>>>>>> dev
     position:relative;
     min-width:120px;
     height:100%;
     display:grid;
-    grid-template-rows: m.$headbox-height auto;
+    grid-template-rows: m.$headerbox-height auto;
     z-index: 10;
     overflow:hidden;
+    background-color: m.$secondary-color;
 
-    #logHead {
+    .inspectHead {
         display:flex;
         justify-content:space-between;
         align-items:center;
         padding:6px m.$side-padding;
-        background-color:m.$darkcolor;
-
-        #recordButton {
-            @include buttonStyle;
-            width:$icon-size;
-            border-radius:100%;
-            background-color:rgba(239, 239, 239, 0.3);
-
-            span {
-                content:"";
-                width:60%;
-                height:60%;
-                border-radius:100%;
-                transition: background-color 0.1s ease;
-            }
-        }
-        #resetButton {
-            @include buttonStyle;
-            padding:0 4px;
-            border-radius:3px;
-            font-size: m.$main-font;
-            font-weight:500;
-            color: m.$primary-color;
-            border:2px solid m.$primary-color;
-        }
+        background-color:m.$secondary-color;
     }
-    #history { 
+    .inspectList { 
         width:100%; 
         height:100%; 
         overflow-y:scroll;
+    }
+}
+
+/* SignalList.tsx */
+#sigboxHead {
+    h3 {
+        font-size:1.4rem;
+        color: m.$recIn-color;
+        // color: #3C3C3C;
+    }
+}
+
+/* LogMonitor.tsx */
+#logboxHead {
+    #recordButton {
+        @include buttonStyle;
+        width:$icon-size;
+        height:$icon-size;
+        border-radius:100%;
+        background-color: m.$recOut-color;
+    
+        span {
+            content:"";
+            width:62%;
+            height:62%;
+            border-radius:100%;
+            transition: background-color 0.1s ease;
+            background-color: m.$secondary-color;
+    
+            @include hoverButton;
+            &.active { 
+                background-color:m.$recIn-color; 
+                animation: recording 1s ease-in-out infinite;
+            }
+        }
+    }
+    #resetButton {
+        @include buttonStyle;
+        @include hoverButton;
+        padding:0 3px;
+        border-radius:3px;
+        font-size: m.$main-font;
+        font-weight:500;
+        color: m.$recIn-color;
+        opacity:0.4;
+        border:0.2rem solid m.$recIn-color;
     }
 }

@@ -8,14 +8,16 @@
     .logTitle {
         padding:0 m.$side-padding;
         line-height:2.8rem;
-        background-color: m.$secondary-color;
+        background-color: m.$tertiary-color;
         color: m.$active-color;
+        overflow: hidden;
     }
     .logContent{
         padding:10px m.$side-padding;
-        
-        p {
-            line-height:1.8rem;
+        overflow:hidden;
+
+        p { 
+            line-height:1.8rem; 
             // border:1px solid #000;
         }
     }

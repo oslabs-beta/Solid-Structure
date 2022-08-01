@@ -18,12 +18,13 @@
   align-items: center;
   padding: 0 m.$side-padding;
   width: 100%;
-  height: m.$mainheadbox-height;
+  height: m.$headerbox-height;
   background-color: m.$primary-color;
 
   h2 {
     font-size: m.$main-font;
     font-weight: normal;
+    color: m.$active-color;
   }
 }
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { createSignal, createEffect, onMount } from 'solid-js';
 import { GraphBox } from './GraphBox';
 import '../styles/components/_graph.scss';
@@ -15,14 +16,29 @@ export const Graph: GraphComponent = (props) => {
     Size of containers inside '#graphContainer' is adjusted based on user-input(drag).
   */
 
+=======
+import { createSignal, createEffect } from 'solid-js';
+import { GraphBoxStr } from './GraphBoxStr';
+import { GraphBoxDep } from './GraphBoxDep';
+import '../styles/components/_graph.scss';
+import { GraphComponent } from '../types';
+
+export const Graph: GraphComponent = (props) => {
+  
+>>>>>>> dev
   /* Updating 'graphContainer' box size with user-input(drag). */
-  const [boxsize, setBoxsize] = createSignal<number>(50);
+  const [boxsize, setBoxsize] = createSignal<number>(25);
   const [onDrag, setOnDrag] = createSignal<boolean>(false);
   const onMouseMove = (e: any) => {
     if (props.orientation() === "horizontal") {
       const h = window.innerHeight - e.clientY - 34;
+<<<<<<< HEAD
       const hp = Math.floor((h / (window.innerHeight - 38))*100);
       if (hp < 20 || hp > 80) return;
+=======
+      const hp = Math.floor((h / (window.innerHeight - 38)) * 100);
+      if (hp < 18 || hp > 80) return;
+>>>>>>> dev
       setBoxsize(hp);
     }
     else if (props.orientation() === "vertical") {
@@ -48,8 +64,15 @@ export const Graph: GraphComponent = (props) => {
     }
   });
 
+<<<<<<< HEAD
 
 
+=======
+  /* 
+    Changing inner display orientation of '#graphContainer' based on 'orientation' signal update. 
+    Size of containers inside '#graphContainer' is adjusted based on user-input(drag).
+  */
+>>>>>>> dev
   createEffect(() => {
     const graphContainerStyle = document.getElementById('graphContainer').style;
     const line = document.querySelector('#graphContainer > .line').classList;
@@ -69,13 +92,18 @@ export const Graph: GraphComponent = (props) => {
   return (
     <div id="graphContainer">
       <div id="containerDep">
+<<<<<<< HEAD
         <p>Dependency</p>
         {/* <GraphBox type="dependency" /> */}
+=======
+        <p>Structural</p>
+        <GraphBoxStr />
+>>>>>>> dev
       </div>
       <div class="line h" onMouseDown={() => setOnDrag(true)}></div>
       <div id="containerStr">
-        <p>Structural</p>
-        <GraphBox type="structural" />
+        <p>Dependency</p>
+        <GraphBoxDep />
       </div>
     </div>
   );

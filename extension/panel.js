@@ -29,7 +29,7 @@ const treeData = {
           name: 'Noam',
           value: 7.5,
           type: 'grey',
-          // "level": "purple"
+          "level": "purple"
         },
       ],
     },
@@ -63,14 +63,14 @@ const treeData = {
 };
 
 // set the dimensions and margins of the diagram
-const margin = { top: 20, right: 90, bottom: 30, left: 90 },
-  width = 660 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+const margin = { top: 20, right: 90, bottom: 30, left: 90 }
+const width = 660 - margin.left - margin.right;
+const height = 500 - margin.top - margin.bottom;
 
 // declares a tree layout and assigns the size
 const treemap = d3.tree().size([height, width]);
 
-//  assigns the data to a hierarchy using parent-child relationships
+// assigns the data to a hierarchy using parent-child relationships
 let nodes = d3.hierarchy(treeData, (d) => d.children);
 
 // maps the node data to the tree layout
