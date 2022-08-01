@@ -1,6 +1,17 @@
-# Solid-Structure-DT
+# Solid-Structure
 
-Solid Structure is a chrome extension developer tool for  SolidJS.
+## About
+Solid Structure is a chrome extension developer tool for SolidJS.
+
+
+## Built With
+
+* Solid.JS
+* TypeScript
+* SCSS
+* D3.JS
+* Vite
+* Chrome API DevTool
 
 
 ## Contributing
@@ -20,3 +31,6 @@ Contributions are what make the open source community such an amazing place to l
 * Matthew Yeon [@myeon7](https://github.com/myeon7)
 * Mark Yermolov [@yermie123](https://github.com/yermie123)
 * Tanner Lyon [@THLyon](https://github.com/THLyon)
+
+## Acknowledgements
+* [Best README Template](https://github.com/othneildrew/Best-README-Template)
