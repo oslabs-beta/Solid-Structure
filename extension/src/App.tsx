@@ -9,7 +9,7 @@ import './styles/main.scss';
 
 export const SolidStructure: SolidComponent = (props) => {
   const [children, root] = createRoot(() => [props.children, getOwner()]);
-  console.log(root);
+  console.log("App.tsx/root:", root);
   const [tab, setTab] = createSignal<TabType>('inspector');
   const [orientation, setOrientation] = createSignal<OrientType>('horizontal');
   const [record, setRecord] = createSignal<boolean>(true);
@@ -43,33 +43,36 @@ export const SolidStructure: SolidComponent = (props) => {
   });
 
   return (
-    <div id="mainApp">
-      <Header
-        tab={tab}
-        orientation={orientation}
-        setOrientation={setOrientation}
-      />
-      <div id="mainDisplay">
-        <Switch>
-          <Match when={tab() === 'inspector'}>
-            <SignalList root={root} />
-            <div class="line inspc" onMouseDown={() => setOnDrag(true)}></div>
-            <Graph tab={tab} orientation={orientation} boxsize={boxsize} />
-          </Match>
-          <Match when={tab() === 'graph'}>
-            <Graph tab={tab} orientation={orientation} />
-          </Match>
-          <Match when={tab() === 'logmonitor'}>
-            <LogMonitor
-              record={record}
-              setRecord={setRecord}
-              caches={caches}
-              setCaches={setCaches}
-            />
-          </Match>
-        </Switch>
+    <>
+      {children}
+      <div id="mainApp">
+        <Header
+          tab={tab}
+          orientation={orientation}
+          setOrientation={setOrientation}
+        />
+        <div id="mainDisplay">
+          <Switch>
+            <Match when={tab() === 'inspector'}>
+              <SignalList root={root} />
+              <div class="line inspc" onMouseDown={() => setOnDrag(true)}></div>
+              <Graph tab={tab} orientation={orientation} boxsize={boxsize} />
+            </Match>
+            <Match when={tab() === 'graph'}>
+              <Graph tab={tab} orientation={orientation} />
+            </Match>
+            <Match when={tab() === 'logmonitor'}>
+              <LogMonitor
+                record={record}
+                setRecord={setRecord}
+                caches={caches}
+                setCaches={setCaches}
+              />
+            </Match>
+          </Switch>
+        </div>
+        <Navbar tab={tab} setTab={setTab} />
       </div>
-      <Navbar tab={tab} setTab={setTab} />
-    </div>
+    </>
   );
 };
