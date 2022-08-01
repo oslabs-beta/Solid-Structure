@@ -42,17 +42,7 @@ Also, keep in mind that every time .append is called, a new element WILL be crea
 let svgDep: any;
 let svgStr: any;
 onMount(() => {
-  // this code creates a circle element inside the svg:
-  // d3.select(svgStr)
-  // .append('circle')
-  // .attr('cx', '50')
-  // .attr('cy', '50')
-  // .attr('r', '40');
-
-  // destructure svg and separate from the margins
-  // so that the code works with the true width before applying the margins again
-  // 960
-  // 500
+  // measurement for svg vs for the group
   var margin: any = { top: 20, right: 90, bottom: 20, left: 90 };
   var width: number = 960 - margin.left - margin.right;
   var height: number = 500 - margin.top - margin.bottom;
@@ -84,79 +74,93 @@ onMount(() => {
     return d.children;
   });
 
-  // nodes should start at 0 distance from the y axis and
+  // these are not inherent properties to a hierarchy, but i believe they are to a treemap(root)
+  // nodes should start at 0 distance from the y axis and at the center length distance from the x axis
   root.x0 = height/2;
   root.y0 = 0;
 
-  // call on update to run with the current root
+  // call on update function to run with the current root
   update(root);
 
   // function update that takes in a source as a parameter
-  // starts off as root, bound to change
   function update(source: any) {
-    // redefining treeData, but only in the function, as a call on treemap and we pass hierarchical data
+    // redefining treeData, but only in the function, as a call on treemap and we pass root
+    // i believe the root.x0 and root.y0 properties are assigned here to the root AND its descendants
     var treeData = treemap(root);
 
-    // nodes
+    // treeData.descendants() generates an array of of descending nodes, starting with this node, followed by each child in order (breadth)
     var nodes = treeData.descendants();
-    // utilized the depth of the children
+    // !!!! not quite sure what this does
     nodes.forEach(function(d) {
       d.y = d.depth * 180;
     });
 
-    //
+    // this doesn't even modify anything immediately, only when called
+    // oh, and all it does is it checks if the id in the data exists. If it doesn't, then just increment the previous
     var node = svg.selectAll('g.node')
       .data(nodes, function(d: any){
         return d.id || (d.id = ++ i);
       });
 
-    
+    // we almost immediately after invoke node, then enter (add on) more g elements that are missing from the parent g elements
     var nodeEnter = node
       .enter()
       .append('g')
       .attr('class', 'node')
       .attr('transform', function(d) {
+        // translation the same as the root's
         return 'translate(' + source.y0 + ',' + source.x0 + ')';
       })
-      .on('click', click);
+      .on('click', click); // on click, invoke the function click
 
+    // up until this point, we've been setting up the data distribution part, now we set up its visualization
+    // call on nodeEnter function, append circle, 
     nodeEnter
       .append('circle')
       .attr('class', 'node')
-      .attr('r', 0)
+      .attr('r', 0)  // initial radius set to 0
       .style('fill', function(d: any) {
         // if children do exist, fill color with red, otherwise black
         return d._children ? 'red' : 'black';
       });
+    
 
+    // call on nodeEnter again, but this time to add visualization for text
     nodeEnter
       .append('text')
-      .attr('dy', '.35em')
+      .attr('dy', '.35em') // shifts text along the y-axis
       .attr('x', function(d: any) {
+        // this function changes x-axis coordinate to either -13 or 13 depending on whether children exist or not
         return d.children || d._children ? -13 : 13;
       })
       .attr('text-anchor', function(d: any) {
+        // if children exist, move to relate axis to end of string, otherwise do move to relate axis to start of string
         return d.children || d._children ? 'end' : 'start';
       })
       .text(function(d: any) {
+        // set text to be the data name
         return d.data.name;
       })
 
+    // merge iterables into a single array. Kind of like concat, but better for nested arrays
     var nodeUpdate = nodeEnter.merge(node);
 
     nodeUpdate
       .transition(duration)
       .attr('transform', function(d) {
+        // transforms the merged nodes by moving them to the d.y and d.x coordinates
         return 'translate(' + d.y + ',' + d.x + ')';
       });
 
+    
     nodeUpdate
       .select('circle.node')
       .attr('r', 10)
       .style('fill', function(d: any) {
+        // since this is for node updates, we check if there are any hidden children, and change the color to red or black accordingly
         return d._children ? 'red': 'black';
       })
-      .attr('cursor', 'pointer');
+      .attr('cursor', 'pointer'); // changes cursor to pointer when hovered over
 
     var nodeExit = node
       .exit()
