@@ -1,1 +1,1 @@
-chrome.devtools.panels.create('SolidStructure', null, 'panel.html', () => {});
+chrome.devtools.panels.create('Solid Structure', null, 'panel.html', () => {});

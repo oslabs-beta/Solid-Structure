@@ -1,4 +1,4 @@
-import type { Accessor, Setter } from 'solid-js';
+import type { Accessor, JSXElement, Setter, getOwner } from 'solid-js';
 import type { JSX, Component } from 'solid-js';
 
 /* GLOBAL TYPE */
@@ -17,14 +17,11 @@ type HeaderProps = {
 };
 export type HeaderComponent = Component<HeaderProps>;
 
-/* Inspect.tsx */
-type InspectProps = {
-    record: Accessor<boolean>,
-    setRecord: Setter<boolean>,
-    caches: Accessor<object[]>,
-    setCaches: Setter<object[]>,
+/* SignalList.tsx */
+type SignalListProps = {
+    root: NonNullable<ReturnType<typeof getOwner>>,
 };
-export type InspectComponent = Component<InspectProps>;
+export type SignalListComponent = Component<SignalListProps>;
 
 /* Graph.tsx */
 type GraphProps = {
@@ -36,9 +33,22 @@ export type GraphComponent = Component<GraphProps>;
 
 /* GraphBox.tsx */
 type GraphBoxProps = {
-    type: string
+    
 };
 export type GraphBoxComponent = Component<GraphBoxProps>;
+export type DiagonalLink = {
+    source: { x: number; y: number };
+    target: { x: number; y: number };
+};
+
+/* LogMonitor.tsx */
+type LogMonitorProps = {
+    record: Accessor<boolean>,
+    setRecord: Setter<boolean>,
+    caches: Accessor<object[]>,
+    setCaches: Setter<object[]>,
+};
+export type LogMonitorComponent = Component<LogMonitorProps>;
 
 /* Navbar.tsx */
 type NavbarProps = {
