@@ -8,7 +8,8 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
-    "target": "es6"
+    "target": "es6",
+    "resolveJsonModule": true
   },
   "include": ["extension/src/**/*"]
 }
