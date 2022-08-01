@@ -1,0 +1,19 @@
+#counter{
+    position:absolute;
+    width:100%; height:100%;
+    background: skyblue;
+}
+#counterBox {
+    width: 180px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    background-color:rgb(250, 250, 250);
+    text-align: center;
+    font-size: 50px;
+}
+
+#incrementBtn{ padding: 8px; }
+#decrementBtn{
+    padding: 8px;
+    margin-right: 20px;
+}

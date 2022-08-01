@@ -1,16 +1,14 @@
-import { createEffect, For } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 import { Log } from './Log';
-import { InspectComponent, HandleClick } from '../types';
+import { LogMonitorComponent, HandleClick } from '../types';
 import '../styles/components/_inspect.scss';
 
-export const Inspect: InspectComponent = (props) => {
-  /* Control "Record" Button */
-  createEffect(() => {
-    props.record()
-      ? (document.getElementById('recBtn').style.backgroundColor = '#2F2F33')
-      : (document.getElementById('recBtn').style.backgroundColor = '#D4D6D9');
-  });
+export const LogMonitor: LogMonitorComponent = (props) => {
+  
+  // TODO: Format "props.caches()" to "logs()" with desired data format
+  const [logs, setLogs] = createSignal<object[]>(props.caches());
 
+  /* Control "Record" Button */
   const handleRecordClick: HandleClick = (e) => {
     e.preventDefault();
     props.setRecord(!props.record());
@@ -23,7 +21,7 @@ export const Inspect: InspectComponent = (props) => {
   const handleResetClick: HandleClick = (e) => {
     e.preventDefault();
     console.log('Reset');
-    props.setCaches(() => {
+    setLogs(() => {
       return [];
     });
 
@@ -31,17 +29,17 @@ export const Inspect: InspectComponent = (props) => {
   };
 
   return (
-    <div id="inspect">
-      <div id="logHead">
+    <div class="inspectBox">
+      <div id="logboxHead" class="inspectHead">
         <div id="recordButton" onClick={handleRecordClick}>
-          <span id="recBtn"></span>
+          <span id="recBtn" classList={{active: props.record()}}></span>
         </div>
         <div id="resetButton" onClick={handleResetClick}>
           Reset
         </div>
       </div>
-      <div id="history">
-        <For each={props.caches()}>{(cache, i) => <Log cache={cache} />}</For>
+      <div class="inspectList">
+        <For each={logs()}>{(cache, i) => <Log cache={cache} />}</For>
       </div>
     </div>
   );

@@ -1,18 +1,19 @@
 import { createSignal, createEffect } from 'solid-js';
-import { GraphBox } from './GraphBox';
+import { GraphBoxStr } from './GraphBoxStr';
+import { GraphBoxDep } from './GraphBoxDep';
 import '../styles/components/_graph.scss';
 import { GraphComponent } from '../types';
-// import * as d3 from 'd3';
 
 export const Graph: GraphComponent = (props) => {
+  
   /* Updating 'graphContainer' box size with user-input(drag). */
-  const [boxsize, setBoxsize] = createSignal<number>(50);
+  const [boxsize, setBoxsize] = createSignal<number>(25);
   const [onDrag, setOnDrag] = createSignal<boolean>(false);
   const onMouseMove = (e: any) => {
     if (props.orientation() === 'horizontal') {
       const h = window.innerHeight - e.clientY - 34;
       const hp = Math.floor((h / (window.innerHeight - 38)) * 100);
-      if (hp < 20 || hp > 80) return;
+      if (hp < 18 || hp > 80) return;
       setBoxsize(hp);
     } else if (props.orientation() === 'vertical') {
       const leftbox = props.boxsize
@@ -39,7 +40,6 @@ export const Graph: GraphComponent = (props) => {
     Changing inner display orientation of '#graphContainer' based on 'orientation' signal update. 
     Size of containers inside '#graphContainer' is adjusted based on user-input(drag).
   */
-
   createEffect(() => {
     const graphContainerStyle = document.getElementById('graphContainer').style;
     const line = document.querySelector('#graphContainer > .line').classList;
@@ -59,13 +59,13 @@ export const Graph: GraphComponent = (props) => {
   return (
     <div id="graphContainer">
       <div id="containerDep">
-        <p>Dependency</p>
-        <GraphBox type="dependency" />
+        <p>Structural</p>
+        <GraphBoxStr />
       </div>
       <div class="line h" onMouseDown={() => setOnDrag(true)}></div>
       <div id="containerStr">
-        <p>Structural</p>
-        <GraphBox type="structural" />
+        <p>Dependency</p>
+        <GraphBoxDep />
       </div>
     </div>
   );
