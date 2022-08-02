@@ -7,7 +7,7 @@ Solid Structure allows developer to oversee a list of signal connections, signal
 <br></br>
 
 ## Features
-- [ ] Signal List
+- [x] Signal List
 - [ ] Signal Update Logs (on/off)
 - [ ] Graph Visualization
     - [ ] Structural Graph

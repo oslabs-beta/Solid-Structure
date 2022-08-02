@@ -1,12 +1,16 @@
 import "solid-js";
-import { render } from 'solid-js/web';
+import { render, Portal } from 'solid-js/web';
 import { SolidStructure } from "../extension/src/App";
 import { App } from './App';
+import { Debugger } from "@solid-devtools/debugger"
 
-render(
-  () => 
-    <SolidStructure>
+render(() =>(
+  <>
+    <Debugger>
       <App/>
-    </SolidStructure>,
+    </Debugger>
+    <SolidStructure/>
+  </>
+),
     document.getElementById('root')
 );

@@ -1,9 +1,18 @@
-import { For } from 'solid-js';
+import { For, createSignal } from 'solid-js';
 import { LogComponent } from '../types';
 import '../styles/components/_log.scss';
+import { addSignalListener } from '../App';
 
 export const Signal: LogComponent = (props) => {
   const observers = props.signal.observers;
+
+  const [value, setValue] = createSignal(props.signal.value.toString())
+
+
+  addSignalListener(props.signal.sdtId, value => {
+    setValue(value.toString())
+  })
+
   // console.log(observers);
   // console.log(props.signal.value);
   // console.log(typeof props.signal.value);
@@ -31,8 +40,8 @@ export const Signal: LogComponent = (props) => {
           {props.signal.name}
         </p>
         <br></br>
-        <span> [{typeof props.signal.value}:</span>
-        {props.signal.value.toString()}
+        <span> [{typeof value()}:</span>
+        {value()}
         <span>]</span>
       </div>
       <div class="logContent">
