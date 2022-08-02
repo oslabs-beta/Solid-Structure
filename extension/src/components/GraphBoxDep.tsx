@@ -106,20 +106,14 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
       updateText(e);
     }
     function updateCircles(e: any){
-      // console.log(`zoom circle ${c++}`);
-
       newSvg.selectAll('g').selectAll("circle")
         .attr('transform', e.transform);
     }
     function updateLinks(e: any){
-      // console.log(`zoom link ${l++}`);
-
       newSvg.selectAll('g').selectAll('path')
         .attr('transform', e.transform);
     }
     function updateText(e: any){
-      // console.log(`zoom text ${t++}`);
-
       newSvg.selectAll('g').selectAll('text')
         .attr('transform', e.transform);
     }
