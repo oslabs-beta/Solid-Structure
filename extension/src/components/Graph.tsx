@@ -68,7 +68,7 @@ export const Graph: GraphComponent = (props) => {
       <div class="line h" onMouseDown={() => setOnDrag(true)}></div>
       <div id="containerStr">
         <p>Dependency</p>
-        <GraphBoxDep />
+        <GraphBoxDep selectedSig={props.selectedSig}/>
       </div>
     </div>
   );

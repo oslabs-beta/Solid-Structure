@@ -1,12 +1,12 @@
-import { createSignal, For } from 'solid-js';
+import { createSignal, createEffect, For } from 'solid-js';
 import { Signal } from './Signal';
 import { SignalListComponent } from '../types';
 import '../styles/components/_inspect.scss';
 
 export const SignalList: SignalListComponent = (props) => {
 
-  // TODO: Format "props.caches()" to "signals()" with desired data format
-  const [signals, setSignals] = createSignal([{}, {}, {}, {}, {}]);
+  const root = props.root.owned ? props.root.owned[0].owned[0].sourceMap : []; 
+  const signals = Object.values(root);
 
   return (
     <div class="inspectBox">
@@ -14,8 +14,15 @@ export const SignalList: SignalListComponent = (props) => {
         <h3>Signals</h3>
       </div>
       <div class="inspectList">
-        <For each={signals()}>{(cache, i) => <Signal cache={cache} />}</For>
+        <For each={signals}>{(signal) => 
+          <Signal 
+            signal={signal} 
+            selectedSig={props.selectedSig} 
+            setSelectedSig={props.setSelectedSig}
+          />}
+        </For>
       </div>
     </div>
   );
 };
+

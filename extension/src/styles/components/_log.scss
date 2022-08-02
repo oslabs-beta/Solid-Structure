@@ -1,13 +1,14 @@
 @use "../main.scss" as m;
 
+/* Signal.tsx & Log.tsx*/
 .logBox{
     font-size: m.$main-font;
     width:100%;
     // border:1px solid #000;
 
     .logTitle {
-        padding:0 m.$side-padding;
-        line-height:2.8rem;
+        padding:6px m.$side-padding;
+        line-height:1.6rem;
         background-color: m.$tertiary-color;
         color: m.$active-color;
         overflow: hidden;
@@ -19,6 +20,26 @@
         p { 
             line-height:1.8rem; 
             // border:1px solid #000;
+        }
+    }
+}
+
+/* Signal.tsx */
+.sigName {
+    display:inline-block;
+    color: m.$active-color;
+    cursor:pointer;
+    transition: opacity 0.28s ease;
+    &:hover{ opacity:0.6; }
+    &.active{
+        &::after{
+            content:"";
+            display:inline-block;
+            margin-left:8px;
+            width:6px; height:6px;
+            margin-bottom:2px;
+            background-color:orange;
+            border-radius:50%;
         }
     }
 }

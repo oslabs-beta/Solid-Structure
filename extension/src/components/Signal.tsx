@@ -1,14 +1,49 @@
+import { For } from 'solid-js';
 import { LogComponent } from '../types';
 import '../styles/components/_log.scss';
 
 export const Signal: LogComponent = (props) => {
+  const observers = props.signal.observers;
+  // console.log(observers);
+  // console.log(props.signal.value);
+  // console.log(typeof props.signal.value);
+
+  const handleClick = (e) => {
+    const id = e.target.id;
+    const obj = {};
+    obj[id] = observers;
+    props.setSelectedSig(obj);
+  }
+
+  /*
+    Edge case: 
+      1) "array" is also considered "object"
+      2) display as collapsible when "array of object" or "object of array/object"
+  */
   return (
     <div class="logBox">
-      <div class="logTitle">@Signal_Name</div>
+      <div class="logTitle">
+        <p class="sigName" 
+          classList={{active: Object.keys(props.selectedSig())[0] === props.signal.name}} 
+          id={props.signal.name} 
+          onClick={handleClick}
+        >
+          {props.signal.name}
+        </p>
+        <br></br>
+        <span> [{typeof props.signal.value}:</span>
+        {props.signal.value.toString()}
+        <span>]</span>
+      </div>
       <div class="logContent">
-        <p>connected_element/location</p>
-        <p>connected_element/location</p>
-        <p>connected_element/location</p>
+        <For each={observers}> 
+          {(observer, i) => 
+            <>
+              <p>{i()} : <span>{observer.name}</span></p>
+              {/* <span>more details</span> */}
+            </>
+          }
+        </For>
       </div>
     </div>
   );

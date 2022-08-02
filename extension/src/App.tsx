@@ -9,12 +9,18 @@ import './styles/main.scss';
 
 export const SolidStructure: SolidComponent = (props: any) => {
   const [children, root] = createRoot(() => [props.children, getOwner()]);
-  console.log(root);
+  // console.log("App.tsx/root:", root);
   const [tab, setTab] = createSignal<TabType>('inspector');
   const [orientation, setOrientation] = createSignal<OrientType>('horizontal');
   const [record, setRecord] = createSignal<boolean>(true);
-  const [caches, setCaches] = createSignal<object[]>([{}, {}, {}, {}, {}, {}, {}, {}]);
+  const [selectedSig, setSelectedSig] = createSignal<object>({});
+  const [caches, setCaches] = createSignal<object[]>([{}, {}]);
   
+  /* TODO: Attempt to render updated "root" after signal value changes on demo-app */
+  // createEffect(() => {
+  //   console.log(children);
+  // })
+
   /* Update 'Inspect' box width by user input (drag) */
   const [boxsize, setBoxsize] = createSignal<number>(65);
   const [onDrag, setOnDrag] = createSignal<boolean>(false);
@@ -43,33 +49,51 @@ export const SolidStructure: SolidComponent = (props: any) => {
   });
 
   return (
-    <div id="mainApp">
-      <Header
-        tab={tab}
-        orientation={orientation}
-        setOrientation={setOrientation}
-      />
-      <div id="mainDisplay">
-        <Switch>
-          <Match when={tab() === 'inspector'}>
-            <SignalList root={root} />
-            <div class="line inspc" onMouseDown={() => setOnDrag(true)}></div>
-            <Graph tab={tab} orientation={orientation} boxsize={boxsize} />
-          </Match>
-          <Match when={tab() === 'graph'}>
-            <Graph tab={tab} orientation={orientation} />
-          </Match>
-          <Match when={tab() === 'logmonitor'}>
-            <LogMonitor
-              record={record}
-              setRecord={setRecord}
-              caches={caches}
-              setCaches={setCaches}
-            />
-          </Match>
-        </Switch>
+    <>
+      {children}
+      <div id="mainApp">
+        <Header
+          tab={tab}
+          orientation={orientation}
+          setOrientation={setOrientation}
+        />
+        <div id="mainDisplay">
+          <Switch>
+            <Match when={tab() === 'inspector'}>
+              <SignalList 
+                root={root} 
+                selectedSig={selectedSig}
+                setSelectedSig={setSelectedSig}
+              />
+              <div class="line inspc" onMouseDown={() => setOnDrag(true)}></div>
+              <Graph 
+                tab={tab} 
+                orientation={orientation} 
+                boxsize={boxsize} 
+                selectedSig={selectedSig}
+                setSelectedSig={setSelectedSig}
+              />
+            </Match>
+            <Match when={tab() === 'graph'}>
+              <Graph 
+                tab={tab} 
+                orientation={orientation} 
+                selectedSig={selectedSig}
+                setSelectedSig={setSelectedSig}
+              />
+            </Match>
+            <Match when={tab() === 'logmonitor'}>
+              <LogMonitor
+                record={record}
+                setRecord={setRecord}
+                caches={caches}
+                setCaches={setCaches}
+              />
+            </Match>
+          </Switch>
+        </div>
+        <Navbar tab={tab} setTab={setTab} />
       </div>
-      <Navbar tab={tab} setTab={setTab} />
-    </div>
+    </>
   );
 };
