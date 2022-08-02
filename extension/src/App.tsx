@@ -13,8 +13,14 @@ export const SolidStructure: SolidComponent = (props) => {
   const [tab, setTab] = createSignal<TabType>('inspector');
   const [orientation, setOrientation] = createSignal<OrientType>('horizontal');
   const [record, setRecord] = createSignal<boolean>(true);
+  const [selectedSig, setSelectedSig] = createSignal<object>({});
   const [caches, setCaches] = createSignal<object[]>([{}, {}]);
   
+  /* TODO: Attempt to render updated "root" after signal value changes on demo-app */
+  // createEffect(() => {
+  //   console.log(children);
+  // })
+
   /* Update 'Inspect' box width by user input (drag) */
   const [boxsize, setBoxsize] = createSignal<number>(65);
   const [onDrag, setOnDrag] = createSignal<boolean>(false);
@@ -54,12 +60,27 @@ export const SolidStructure: SolidComponent = (props) => {
         <div id="mainDisplay">
           <Switch>
             <Match when={tab() === 'inspector'}>
-              <SignalList root={root} />
+              <SignalList 
+                root={root} 
+                selectedSig={selectedSig}
+                setSelectedSig={setSelectedSig}
+              />
               <div class="line inspc" onMouseDown={() => setOnDrag(true)}></div>
-              <Graph tab={tab} orientation={orientation} boxsize={boxsize} />
+              <Graph 
+                tab={tab} 
+                orientation={orientation} 
+                boxsize={boxsize} 
+                selectedSig={selectedSig}
+                setSelectedSig={setSelectedSig}
+              />
             </Match>
             <Match when={tab() === 'graph'}>
-              <Graph tab={tab} orientation={orientation} />
+              <Graph 
+                tab={tab} 
+                orientation={orientation} 
+                selectedSig={selectedSig}
+                setSelectedSig={setSelectedSig}
+              />
             </Match>
             <Match when={tab() === 'logmonitor'}>
               <LogMonitor
