@@ -1,20 +1,39 @@
-import { Show, createSignal, onMount } from 'solid-js';
+import { Show, createSignal, onMount, createEffect } from 'solid-js';
 import * as d3 from 'd3';
 import { GraphBoxComponent, DiagonalLink } from '../types';
 
 export const GraphBoxDep: GraphBoxComponent = (props) => {
   let svgDep: any;
   
-  onMount(() => {
+  createEffect(() => {
     /* Target where to load D3 Graph */
     const newSvg = d3.select(svgDep);
 
+
+
+
+    const sgName = Object.keys(props.selectedSig())[0]
+    const sgdata = props.selectedSig()[sgName];
+    console.log(sgName);
+    console.log(sgdata);
+
+    // if (sgdata) {
+    //   sgdata.forEach(el => {
+    //     console.log(el.name);
+    //   }
+    // }
+
+
     /* Sample Data */
-    const data = [{"child":"Signal", "parent":""},
-                  {"child":"connected A", "parent":"Signal"},
-                  {"child":"connected B", "parent":"Signal"},
-                  {"child":"connected C", "parent":"Signal"},
+
+    const data = [{"child":`${sgName}`, "parent":""},
+                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":`${sgName}`},
+                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":`${sgName}`},
+                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":`${sgName}`},
                   ];
+
+  //  console.log('data:', data);
+
 
     /* Convert Sample Data to data structure for D3 */
     const dataStructure = d3.stratify()
@@ -110,9 +129,6 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
     <>
       <svg ref={svgDep} width="100%" height="100%">
         {/* Depenendency Graph */}
-        <g>
-          
-        </g>
       </svg>
     </>
   );

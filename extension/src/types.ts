@@ -20,6 +20,8 @@ export type HeaderComponent = Component<HeaderProps>;
 /* SignalList.tsx */
 type SignalListProps = {
     root: NonNullable<ReturnType<typeof getOwner>>,
+    selectedSig: Accessor<object>,
+    setSelectedSig: Setter<object>,
 };
 export type SignalListComponent = Component<SignalListProps>;
 
@@ -27,18 +29,20 @@ export type SignalListComponent = Component<SignalListProps>;
 type GraphProps = {
     tab: Accessor<TabType>,
     orientation: Accessor<OrientType>,
-    boxsize?: Accessor<number>
+    boxsize?: Accessor<number>,
+    selectedSig: Accessor<object>,
+    setSelectedSig: Setter<object>,
 };
 export type GraphComponent = Component<GraphProps>;
 
 /* GraphBox.tsx */
 type GraphBoxProps = {
-    
+    selectedSig: Accessor<object>,
 };
 export type GraphBoxComponent = Component<GraphBoxProps>;
 export type DiagonalLink = {
-    source: { x: number; y: number };
-    target: { x: number; y: number };
+    source: { x: number; y: number },
+    target: { x: number; y: number },
 };
 
 /* LogMonitor.tsx */
@@ -53,12 +57,14 @@ export type LogMonitorComponent = Component<LogMonitorProps>;
 /* Navbar.tsx */
 type NavbarProps = {
     tab: Accessor<TabType>,
-    setTab: Setter<TabType>
+    setTab: Setter<TabType>,
 };
 export type NavbarComponent = Component<NavbarProps>;
 
 /* Log.tsx */
 type LogProps = {
     signal: object,
+    selectedSig: Accessor<object>,
+    setSelectedSig: Setter<object>,
 }
 export type LogComponent = Component<LogProps>;
