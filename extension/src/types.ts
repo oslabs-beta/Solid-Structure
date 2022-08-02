@@ -33,7 +33,7 @@ export type GraphComponent = Component<GraphProps>;
 
 /* GraphBox.tsx */
 type GraphBoxProps = {
-    
+
 };
 export type GraphBoxComponent = Component<GraphBoxProps>;
 export type DiagonalLink = {

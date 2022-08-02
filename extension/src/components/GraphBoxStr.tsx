@@ -6,11 +6,113 @@ import { svg } from 'd3';
 export const GraphBoxStr: GraphBoxComponent = (props) => {
 
   const [visTransform, setTransform] = createSignal("");
+  console.log(window.innerWidth);
   let svgStr: any;
   
   onMount(() => {
+    /*Different x value additions for different screen sizes*/
+    let depends = 50;
+    let dwidth = 650;
+    switch(true){
+      case (window.innerWidth >= 300 && window.innerWidth < 400):
+        depends = -20;
+        dwidth = 240;
+        break;
+      case (window.innerWidth >= 400 && window.innerWidth < 500):
+        depends = -15;
+        dwidth = 280;
+        break;
+      case (window.innerWidth >= 500 && window.innerWidth < 600):
+        depends = -5;
+        dwidth = 350;
+        break;
+      case (window.innerWidth >= 600 && window.innerWidth < 700):
+        depends = 0;
+        dwidth = 450;
+        break;
+      case (window.innerWidth >= 700 && window.innerWidth < 800):
+        depends = 20;
+        dwidth = 450;
+        break;
+      case (window.innerWidth >= 800 && window.innerWidth < 900):
+        depends = 40;
+        dwidth = 450;
+        break;
+      case (window.innerWidth >= 900 && window.innerWidth < 1000):
+        depends = 45;
+        dwidth = 550;
+        break;
+      case (window.innerWidth >= 1000 && window.innerWidth < 1100):
+        depends = 50;
+        dwidth = 600;
+        break;
+      case (window.innerWidth >= 1100 && window.innerWidth < 1200):
+        depends = 80;
+        dwidth = 600;
+        break;
+      case (window.innerWidth >= 1200 && window.innerWidth < 1300):
+        depends = 90;
+        dwidth = 600;
+        break;
+      case (window.innerWidth >= 1300 && window.innerWidth < 1400):
+        depends = 80;
+        dwidth = 700;
+        break;
+      case (window.innerWidth >= 1400 && window.innerWidth < 1500):
+        depends = 85;
+        dwidth = 750;
+        break;
+      case (window.innerWidth >= 1500 && window.innerWidth < 1600):
+        depends = 85;
+        dwidth = 800;
+        break;
+      case (window.innerWidth >= 1600 && window.innerWidth < 1700):
+        depends = 70;
+        dwidth = 900;
+        break;
+      case (window.innerWidth >= 1700 && window.innerWidth < 1800):
+        depends = 75;
+        dwidth = 950;
+        break;
+      case (window.innerWidth >= 1800 && window.innerWidth < 1900):
+        depends = 75;
+        dwidth = 1000;
+        break;
+      case (window.innerWidth >= 1900 && window.innerWidth < 2000):
+        depends = 65;
+        dwidth = 1100;
+        break;
+      case (window.innerWidth >= 2000 && window.innerWidth < 2100):
+        depends = 35;
+        dwidth = 1200;
+        break;
+      case (window.innerWidth >= 2100 && window.innerWidth < 2200):
+        depends = 65;
+        dwidth = 1250;
+        break;
+      case (window.innerWidth >= 2200 && window.innerWidth < 2300):
+        depends = 55;
+        dwidth = 1300;
+        break;
+      case (window.innerWidth >= 2300 && window.innerWidth < 2400):
+        depends = 65;
+        dwidth = 1400;
+        break;
+      case (window.innerWidth >= 2400 && window.innerWidth < 2500):
+        depends = 60;
+        dwidth = 1450;
+        break;
+      case (window.innerWidth >= 2500):
+        depends = 40;
+        dwidth = 1500;
+        break;
+
+      default:
+        depends = 0;
+    }
+
     var margin: any = { top: 90, right: 20, bottom: 90, left: 20 }
-    var width: number = 800 - margin.left - margin.right;
+    var width: any = dwidth - margin.left - margin.right;
     var height: number = 650 - margin.top - margin.bottom;
 
      /* Sample Data */
@@ -38,7 +140,6 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     const information = treeStructure(dataStructure);
     // console.log(information.descendants());
     // console.log(information.links());
-
     
     /* Draw links (https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
     <path d="M 10 10 C 20 20, 40 20, 50 10" stroke="black" fill="transparent"/> */
@@ -56,10 +157,10 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
             d.target.y + "," + d.target.x;
           */
           /* Vertical (Default) */
-          return "M" + d.source.x + "," + (d.source.y+55) + // 418, 0
-          " C " + d.source.x + "," + (d.source.y + d.target.y)/2 + " " + //point1   418, (0+160)/2
-          d.target.x + "," + (d.source.y + d.target.y)/2 + " " + //point2  228, (0+160)/2
-          d.target.x + "," + (d.target.y+15); //final point  228, 160
+          return "M" + (d.source.x+depends) + "," + (d.source.y+60) + // 418, 0
+          " C " + (d.source.x+depends) + "," + (d.source.y + d.target.y)/2 + " " + //point1   418, (0+160)/2
+          (d.target.x+depends) + "," + (d.source.y + d.target.y)/2 + " " + //point2  228, (0+160)/2
+          (d.target.x+depends) + "," + (d.target.y+20); //final point  228, 160
           
         })
     // /*Rectangles behind the text*/
@@ -77,9 +178,7 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
                   .data(information.descendants());
     names.enter().append("text")
               .text(function(d: any){return d.data.child;})
-              .attr("x", function(d: any){
-                return d.x-(this.getComputedTextLength()/2);
-              })
+              .attr("x", function(d: any){return (d.x-(this.getComputedTextLength()/2)+depends);})
               .attr("y", function(d: any){return d.y+35;})
               .attr('opacity', "1");
 
@@ -97,7 +196,7 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     */
     /* Vertical (Default) */
     circles.enter().append("circle")
-    .attr("cx", function(d){return d.x;})
+    .attr("cx", function(d){return (d.x+depends);})
     .attr("cy", function(d){return d.y + 50;})
     .attr("r", 5); 
 
