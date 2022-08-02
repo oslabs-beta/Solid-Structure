@@ -6,9 +6,12 @@ import { LogMonitor } from './components/LogMonitor';
 import { Navbar } from './components/Navbar';
 import { SolidComponent, TabType, OrientType } from './types';
 import './styles/main.scss';
+// TEST
+import { attachDebugger, makeCreateRootListener } from "@solid-devtools/debugger"
 
 export const SolidStructure: SolidComponent = (props) => {
   const [children, root] = createRoot(() => [props.children, getOwner()]);
+
   // console.log("App.tsx/root:", root);
   const [tab, setTab] = createSignal<TabType>('inspector');
   const [orientation, setOrientation] = createSignal<OrientType>('horizontal');
@@ -18,8 +21,10 @@ export const SolidStructure: SolidComponent = (props) => {
   
   /* TODO: Attempt to render updated "root" after signal value changes on demo-app */
   // createEffect(() => {
-  //   console.log(children);
   // })
+  // makeCreateRootListener(root => attachDebugger(root));
+  attachDebugger();
+  console.log(root);
 
   /* Update 'Inspect' box width by user input (drag) */
   const [boxsize, setBoxsize] = createSignal<number>(65);

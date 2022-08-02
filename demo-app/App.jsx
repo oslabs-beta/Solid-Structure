@@ -8,10 +8,10 @@ export const App = (props) => {
     const [bool, setBool] = createSignal(true); 
     const [guess, setGuess] = createSignal("boo"); 
 
-    const [tab, setTab] = createSignal('inspector');
-    const [orientation, setOrientation] = createSignal('horizontal');
+    const [tab, setTab] = createSignal('inspctr');
+    const [orientation, setOrientation] = createSignal('vertica');
     const [record, setRecord] = createSignal(true);
-    const [caches, setCaches] = createSignal([{}, {}, {}, {}, {}]);
+    const [caches, setCaches] = createSignal([{'cache':1}]);
     const [cache, setCache] = createSignal({0:'zero', 1:'one', 'two':2});
     
     /* Update 'Inspect' box width by user input (drag) */
