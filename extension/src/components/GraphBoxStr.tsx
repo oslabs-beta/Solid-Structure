@@ -13,6 +13,7 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     /*Different x value additions for different screen sizes*/
     let depends = 50;
     let dwidth = 650;
+    let dheight = 200;
     switch(true){
       case (window.innerWidth >= 300 && window.innerWidth < 400):
         depends = -20;
@@ -157,10 +158,10 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
             d.target.y + "," + d.target.x;
           */
           /* Vertical (Default) */
-          return "M" + (d.source.x+depends) + "," + (d.source.y+60) + // 418, 0
+          return "M" + (d.source.x+depends) + "," + (d.source.y+60+dheight) + // 418, 0
           " C " + (d.source.x+depends) + "," + (d.source.y + d.target.y)/2 + " " + //point1   418, (0+160)/2
           (d.target.x+depends) + "," + (d.source.y + d.target.y)/2 + " " + //point2  228, (0+160)/2
-          (d.target.x+depends) + "," + (d.target.y+20); //final point  228, 160
+          (d.target.x+depends) + "," + (d.target.y+20+dheight); //final point  228, 160
           
         })
     // /*Rectangles behind the text*/
@@ -179,7 +180,7 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     names.enter().append("text")
               .text(function(d: any){return d.data.child;})
               .attr("x", function(d: any){return (d.x-(this.getComputedTextLength()/2)+depends);})
-              .attr("y", function(d: any){return d.y+35;})
+              .attr("y", function(d: any){return d.y+35+dheight;})
               .attr('opacity', "1");
 
     /* Draw circles for each descendants in hierarchy graph */
@@ -197,7 +198,7 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     /* Vertical (Default) */
     circles.enter().append("circle")
     .attr("cx", function(d){return (d.x+depends);})
-    .attr("cy", function(d){return d.y + 50;})
+    .attr("cy", function(d){return d.y + 50 + dheight;})
     .attr("r", 5); 
 
     /*Implement zoom functionality on all the parts of the svg*/
