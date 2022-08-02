@@ -5,8 +5,8 @@ import { App } from './App';
 
 render(
   () => 
-    <SolidStructure >
-      <App />
+    <SolidStructure>
+      <App/>
     </SolidStructure>,
     document.getElementById('root')
 );
