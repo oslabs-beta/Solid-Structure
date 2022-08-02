@@ -11,7 +11,7 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
   onMount(() => {
     var margin: any = { top: 90, right: 20, bottom: 90, left: 20 }
     var width: number = 800 - margin.left - margin.right;
-    var height: number = 500 - margin.top - margin.bottom;
+    var height: number = 650 - margin.top - margin.bottom;
 
      /* Sample Data */
     const data = [{"child":"Root", "parent":""},
@@ -38,24 +38,6 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     const information = treeStructure(dataStructure);
     // console.log(information.descendants());
     // console.log(information.links());
-  
-    /* Draw circles for each descendants in hierarchy graph */
-    const circles = newSvg.append("g")
-                        .selectAll("circle")
-                        .data(information.descendants());
-
-    /* Horizontal
-    circles.enter().append("circle")
-      .attr("cx", function(d){return d.y;})
-      .attr("cy", function(d){return d.x;})
-      .attr("r", 5);  
-    */
-    /* Vertical (Default) */
-    circles.enter().append("circle")
-    .attr("cx", function(d){return d.x;})
-    .attr("cy", function(d){return d.y;})
-    .attr("r", 5)
-    .attr('transform', 'translate('+ margin.left +','+margin.top+')');  
 
     
     /* Draw links (https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
@@ -66,8 +48,7 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
                           .data(information.links());
     connections.enter()
         .append("path")
-        .attr('transform', 'translate('+ margin.left +','+margin.top+')')
-        .attr("d", function(d) {
+        .attr("d", function(d: any) {
           /* Horizontal
           return "M" + d.source.y + "," + d.source.x + " C " + 
             (d.source.y + d.target.y)/2 + "," + d.source.x + " " + 
@@ -75,27 +56,53 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
             d.target.y + "," + d.target.x;
           */
           /* Vertical (Default) */
-          return "M" + d.source.x + "," + d.source.y + " C " + 
-            d.source.x + "," + (d.source.y + d.target.y)/2 + " " + 
-            d.target.x + "," + (d.source.y + d.target.y)/2 + " " + 
-            d.target.x + "," + d.target.y;
+          return "M" + d.source.x + "," + (d.source.y+55) + // 418, 0
+          " C " + d.source.x + "," + (d.source.y + d.target.y)/2 + " " + //point1   418, (0+160)/2
+          d.target.x + "," + (d.source.y + d.target.y)/2 + " " + //point2  228, (0+160)/2
+          d.target.x + "," + (d.target.y+15); //final point  228, 160
           
         })
+    // /*Rectangles behind the text*/
+    // const rectangles = newSvg.append('g').selectAll('rect')
+    //                       .data(information.descendants());
+                          
+    // rectangles.enter().append('rect')
+    //     .attr("x", function(d:any){return d.x-20})
+    //     .attr("y", function(d:any){return d.y+10})
+    //     .attr("width", '40')
+    //     .attr('height', '15');
 
     /* Include texts on each circles with specified text location */
     const names = newSvg.append("g").selectAll("text")
                   .data(information.descendants());
     names.enter().append("text")
-                .text(function(d: any){return d.data.child;})
-                .attr("x", function(d){return d.x-10;})
-                .attr("y", function(d){return d.y-10;})
-                .attr('transform', 'translate('+ margin.left +','+margin.top+')');
-    
+              .text(function(d: any){return d.data.child;})
+              .attr("x", function(d: any){
+                return d.x-(this.getComputedTextLength()/2);
+              })
+              .attr("y", function(d: any){return d.y+35;})
+              .attr('opacity', "1");
+
+    /* Draw circles for each descendants in hierarchy graph */
+    const circles = newSvg.append("g")
+                        .selectAll("circle")
+                        .data(information.descendants());
+    const baseSvg = d3.select(svgStr);
+
+    /* Horizontal
+    circles.enter().append("circle")
+      .attr("cx", function(d){return d.y;})
+      .attr("cy", function(d){return d.x;})
+      .attr("r", 5);  
+    */
+    /* Vertical (Default) */
+    circles.enter().append("circle")
+    .attr("cx", function(d){return d.x;})
+    .attr("cy", function(d){return d.y + 50;})
+    .attr("r", 5); 
 
     /*Implement zoom functionality on all the parts of the svg*/
-    newSvg.call(d3.zoom().on("zoom", zoomed));
-    
-    
+    baseSvg.call(d3.zoom().on("zoom", zoomed));
     // let c = 0;
     // let l = 0;
     // let t = 0;
@@ -104,6 +111,7 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
       updateCircles(e);
       updateLinks(e);
       updateText(e);
+      updateRect(e);
     }
     function updateCircles(e: any){
       // console.log(`zoom circle ${c++}`);
@@ -121,6 +129,10 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
       // console.log(`zoom text ${t++}`);
 
       newSvg.selectAll('g').selectAll('text')
+        .attr('transform', e.transform);
+    }
+    function updateRect(e: any){
+      newSvg.selectAll('g').selectAll('rect')
         .attr('transform', e.transform);
     }
 
