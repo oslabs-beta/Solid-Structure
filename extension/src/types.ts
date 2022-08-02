@@ -59,6 +59,6 @@ export type NavbarComponent = Component<NavbarProps>;
 
 /* Log.tsx */
 type LogProps = {
-    cache: object
+    signal: object,
 }
 export type LogComponent = Component<LogProps>;
