@@ -9,11 +9,11 @@ import './styles/main.scss';
 
 export const SolidStructure: SolidComponent = (props) => {
   const [children, root] = createRoot(() => [props.children, getOwner()]);
-  console.log("App.tsx/root:", root);
+  // console.log("App.tsx/root:", root);
   const [tab, setTab] = createSignal<TabType>('inspector');
   const [orientation, setOrientation] = createSignal<OrientType>('horizontal');
   const [record, setRecord] = createSignal<boolean>(true);
-  const [caches, setCaches] = createSignal<object[]>([{}, {}, {}, {}, {}, {}, {}, {}]);
+  const [caches, setCaches] = createSignal<object[]>([{}, {}]);
   
   /* Update 'Inspect' box width by user input (drag) */
   const [boxsize, setBoxsize] = createSignal<number>(65);
