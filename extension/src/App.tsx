@@ -7,7 +7,7 @@ import { Navbar } from './components/Navbar';
 import { SolidComponent, TabType, OrientType } from './types';
 import './styles/main.scss';
 
-export const SolidStructure: SolidComponent = (props) => {
+export const SolidStructure: SolidComponent = (props: any) => {
   const [children, root] = createRoot(() => [props.children, getOwner()]);
   console.log(root);
   const [tab, setTab] = createSignal<TabType>('inspector');
