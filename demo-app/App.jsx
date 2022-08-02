@@ -37,9 +37,6 @@ export const App = (props) => {
     const increment = () => setCount(count() + 1);
     const decrement = () => setCount(count() - 1); 
     const updateGuess = () => setGuess("hi"); 
-    
-    // const [children, root] = createRoot(() => [props.children, getOwner()]);
-    // console.log(root);
 
     return (
       <div id='counter'>
@@ -55,4 +52,93 @@ export const App = (props) => {
     );
 };
 
-// export default App;
+
+// import { createEffect, DEV, getOwner } from "solid-js";
+// import { createStore } from "solid-js/store"
+// import { render, For } from "solid-js/web";
+
+// function createLocalState(initState) {
+//   const [state, setState] = createStore(initState);
+//   if (localStorage.todos) setState(JSON.parse(localStorage.todos));
+//   createEffect(() => (localStorage.todos = JSON.stringify(state)));
+//   return [state, setState];
+// }
+
+// export const App = () => {
+//   const [state, setState] = createLocalState({
+//     todos: [],
+//     newTitle: ""
+//   });
+
+//   let owner = getOwner();
+//   // after every update log current graph
+//   window._$afterUpdate = () => {
+//     document.body.getElementsByTagName("pre")[0].textContent = JSON.stringify(
+//       DEV.serializeGraph(owner),
+//       null,
+//       2
+//     );
+//   };
+
+//   return (
+//     <div id="counter">
+//       <h3>Simple Todos Example</h3>
+//       <input
+//         type="text"
+//         placeholder="enter todo and click +"
+//         value={state.newTitle}
+//         onInput={(e) => setState({ newTitle: e.target.value })}
+//       />
+//       <button
+//         onClick={() =>
+//           setState({
+//             todos: [
+//               ...state.todos,
+//               {
+//                 title: state.newTitle,
+//                 done: false
+//               }
+//             ],
+//             newTitle: ""
+//           })
+//         }
+//       >
+//         +
+//       </button>
+//       <For each={state.todos}>
+//         {(todo, i) => {
+//           const { done, title } = todo;
+//           return (
+//             <div>
+//               <input
+//                 type="checkbox"
+//                 checked={done}
+//                 onChange={(e) =>
+//                   setState("todos", i(), { done: e.target.checked })
+//                 }
+//               />
+//               <input
+//                 type="text"
+//                 value={title}
+//                 onChange={(e) =>
+//                   setState("todos", i(), { title: e.target.value })
+//                 }
+//               />
+//               <button
+//                 onClick={() =>
+//                   setState("todos", (t) => [
+//                     ...t.slice(0, i()),
+//                     ...t.slice(i() + 1)
+//                   ])
+//                 }
+//               >
+//                 x
+//               </button>
+//             </div>
+//           );
+//         }}
+//       </For>
+//       <pre />
+//     </div>
+//   );
+// };
