@@ -30,7 +30,28 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
     /*Define width and height for the tree */
     let width = 280;
     let height = 200;
-    let xheight = 0;
+    let xheight = 50;
+    
+    /*Micro-managed reactive dependency graph based on window.innerHeight*/
+    switch(true){
+      case(window.innerHeight >= 900 && window.innerHeight < 1100):
+      xheight = 20;
+      break;
+      case(window.innerHeight >= 800 && window.innerHeight < 900):
+      xheight = 0;
+      break;
+      case(window.innerHeight >= 700 && window.innerHeight < 800):
+      xheight = 20;
+      height = 150;
+      break;
+      case(window.innerHeight >= 600 && window.innerHeight < 700):
+      height = 130;
+      xheight = 10;
+      break;
+      case(window.innerHeight >= 500 && window.innerHeight < 600):
+      height = 120;
+      xheight = 5;
+    }
 
     /* Convert Sample Data to data structure for D3 */
     const dataStructure = d3.stratify()
@@ -55,10 +76,10 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
         .attr("d", function(d) {
           console.log(d);
           /* Horizontal (default)*/
-          return "M" + (d.source.y+130) + "," + d.source.x + " C " +  // 0, 100 
-            (d.source.y + d.target.y + 130)/2 + "," + d.source.x + " " + // (100)/2, 100
-            (d.source.y + d.target.y + 130)/2 + "," + d.target.x + " " + // (100)/2, 33.333_
-            d.target.y + "," + (d.target.x); // 100, 33.333_
+          return "M" + (d.source.y+130) + "," + (d.source.x+xheight) + " C " +  // 0, 100 
+            (d.source.y + d.target.y + 130)/2 + "," + (d.source.x+xheight) + " " + // (100)/2, 100
+            (d.source.y + d.target.y + 130)/2 + "," + (d.target.x+xheight) + " " + // (100)/2, 33.333_
+            d.target.y + "," + (d.target.x+xheight); // 100, 33.333_
           /* Vertical
           return "M" + d.source.x + "," + d.source.y + " C " + 
             d.source.x + "," + (d.source.y + d.target.y)/2 + " " + 
@@ -73,7 +94,7 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
     names.enter().append("text")
                 .text(function(d: any){return d.data.child;})
                 .attr("x", function(d){return (d.y+10)+30;})
-                .attr("y", function(d){return d.x+3;})
+                .attr("y", function(d){return d.x+3+xheight;})
 
     /*Implement zoom functionality on all the parts of the svg*/
     newSvg.call(d3.zoom().on("zoom", zoomed));
@@ -84,7 +105,7 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
     /* Horizontal */
     circles.enter().append("circle")
       .attr("cx", function(d){return d.y+30;})
-      .attr("cy", function(d){return d.x;})
+      .attr("cy", function(d){return d.x + xheight;})
       .attr("r", 5);
     /* Vertical (Default)
      circles.enter().append("circle")
