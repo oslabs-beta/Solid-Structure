@@ -6,7 +6,6 @@ import { svg } from 'd3';
 export const GraphBoxStr: GraphBoxComponent = (props) => {
 
   const [visTransform, setTransform] = createSignal("");
-  console.log(window.innerWidth);
   let svgStr: any;
   
   onMount(() => {
