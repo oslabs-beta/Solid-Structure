@@ -1,4 +1,4 @@
-import { For, createSignal } from 'solid-js';
+import { For, createSignal, createEffect } from 'solid-js';
 import { SignalComponent } from '../types';
 import '../styles/components/_log.scss';
 import { addSignalListener } from '../App';
@@ -17,6 +17,10 @@ export const Signal: SignalComponent = (props) => {
     selected[id] = observers;
     props.setSelectedSig(selected);
   };
+
+  // createEffect(() => {
+  //   console.log(value());
+  // })
 
   /*
     IMPROVMENTS: 
@@ -39,7 +43,7 @@ export const Signal: SignalComponent = (props) => {
         </p>
         <br></br>
         <span> ➤ {typeof value()}:</span>
-        {value()}
+        <span class="liveSignal">{value()}</span>
       </div>
       <div class="logContent">
         <For each={observers}>

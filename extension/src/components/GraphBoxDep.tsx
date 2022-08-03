@@ -16,6 +16,13 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
   let xheight = 50;
 
   createEffect(() => {
+
+    /*
+
+      1) Logic to remove the previous <g> 
+      2) SolidJS method to replace the previous <g> 
+    
+    */
     /* Target where to load D3 Graph */
     const newSvg = d3.select(svgDep);
 
