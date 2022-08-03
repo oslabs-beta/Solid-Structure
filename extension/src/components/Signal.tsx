@@ -1,32 +1,25 @@
 import { For, createSignal } from 'solid-js';
-import { LogComponent } from '../types';
+import { SignalComponent } from '../types';
 import '../styles/components/_log.scss';
 import { addSignalListener } from '../App';
 
-export const Signal: LogComponent = (props) => {
-  // console.log('Props.signal', props.signal);
+export const Signal: SignalComponent = (props) => {
   const observers = props.signal.observers;
+  const [value, setValue] = createSignal(props.signal.value);
 
-  const [value, setValue] = createSignal(props.signal.value.toString());
-
-  addSignalListener(props.signal.sdtId, (value) => {
-    setValue(value.toString());
+  addSignalListener(props.signal.sdtId, (val) => {
+    setValue(val);
   });
-
-  // console.log(observers);
-  // console.log(props.signal.value);
-  // console.log(typeof props.signal.value);
 
   const handleClick = (e) => {
     const id = e.target.id;
-    const obj = {};
-    obj[id] = observers;
-    console.log(obj);
-    props.setSelectedSig(obj);
+    const selected:object = {};
+    selected[id] = observers;
+    props.setSelectedSig(selected);
   };
 
   /*
-    Edge case: 
+    IMPROVMENTS: 
       1) "array" is also considered "object"
       2) display as collapsible when "array of object" or "object of array/object"
   */
@@ -36,17 +29,17 @@ export const Signal: LogComponent = (props) => {
         <p
           class="sigName"
           classList={{
-            active: Object.keys(props.selectedSig())[0] === props.signal.name,
+            active: Object.keys(props.selectedSig())[0] === props.signal.name
           }}
           id={props.signal.name}
           onClick={handleClick}
         >
           {props.signal.name}
+          <span> (id: {props.sigId})</span>
         </p>
         <br></br>
-        <span> [{typeof value()}:</span>
+        <span> ➤ {typeof value()}:</span>
         {value()}
-        <span>]</span>
       </div>
       <div class="logContent">
         <For each={observers}>

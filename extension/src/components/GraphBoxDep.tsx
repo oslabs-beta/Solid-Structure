@@ -3,57 +3,33 @@ import * as d3 from 'd3';
 import { GraphBoxComponent, DiagonalLink } from '../types';
 
 export const GraphBoxDep: GraphBoxComponent = (props) => {
+  /*
+    ISSUE: Not rendering new graph every time; it loads on top of previous graph 
+    EXTENSION: When hover the circle, show more details
+   */
+
   let svgDep: any;
   
+  /*Define width and height for the tree */
+  let width = 280;
+  let height = 200;
+  let xheight = 50;
+
   createEffect(() => {
     /* Target where to load D3 Graph */
     const newSvg = d3.select(svgDep);
 
+    /* Format Data to be compatible with D3  */
     const sgName = Object.keys(props.selectedSig())[0]
-    const sgdata = props.selectedSig()[sgName];
-    // console.log(sgName);
-    // console.log(sgdata);
-
-    // if (sgdata) {
-    //   sgdata.forEach(el => {
-    //     console.log(el.name);
-    //   }
-    // }
-
-    /* Sample Data */
-
-    const data = [{"child":`s-68655021`, "parent":""},
-                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":"s-68655021"},
-                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":"s-68655021"},
-                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":"s-68655021"},
-                  ];
-
-
-    /*Define width and height for the tree */
-    let width = 280;
-    let height = 200;
-    let xheight = 50;
-    
-    /*Micro-managed reactive dependency graph based on window.innerHeight*/
-    switch(true){
-      case(window.innerHeight >= 900 && window.innerHeight < 1100):
-      xheight = 20;
-      break;
-      case(window.innerHeight >= 800 && window.innerHeight < 900):
-      xheight = 0;
-      break;
-      case(window.innerHeight >= 700 && window.innerHeight < 800):
-      xheight = 20;
-      height = 150;
-      break;
-      case(window.innerHeight >= 600 && window.innerHeight < 700):
-      height = 130;
-      xheight = 10;
-      break;
-      case(window.innerHeight >= 500 && window.innerHeight < 600):
-      height = 120;
-      xheight = 5;
-    }
+    const sgdata = Object.values(props.selectedSig())[0];
+    const data = [{child: sgName, parent: ""}];
+    sgdata ? sgdata.forEach(el => {
+      const d = {}
+      d.child = el.name;
+      d.parent = sgName;
+      d.data = el;
+      data.push(d)
+    }) : null;
 
     /* Convert Sample Data to data structure for D3 */
     const dataStructure = d3.stratify()
@@ -68,6 +44,27 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
     const information = treeStructure(dataStructure);
     // console.log(information.descendants());
     // console.log(information.links());
+        
+    /*Micro-managed reactive dependency graph based on window.innerHeight*/
+    switch(true){
+      case(window.innerHeight >= 900 && window.innerHeight < 1100):
+        xheight = 20;
+        break;
+      case(window.innerHeight >= 800 && window.innerHeight < 900):
+        xheight = 0;
+        break;
+      case(window.innerHeight >= 700 && window.innerHeight < 800):
+        xheight = 20;
+        height = 150;
+        break;
+      case(window.innerHeight >= 600 && window.innerHeight < 700):
+        height = 130;
+        xheight = 10;
+        break;
+      case(window.innerHeight >= 500 && window.innerHeight < 600):
+        height = 120;
+        xheight = 5;
+    }
 
     /* Draw links (https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
     <path d="M 10 10 C 20 20, 40 20, 50 10" stroke="black" fill="transparent"/> */
@@ -76,7 +73,7 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
                           .data(information.links());
     connections.enter().append("path")
         .attr("d", function(d) {
-          console.log(d);
+          // console.log(d);
           /* Horizontal (default)*/
           return "M" + (d.source.y+130) + "," + (d.source.x+xheight) + " C " +  // 0, 100 
             (d.source.y + d.target.y + 130)/2 + "," + (d.source.x+xheight) + " " + // (100)/2, 100
@@ -95,7 +92,7 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
                   .data(information.descendants());
     names.enter().append("text")
                 .text(function(d: any){return d.data.child;})
-                .attr("x", function(d){return (d.y+10)+30;})
+                .attr("x", function(d){return (d.y+42)})
                 .attr("y", function(d){return d.x+3+xheight;})
 
     /*Implement zoom functionality on all the parts of the svg*/
@@ -116,7 +113,6 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
       .attr("r", 5);
     */
     
-
     /*Functionality for circles, links, and text behavior on zoom*/
     function zoomed (e: any){
       updateCircles(e);
