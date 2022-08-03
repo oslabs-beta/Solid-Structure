@@ -5,15 +5,13 @@ import { svg } from 'd3';
 
 export const GraphBoxStr: GraphBoxComponent = (props) => {
   let svgStr: any;
-  // console.log(props.rootTree);
-  // createEffect(() => console.log('GBS:', props.rootTree()));
+  let xwidth = 50;    // measures x placement
+  let dwidth = 650;   // measures width of tree
+  let yheight = 30;   // measures y placement
+  let dheight = 650;  // measures height of tree
 
   onMount(() => {
     /*Different x value additions for different screen sizes*/
-    let xwidth = 50; // measures x placement
-    let dwidth = 650; // measures width of tree
-    let yheight = 30; // measures y placement
-    let dheight = 650; // measures height of tree
     switch (true) {
       case window.innerWidth >= 300 && window.innerWidth < 400:
         xwidth = -10;
@@ -141,11 +139,9 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     var height: number = dheight - margin.top - margin.bottom;
 
     const data = props.rootTree().children[0].children[0];
-    // console.log(rootdata);
+    // console.log(data);
 
-    const dataStructure = d3.hierarchy(data, (a) => a.children);
-
-    // console.log('newData: ', newData);
+    const dataStructure = d3.hierarchy(data, (d) => d.children);
 
     /* Sample Data */
     // const data = [

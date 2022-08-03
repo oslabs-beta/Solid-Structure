@@ -3,9 +3,9 @@ import { GraphBoxStr } from './GraphBoxStr';
 import { GraphBoxDep } from './GraphBoxDep';
 import '../styles/components/_graph.scss';
 import { GraphComponent } from '../types';
-// console.log(currentRoots);
+
 export const Graph: GraphComponent = (props) => {
-  // console.log('Graph.tsx', props.root);
+
   /* Updating 'graphContainer' box size with user-input(drag). */
   const [boxsize, setBoxsize] = createSignal<number>(25);
   const [onDrag, setOnDrag] = createSignal<boolean>(false);
@@ -58,12 +58,12 @@ export const Graph: GraphComponent = (props) => {
 
   return (
     <div id="graphContainer">
-      <div id="containerDep">
+      <div id="containerStr">
         <p>Structural</p>
         <GraphBoxStr rootTree={props.rootTree} />
       </div>
       <div class="line h" onMouseDown={() => setOnDrag(true)}></div>
-      <div id="containerStr">
+      <div id="containerDep">
         <p>Dependency</p>
         <GraphBoxDep selectedSig={props.selectedSig} />
       </div>
