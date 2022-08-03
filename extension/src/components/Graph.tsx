@@ -3,39 +3,36 @@ import { GraphBoxStr } from './GraphBoxStr';
 import { GraphBoxDep } from './GraphBoxDep';
 import '../styles/components/_graph.scss';
 import { GraphComponent } from '../types';
-
+// console.log(currentRoots);
 export const Graph: GraphComponent = (props) => {
-  
+  // console.log('Graph.tsx', props.root);
   /* Updating 'graphContainer' box size with user-input(drag). */
   const [boxsize, setBoxsize] = createSignal<number>(25);
   const [onDrag, setOnDrag] = createSignal<boolean>(false);
   const onMouseMove = (e: any) => {
-    if (props.orientation() === "horizontal") {
+    if (props.orientation() === 'horizontal') {
       const h = window.innerHeight - e.clientY - 34;
       const hp = Math.floor((h / (window.innerHeight - 38)) * 100);
       if (hp < 18 || hp > 80) return;
       setBoxsize(hp);
-    }
-    else if (props.orientation() === "vertical") {
-      const leftbox = (props.boxsize 
-        ? (100 - props.boxsize())/100 * window.innerWidth + 4 
-        : 0
-      );
+    } else if (props.orientation() === 'vertical') {
+      const leftbox = props.boxsize
+        ? ((100 - props.boxsize()) / 100) * window.innerWidth + 4
+        : 0;
       const w = e.clientX - leftbox;
-      const wp = 100 - Math.floor((w / (window.innerWidth - leftbox))*100);
+      const wp = 100 - Math.floor((w / (window.innerWidth - leftbox)) * 100);
       if (wp < 15 || wp > 85) return;
       setBoxsize(wp);
     }
-  }
+  };
   const onMouseUp = (e: any) => setOnDrag(false);
   createEffect(() => {
     if (onDrag()) {
-      window.addEventListener("mousemove", onMouseMove);
-      window.addEventListener("mouseup", onMouseUp);
-    }
-    else {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+    } else {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
     }
   });
 
@@ -63,12 +60,12 @@ export const Graph: GraphComponent = (props) => {
     <div id="graphContainer">
       <div id="containerDep">
         <p>Structural</p>
-        <GraphBoxStr />
+        <GraphBoxStr rootTree={props.rootTree} />
       </div>
       <div class="line h" onMouseDown={() => setOnDrag(true)}></div>
       <div id="containerStr">
         <p>Dependency</p>
-        <GraphBoxDep selectedSig={props.selectedSig}/>
+        <GraphBoxDep selectedSig={props.selectedSig} />
       </div>
     </div>
   );

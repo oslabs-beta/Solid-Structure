@@ -1,5 +1,5 @@
 import { createSignal, createEffect, createRoot, getOwner, Switch, Match, createMemo, on } from 'solid-js';
-
+import {createStore} from 'solid-js/store';
 import { Header } from './components/Header';
 import { SignalList } from './components/SignalList';
 import { Graph } from './components/Graph';
@@ -18,7 +18,7 @@ export function debugComponent() {
   appOwner = getOwner()
 }
 
-const signalListeners:Record<number, (newValue: unknown) => void> = {}
+export const signalListeners:Record<number, (newValue: unknown) => void> = {}
 
 export const addSignalListener = (id:number, listener: (newValue: unknown) => void) => {
   signalListeners[id] = listener
@@ -29,23 +29,33 @@ export const addSignalListener = (id:number, listener: (newValue: unknown) => vo
     Conceptually similar to middleware plugin for data / information connectivity 
     to a seperate application (demo-app / browser-rendered app) 
 */
+// let mainCurrRoot;
+const [mainCurrRoot, setMainCurrRoot] = createSignal();
+
 registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
   createEffect(() => {
   /*  For Structural Graph Rendering  */
-    const currentRoots = roots()
+   const currentRoots = roots()
+  //  mainCurrRoot = roots();
+    // console.log(currentRoots);
     createEffect(() => {
       currentRoots.forEach(root => {
-        console.log("root.tree:", root.tree)
+        // mainCurrRoot = root.tree;
+        setMainCurrRoot(root.tree);
+        console.log("createEffect:", mainCurrRoot())
+       
       })
     })
 
     makeBatchUpdateListener((updates) => {
       updates.forEach(update => {
         // UpdateType.Signal = 0 ; UpdateType.Computation = 1
+        // console.log(update);
         if (update.type !== 0) return
         const id = update.payload.id 
         const listener = signalListeners[id]
         if (listener) listener(update.payload.value)
+        // console.log(listener);
       })
     })
   })
@@ -67,12 +77,12 @@ export const SolidStructure: SolidComponent = (props) => {
       on(mounted, (mounted) => {
         if (!mounted) return undefined
 
-        const root = appOwner
+        const root = appOwner;
       
         /* TODO: Attempt to render updated "root" after signal value changes on demo-app */
       
         // console.log("App.tsx/root:", root);
-      
+        // console.log('MAIN CURR', mainCurrRoot());
         const [tab, setTab] = createSignal<TabType>('inspector');
         const [orientation, setOrientation] = createSignal<OrientType>('horizontal');
         const [record, setRecord] = createSignal<boolean>(true);
@@ -129,6 +139,7 @@ export const SolidStructure: SolidComponent = (props) => {
                       boxsize={boxsize} 
                       selectedSig={selectedSig}
                       setSelectedSig={setSelectedSig}
+                      rootTree={mainCurrRoot}
                     />
                   </Match>
                   <Match when={tab() === 'graph'}>
@@ -137,6 +148,8 @@ export const SolidStructure: SolidComponent = (props) => {
                       orientation={orientation} 
                       selectedSig={selectedSig}
                       setSelectedSig={setSelectedSig}
+                      rootTree={mainCurrRoot}
+                      
                     />
                   </Match>
                   <Match when={tab() === 'logmonitor'}>
