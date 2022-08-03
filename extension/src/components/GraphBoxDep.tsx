@@ -16,7 +16,6 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
   let xheight = 50;
 
   createEffect(() => {
-
     /*
 
       1) Logic to remove the previous <g> 

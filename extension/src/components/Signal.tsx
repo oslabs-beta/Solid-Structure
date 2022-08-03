@@ -18,10 +18,6 @@ export const Signal: SignalComponent = (props) => {
     props.setSelectedSig(selected);
   };
 
-  // createEffect(() => {
-  //   console.log(value());
-  // })
-
   /*
     IMPROVMENTS: 
       1) "array" is also considered "object"

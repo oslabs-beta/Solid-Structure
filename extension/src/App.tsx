@@ -27,15 +27,11 @@ export function debugComponent() { appOwner = getOwner() };
 export const signalListeners:Record<number, (newValue: unknown) => void> = {};
 /**
  * @method addSignalListener
- * @description - ...
+ * @description - 
  */
 export const addSignalListener = (id:number, listener:(newValue: unknown) => void) => {
   signalListeners[id] = listener;
-};
-
-export const logListeners:Record<object, (newValue: unknown) => void> = [];
-export const addLogListener = (id:number, listener:(newValue: unknown) => void) => {
-  logListeners[id] = listener;
+  // console.log(signalListeners);
 };
 
 /**
@@ -48,10 +44,7 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
     const currentRoots = roots();
 
     createEffect(() => {
-      currentRoots.forEach(root => {
-        setMainCurrRoot(root.tree);
-        // console.log("mainCurrRoot(s):", mainCurrRoot())
-      })
+      currentRoots.forEach(root => { setMainCurrRoot(root.tree) })
     })
 
     /**
@@ -63,10 +56,9 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
         // UpdateType.Signal = 0 ; UpdateType.Computation = 1
         if (update.type !== 0) return
         if (record()){
-          const prevlogs = logs();
+          const prevlogs = [...logs()];
           prevlogs.push(update)
           setLogs(prevlogs);
-          // console.log(logs());
         }
         const id = update.payload.id;
         const listener = signalListeners[id];
@@ -85,10 +77,6 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
 
 
 export const SolidStructure: SolidComponent = (props) => {
-
-  createEffect(() => {
-    console.log(logs());
-  })
 
   return createInternalRoot(() => {
     const [mounted, setMounted] = createSignal(false)
