@@ -1,31 +1,26 @@
-import { createSignal, For } from 'solid-js';
+import { createEffect, createSignal, For } from 'solid-js';
 import { Log } from './Log';
 import { LogMonitorComponent, HandleClick } from '../types';
+import { addLogListener } from '../App';
+
 import '../styles/components/_inspect.scss';
 
 export const LogMonitor: LogMonitorComponent = (props) => {
-  
-  // TODO: Format "props.caches()" to "logs()" with desired data format
-  const [logs, setLogs] = createSignal<object[]>(props.caches());
 
-  /* Control "Record" Button */
+  /* Controls "Record" Button */
   const handleRecordClick: HandleClick = (e) => {
     e.preventDefault();
     props.setRecord(!props.record());
     console.log(props.record() ? 'Record' : 'StopRecord');
-
-    // (LOGIC: update 'cache' object with all signals and application interaction & current state)
   };
 
-  /* Control "Reset" Button */
+  /* Controls "Reset" Button */
   const handleResetClick: HandleClick = (e) => {
     e.preventDefault();
     console.log('Reset');
-    setLogs(() => {
+    props.setLogs(() => {
       return [];
     });
-
-    // (LOGIC: clear out 'cache' object )
   };
 
   return (
@@ -39,7 +34,7 @@ export const LogMonitor: LogMonitorComponent = (props) => {
         </div>
       </div>
       <div class="inspectList">
-        <For each={logs()}>{(cache, i) => <Log cache={cache} />}</For>
+        <For each={props.logs()}>{(log, i) => <Log sigName={props.sigIds[log.payload.id]} log={log} />}</For>
       </div>
     </div>
   );

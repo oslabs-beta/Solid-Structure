@@ -19,8 +19,8 @@ export const App = (props) => {
     const updateGuess = () => setGuess("hi"); 
 
     /* List of random signals */
-    const [tab, setTab] = createSignal('inspctr');
-    const [orientation, setOrientation] = createSignal('vertica');
+    const [tab, setTab] = createSignal('graphs');
+    const [orientation, setOrientation] = createSignal('vertical');
     const [record, setRecord] = createSignal(true);
     const [caches, setCaches] = createSignal([{'cache':1}]);
     const [cache, setCache] = createSignal({0:'zero', 1:'one', 'two':2});

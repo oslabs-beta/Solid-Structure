@@ -54,6 +54,10 @@ $icon-size: 22px;
     }
 }
 
+.liveSignal {
+    color: m.$active-color;
+}
+
 /* LogMonitor.tsx */
 #logboxHead {
     #recordButton {

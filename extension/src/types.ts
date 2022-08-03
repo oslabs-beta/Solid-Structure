@@ -22,8 +22,18 @@ type SignalListProps = {
     root: NonNullable<ReturnType<typeof getOwner>>,
     selectedSig: Accessor<object>,
     setSelectedSig: Setter<object>,
+    sigIds: object,
 };
 export type SignalListComponent = Component<SignalListProps>;
+
+/* Signal.tsx */
+type SignalProps = {
+    sigId: string,
+    signal: object,
+    selectedSig: Accessor<object>,
+    setSelectedSig: Setter<object>,
+}
+export type SignalComponent = Component<SignalProps>;
 
 /* Graph.tsx */
 type GraphProps = {
@@ -51,10 +61,18 @@ export type DiagonalLink = {
 type LogMonitorProps = {
     record: Accessor<boolean>,
     setRecord: Setter<boolean>,
-    caches: Accessor<object[]>,
-    setCaches: Setter<object[]>,
+    logs: Accessor<object[]>,
+    setLogs: Setter<object[]>,
+    sigIds: object,
 };
 export type LogMonitorComponent = Component<LogMonitorProps>;
+
+/* Log.tsx */
+type LogProps = {
+    sigName: string,
+    log: object,
+}
+export type LogComponent = Component<LogProps>;
 
 /* Navbar.tsx */
 type NavbarProps = {
@@ -62,11 +80,3 @@ type NavbarProps = {
     setTab: Setter<TabType>,
 };
 export type NavbarComponent = Component<NavbarProps>;
-
-/* Log.tsx */
-type LogProps = {
-    signal: object,
-    selectedSig: Accessor<object>,
-    setSelectedSig: Setter<object>,
-}
-export type LogComponent = Component<LogProps>;
