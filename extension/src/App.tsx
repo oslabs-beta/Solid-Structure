@@ -1,5 +1,4 @@
-import { createSignal, createEffect, createRoot, getOwner, Switch, Match, createMemo, on } from 'solid-js';
-
+import { createSignal, createEffect, getOwner, Switch, Match, createMemo, on } from 'solid-js';
 import { Header } from './components/Header';
 import { SignalList } from './components/SignalList';
 import { Graph } from './components/Graph';
@@ -8,20 +7,19 @@ import { Navbar } from './components/Navbar';
 import { SolidComponent, TabType, OrientType } from './types';
 import './styles/main.scss';
 
-
 import { registerDebuggerPlugin, createInternalRoot } from "@solid-devtools/debugger"
-import type {Owner} from "solid-js/types/reactive/signal"
+import type { Owner } from "solid-js/types/reactive/signal"
 
-let appOwner: Owner
+let appOwner: Owner;
 
 export function debugComponent() {
-  appOwner = getOwner()
+  appOwner = getOwner();
 }
 
 const signalListeners:Record<number, (newValue: unknown) => void> = {}
 
 export const addSignalListener = (id:number, listener: (newValue: unknown) => void) => {
-  signalListeners[id] = listener
+  signalListeners[id] = listener;
 }
 
 /* 
@@ -30,21 +28,25 @@ export const addSignalListener = (id:number, listener: (newValue: unknown) => vo
     to a seperate application (demo-app / browser-rendered app) 
 */
 registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
-  createEffect(() => {
   /*  For Structural Graph Rendering  */
+  createEffect(() => {
     const currentRoots = roots()
+    // console.log('currentRoots:', currentRoots);
     createEffect(() => {
       currentRoots.forEach(root => {
-        console.log("root.tree:", root.tree)
+        // console.log("root.tree:", root.tree)
       })
     })
 
     makeBatchUpdateListener((updates) => {
       updates.forEach(update => {
+        console.log(update);
         // UpdateType.Signal = 0 ; UpdateType.Computation = 1
-        if (update.type !== 0) return
-        const id = update.payload.id 
-        const listener = signalListeners[id]
+        if (update.type !== 0) return;
+        const id = update.payload.id;
+        const listener = signalListeners[id];
+        // console.log(id);
+
         if (listener) listener(update.payload.value)
       })
     })
@@ -55,7 +57,7 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
     trackBatchedUpdates: () => true,
     trackSignals: () => true
   }
-})
+});
 
 
 export const SolidStructure: SolidComponent = (props) => {
@@ -153,11 +155,8 @@ export const SolidStructure: SolidComponent = (props) => {
             </div>
           </>
         );
-  
       })
     )
-      
-
 
   })
 };
