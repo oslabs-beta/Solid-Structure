@@ -2,20 +2,29 @@ import { createSignal, createEffect } from "solid-js";
 import './style.css';
 import { Nav } from './Nav';
 
+import { debugComponent } from "../extension/src/App"
+
 /* THIS IS DEMO APP!!! */
 export const App = (props) => {
+
+    debugComponent()
+
+    /* ONLY the following 3 signals work */
     const [count, setCount] = createSignal(0); 
     const [bool, setBool] = createSignal(true); 
-    const [guess, setGuess] = createSignal("boo"); 
+    const [guess, setGuess] = createSignal("boo");
 
-    const [tab, setTab] = createSignal('inspector');
-    const [orientation, setOrientation] = createSignal('horizontal');
+    const increment = () => setCount(count() + 1);
+    const decrement = () => setCount(count() - 1); 
+    const updateGuess = () => setGuess("hi"); 
+
+    /* List of random signals */
+    const [tab, setTab] = createSignal('inspctr');
+    const [orientation, setOrientation] = createSignal('vertica');
     const [record, setRecord] = createSignal(true);
-    const [caches, setCaches] = createSignal([{}, {}, {}, {}, {}]);
+    const [caches, setCaches] = createSignal([{'cache':1}]);
     const [cache, setCache] = createSignal({0:'zero', 1:'one', 'two':2});
-    
-    /* Update 'Inspect' box width by user input (drag) */
-    const [boxsize, setBoxsize] = createSignal(65);
+        const [boxsize, setBoxsize] = createSignal(65);
     const [onDrag, setOnDrag] = createSignal(false);
     const onMouseMove = (e) => {
       const w = window.innerWidth - e.clientX;
@@ -33,10 +42,6 @@ export const App = (props) => {
         window.removeEventListener('mouseup', onMouseUp);
       }
     });
-
-    const increment = () => setCount(count() + 1);
-    const decrement = () => setCount(count() - 1); 
-    const updateGuess = () => setGuess("hi"); 
 
     return (
       <div id='counter'>

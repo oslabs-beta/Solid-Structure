@@ -4,9 +4,7 @@ import { SignalListComponent } from '../types';
 import '../styles/components/_inspect.scss';
 
 export const SignalList: SignalListComponent = (props) => {
-
-  const root = props.root.owned ? props.root.owned[0].owned[0].sourceMap : []; 
-  const signals = Object.values(root);
+  const signals = Object.values(props.root.sourceMap);
 
   return (
     <div class="inspectBox">
@@ -16,8 +14,8 @@ export const SignalList: SignalListComponent = (props) => {
       <div class="inspectList">
         <For each={signals}>{(signal) => 
           <Signal 
-            signal={signal} 
-            selectedSig={props.selectedSig} 
+            signal={signal}
+            selectedSig={props.selectedSig}
             setSelectedSig={props.setSelectedSig}
           />}
         </For>

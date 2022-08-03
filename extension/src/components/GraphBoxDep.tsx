@@ -9,21 +9,23 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
     /* Target where to load D3 Graph */
     const newSvg = d3.select(svgDep);
 
-
-
-
     const sgName = Object.keys(props.selectedSig())[0]
-    // const sgdata = props.selectedSig()[sgName];
+    const sgdata = props.selectedSig()[sgName];
     // console.log(sgName);
     // console.log(sgdata);
 
+    // if (sgdata) {
+    //   sgdata.forEach(el => {
+    //     console.log(el.name);
+    //   }
+    // }
 
     /* Sample Data */
 
-    const data = [{"child":`${sgName}`, "parent":""},
-                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":`${sgName}`},
-                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":`${sgName}`},
-                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":`${sgName}`},
+    const data = [{"child":`s-68655021`, "parent":""},
+                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":"s-68655021"},
+                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":"s-68655021"},
+                  {"child":"c-1-1-r0-1-1-4-1-1", "parent":"s-68655021"},
                   ];
 
 
