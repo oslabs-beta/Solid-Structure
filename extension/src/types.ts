@@ -32,12 +32,14 @@ type GraphProps = {
     boxsize?: Accessor<number>,
     selectedSig: Accessor<object>,
     setSelectedSig: Setter<object>,
+    rootTree: NonNullable<ReturnType<typeof getOwner>>,
 };
 export type GraphComponent = Component<GraphProps>;
 
 /* GraphBox.tsx */
 type GraphBoxProps = {
-    selectedSig: Accessor<object>,
+    selectedSig?: Accessor<object>,
+    rootTree?: NonNullable<ReturnType<typeof getOwner>>,
 };
 export type GraphBoxComponent = Component<GraphBoxProps>;
 export type DiagonalLink = {
