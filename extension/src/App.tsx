@@ -1,6 +1,6 @@
 import { createSignal, createEffect, getOwner, Switch, Match, createMemo, on } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { registerDebuggerPlugin, createInternalRoot } from "@solid-devtools/debugger"
+import { registerDebuggerPlugin, createInternalRoot } from "@solid-devtools/debugger";
 import type { Owner } from "solid-js/types/reactive/signal";
 import { SolidComponent, TabType, OrientType } from './types';
 import { Header } from './components/Header';
@@ -13,6 +13,8 @@ import './styles/main.scss';
 const [mainCurrRoot, setMainCurrRoot] = createSignal();
 const [record, setRecord] = createSignal<boolean>(true);
 const [logs, setLogs] = createSignal([]);
+
+// useExtensionAdapter();
 
 /**
  * @method debugComponent
@@ -56,6 +58,7 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
         // UpdateType.Signal = 0 ; UpdateType.Computation = 1
         if (update.type !== 0) return
         if (record()){
+          // Signal
           const prevlogs = [...logs()];
           prevlogs.push(update)
           setLogs(prevlogs);
@@ -78,6 +81,9 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
 
 export const SolidStructure: SolidComponent = (props) => {
 
+  // createEffect(() => {
+  //   console.log(loggs);
+  // })
   return createInternalRoot(() => {
     const [mounted, setMounted] = createSignal(false)
     setTimeout(() => setMounted(true))
@@ -92,7 +98,7 @@ export const SolidStructure: SolidComponent = (props) => {
 
         /* Creating an object that pairs "signal id" with "signal name"  */
         const [sigIds, setSigIds] = createSignal<object>({});
-        const sigs = root.sourceMap;
+        const sigs = root ? root.sourceMap : {};
         for (const sig in sigs) {
           const currSig = sigIds();
           currSig[sigs[sig].sdtId] = sig;

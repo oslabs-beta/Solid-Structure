@@ -4,7 +4,7 @@ import { SignalListComponent } from '../types';
 import '../styles/components/_inspect.scss';
 
 export const SignalList: SignalListComponent = (props) => {
-  const signals = Object.values(props.root.sourceMap);
+  const signals = props.root ? Object.values(props.root.sourceMap) : [];
 
   /* Helper function to get signal "id" from "signal.name" */
   function getKeyByValue(obj:object, val:string) {

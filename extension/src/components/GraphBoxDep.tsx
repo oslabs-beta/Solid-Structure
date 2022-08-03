@@ -37,6 +37,9 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
       data.push(d)
     }) : null;
 
+    /*Remove previous tree from SVG and add new one upon invocation*/
+    d3.select(svgDep).selectAll("*").remove();
+
     /* Convert Sample Data to data structure for D3 */
     const dataStructure = d3.stratify()
                               .id(function(d: any) {return d.child;})
