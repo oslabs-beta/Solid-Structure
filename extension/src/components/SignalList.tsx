@@ -7,8 +7,8 @@ export const SignalList: SignalListComponent = (props) => {
   const signals = props.root ? Object.values(props.root.sourceMap) : [];
 
   /* Helper function to get signal "id" from "signal.name" */
-  function getKeyByValue(obj:object, val:string) {
-    return Object.keys(obj).find(key => obj[key] === val);
+  function getKeyByValue(obj: object, val: string) {
+    return Object.keys(obj).find((key) => obj[key] === val);
   }
 
   return (
@@ -17,16 +17,17 @@ export const SignalList: SignalListComponent = (props) => {
         <h3>Signals</h3>
       </div>
       <div class="inspectList">
-        <For each={signals}>{(signal) => 
-          <Signal 
-            sigId={getKeyByValue(props.sigIds, signal.name)}
-            signal={signal}
-            selectedSig={props.selectedSig}
-            setSelectedSig={props.setSelectedSig}
-          />}
+        <For each={signals}>
+          {(signal) => (
+            <Signal
+              sigId={getKeyByValue(props.sigIds, signal.name)}
+              signal={signal}
+              selectedSig={props.selectedSig}
+              setSelectedSig={props.setSelectedSig}
+            />
+          )}
         </For>
       </div>
     </div>
   );
 };
-

@@ -7,10 +7,8 @@ import { Debugger } from "@solid-devtools/debugger"
 render(() =>(
   <>
     <Debugger>
-      <App/>
+      <App/> 
     </Debugger>
-    <SolidStructure/>
-  </>
-),
-    document.getElementById('root')
+  </>),
+  document.getElementById('root')
 );

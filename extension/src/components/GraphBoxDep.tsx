@@ -26,11 +26,12 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
     const newSvg = d3.select(svgDep);
 
     /* Format Data to be compatible with D3  */
+    // console.log(props.selectedSig());
     const sgName = Object.keys(props.selectedSig())[0]
     const sgdata = Object.values(props.selectedSig())[0];
     const data = [{child: sgName, parent: ""}];
     sgdata ? sgdata.forEach(el => {
-      const d = {}
+      const d: any = {}
       d.child = el.name;
       d.parent = sgName;
       d.data = el;
@@ -50,10 +51,11 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
     const treeStructure = d3.tree().size([height,width]);
 
     /* Set data to be loaded in D3 Graph */
-    const information = treeStructure(dataStructure);
+    const information = treeStructure(dataStructure); 
     // console.log(information.descendants());
     // console.log(information.links());
-        
+    // console.log(information);
+
     /*Micro-managed reactive dependency graph based on window.innerHeight*/
     switch(true){
       case(window.innerHeight >= 900 && window.innerHeight < 1100):

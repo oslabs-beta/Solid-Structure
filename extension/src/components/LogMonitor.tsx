@@ -6,7 +6,6 @@ import { addLogListener } from '../App';
 import '../styles/components/_inspect.scss';
 
 export const LogMonitor: LogMonitorComponent = (props) => {
-
   /* Controls "Record" Button */
   const handleRecordClick: HandleClick = (e) => {
     e.preventDefault();
@@ -25,14 +24,16 @@ export const LogMonitor: LogMonitorComponent = (props) => {
     <div class="inspectBox">
       <div id="logboxHead" class="inspectHead">
         <div id="recordButton" onClick={handleRecordClick}>
-          <span id="recBtn" classList={{active: props.record()}}></span>
+          <span id="recBtn" classList={{ active: props.record() }}></span>
         </div>
         <div id="resetButton" onClick={handleResetClick}>
           Reset
         </div>
       </div>
       <div class="inspectList">
-        <For each={props.logs()}>{(log, i) => <Log sigName={props.sigIds[log.payload.id]} log={log} />}</For>
+        <For each={props.logs()}>
+          {(log, i) => <Log sigName={props.sigIds[log.payload.id]} log={log} />}
+        </For>
       </div>
     </div>
   );
