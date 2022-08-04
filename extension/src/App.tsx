@@ -1,6 +1,6 @@
 import { createSignal, createEffect, getOwner, Switch, Match, createMemo, on } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import { registerDebuggerPlugin, createInternalRoot } from "@solid-devtools/debugger"
+import { registerDebuggerPlugin, createInternalRoot } from "@solid-devtools/debugger";
 import type { Owner } from "solid-js/types/reactive/signal";
 import { SolidComponent, TabType, OrientType } from './types';
 import { Header } from './components/Header';
@@ -13,6 +13,8 @@ import './styles/main.scss';
 const [mainCurrRoot, setMainCurrRoot] = createSignal();
 const [record, setRecord] = createSignal<boolean>(true);
 const [logs, setLogs] = createSignal([]);
+
+// useExtensionAdapter();
 
 /**
  * @method debugComponent
@@ -27,15 +29,11 @@ export function debugComponent() { appOwner = getOwner() };
 export const signalListeners:Record<number, (newValue: unknown) => void> = {};
 /**
  * @method addSignalListener
- * @description - ...
+ * @description - 
  */
 export const addSignalListener = (id:number, listener:(newValue: unknown) => void) => {
   signalListeners[id] = listener;
-};
-
-export const logListeners:Record<object, (newValue: unknown) => void> = [];
-export const addLogListener = (id:number, listener:(newValue: unknown) => void) => {
-  logListeners[id] = listener;
+  // console.log(signalListeners);
 };
 
 /**
@@ -48,10 +46,7 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
     const currentRoots = roots();
 
     createEffect(() => {
-      currentRoots.forEach(root => {
-        setMainCurrRoot(root.tree);
-        // console.log("mainCurrRoot(s):", mainCurrRoot())
-      })
+      currentRoots.forEach(root => { setMainCurrRoot(root.tree) })
     })
 
     /**
@@ -63,10 +58,10 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
         // UpdateType.Signal = 0 ; UpdateType.Computation = 1
         if (update.type !== 0) return
         if (record()){
-          const prevlogs = logs();
+          // Signal
+          const prevlogs = [...logs()];
           prevlogs.push(update)
           setLogs(prevlogs);
-          // console.log(logs());
         }
         const id = update.payload.id;
         const listener = signalListeners[id];
@@ -86,10 +81,6 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
 
 export const SolidStructure: SolidComponent = (props) => {
 
-  createEffect(() => {
-    console.log(logs());
-  })
-
   return createInternalRoot(() => {
     const [mounted, setMounted] = createSignal(false)
     setTimeout(() => setMounted(true))
@@ -104,7 +95,7 @@ export const SolidStructure: SolidComponent = (props) => {
 
         /* Creating an object that pairs "signal id" with "signal name"  */
         const [sigIds, setSigIds] = createSignal<object>({});
-        const sigs = root.sourceMap;
+        const sigs = root ? root.sourceMap : {};
         for (const sig in sigs) {
           const currSig = sigIds();
           currSig[sigs[sig].sdtId] = sig;

@@ -1,28 +1,31 @@
+import { createCallbackStack } from '@solid-primitives/utils';
+import { portHandler, createRuntimeMsgr, MESSAGE } from './utils/utils';
+console.log('BG SCRIPT WORKING');
+const { onRuntimeMsg, postRuntimeMessage } = createRuntimeMsgr();
+
 let mainport;
 
-chrome.runtime.onMessage.addListener((req, sender, sendRes) => {
-  if (req) {
-    if (mainport) {
-      mainport.portMessage({ body: req.body });
-    }
-  }
+//?? -> graphUpdate , batchedUpdate, forceUpdate
+const { push: addCleanup, execute: clearListeners } = createCallbackStack();
+chrome.runtime.onConnect.addListener((port) => {
+  if (port.name !== 'Solid-Structure')
+    return console.log('UNABLE TO CONNECT:', port.name);
+
+  mainport = port;
+  //createPortMessage(mainport) -> postPortMessage & onPortMessage
+  const { postPortMsg, onPortMsg } = portHandler(mainport);
+
+  addCleanup(
+    onPortMsg(MESSAGE.UpdateRoots, (root) =>
+      postRuntimeMessage(MESSAGE.UpdateRoots, root)
+    )
+  );
+
+  addCleanup(
+    onPortMsg(MESSAGE.BatchedUpdate, (payload) =>
+      postRuntimeMessage(MESSAGE.BatchedUpdate, payload)
+    )
+  );
 });
 
-chrome.runtime.onConnect.addListener((port) => {
-  mainport = port;
-  mainport.onMessage.addListener((msg) => {
-    if (msg.body === 'runContentScript') {
-      chrome.tabs.executeScript({ file: './contentScript.js' });
-    }
-    if (msg.body === 'updateScript') {
-      setTimeout(() => {
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-          chrome.tabs.sendMessage(tabs[0].id, {
-            body: 'UPDATE',
-            script: msg.script,
-          });
-        });
-      }, 50);
-    }
-  });
-});
+export {};
