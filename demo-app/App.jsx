@@ -1,62 +1,69 @@
-import { createSignal, createEffect } from "solid-js";
+import { createSignal, createEffect } from 'solid-js';
 import './style.css';
 import { Nav } from './Nav';
 
-import { debugComponent } from "../extension/src/App"
+import { debugComponent } from '../extension/src/App';
 
 /* THIS IS DEMO APP!!! */
 export const App = (props) => {
+  debugComponent();
 
-    debugComponent()
+  /* ONLY the following 3 signals work */
+  const [count, setCount] = createSignal(0);
+  const [bool, setBool] = createSignal(true);
+  const [guess, setGuess] = createSignal('boo');
 
-    /* ONLY the following 3 signals work */
-    const [count, setCount] = createSignal(0); 
-    const [bool, setBool] = createSignal(true); 
-    const [guess, setGuess] = createSignal("boo");
+  const increment = () => setCount(count() + 1);
+  const decrement = () => setCount(count() - 1);
+  const updateGuess = () => setGuess((g) => (g === 'boo' ? 'hi' : 'boo'));
 
-    const increment = () => setCount(count() + 1);
-    const decrement = () => setCount(count() - 1); 
-    const updateGuess = () => setGuess("hi"); 
+  /* List of random signals */
+  const [tab, setTab] = createSignal('graphs');
+  const [orientation, setOrientation] = createSignal('vertical');
+  const [record, setRecord] = createSignal(true);
+  const [caches, setCaches] = createSignal([{ cache: 1 }]);
+  const [cache, setCache] = createSignal({ 0: 'zero', 1: 'one', two: 2 });
+  const [boxsize, setBoxsize] = createSignal(65);
+  const [onDrag, setOnDrag] = createSignal(false);
+  const onMouseMove = (e) => {
+    const w = window.innerWidth - e.clientX;
+    const wp = Math.floor((w / window.innerWidth) * 100);
+    if (w < 200 || wp < 20 || wp > 90) return;
+    setBoxsize(wp);
+  };
+  const onMouseUp = (e) => setOnDrag(false);
+  createEffect(() => {
+    if (onDrag()) {
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+    } else {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    }
+  });
 
-    /* List of random signals */
-    const [tab, setTab] = createSignal('graphs');
-    const [orientation, setOrientation] = createSignal('vertical');
-    const [record, setRecord] = createSignal(true);
-    const [caches, setCaches] = createSignal([{'cache':1}]);
-    const [cache, setCache] = createSignal({0:'zero', 1:'one', 'two':2});
-        const [boxsize, setBoxsize] = createSignal(65);
-    const [onDrag, setOnDrag] = createSignal(false);
-    const onMouseMove = (e) => {
-      const w = window.innerWidth - e.clientX;
-      const wp = Math.floor((w / window.innerWidth) * 100);
-      if (w < 200 || wp < 20 || wp > 90) return;
-      setBoxsize(wp);
-    };
-    const onMouseUp = (e) => setOnDrag(false);
-    createEffect(() => {
-      if (onDrag()) {
-        window.addEventListener('mousemove', onMouseMove);
-        window.addEventListener('mouseup', onMouseUp);
-      } else {
-        window.removeEventListener('mousemove', onMouseMove);
-        window.removeEventListener('mouseup', onMouseUp);
-      }
-    });
-
-    return (
-      <div id='counter'>
-        <div id='counterBox'>{count}</div>
-        <div id='counterBox'>{guess}</div>
-        <div>
-          <button id="decrementBtn" onClick={decrement} type="button"> Decrement </button>
-          <button id="incrementBtn" onClick={increment} type="button"> Increment </button>
-          <button id="updateGuessBtn" onClick={updateGuess} type="button"> UpdateGuess </button>
+  return (
+    <div id="counter">
+      <div id="counterBox">{count()}</div>
+      <div id="counterBox2">{guess}</div>
+      <div>
+        <div id="decrementBtn" onClick={decrement}>
+          {' '}
+          Decrement{' '}
         </div>
-        <Nav tab={tab} setTab={setTab} />
+        <div id="incrementBtn" onClick={increment}>
+          {' '}
+          Increment{' '}
+        </div>
+        <button id="updateGuessBtn" onClick={updateGuess} type="button">
+          {' '}
+          UpdateGuess{' '}
+        </button>
       </div>
-    );
+      <Nav tab={tab} setTab={setTab} />
+    </div>
+  );
 };
-
 
 // import { createEffect, DEV, getOwner } from "solid-js";
 // import { createStore } from "solid-js/store"

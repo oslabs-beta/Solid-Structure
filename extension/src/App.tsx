@@ -1,4 +1,4 @@
-import { createSignal, createEffect, getOwner, Switch, Match, createMemo, on } from 'solid-js';
+import { createSignal, createEffect, getOwner, Switch, Match, createMemo, on, Show } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { registerDebuggerPlugin, createInternalRoot } from "@solid-devtools/debugger";
 import type { Owner } from "solid-js/types/reactive/signal";
@@ -44,9 +44,10 @@ export const addSignalListener = (id:number, listener:(newValue: unknown) => voi
 registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
   createEffect(() => {
     const currentRoots = roots();
-
     createEffect(() => {
-      currentRoots.forEach(root => { setMainCurrRoot(root.tree) })
+      currentRoots.forEach(root => { 
+        setMainCurrRoot(root.tree) 
+      })
     })
 
     /**
@@ -92,7 +93,6 @@ export const SolidStructure: SolidComponent = (props) => {
         const [tab, setTab] = createSignal<TabType>('inspector');
         const [orientation, setOrientation] = createSignal<OrientType>('horizontal');
         const [selectedSig, setSelectedSig] = createSignal<object>({});
-
         /* Creating an object that pairs "signal id" with "signal name"  */
         const [sigIds, setSigIds] = createSignal<object>({});
         const sigs = root ? root.sourceMap : {};
