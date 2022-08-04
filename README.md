@@ -8,10 +8,10 @@ Solid Structure allows developer to oversee a list of signal connections, signal
 
 ## Features
 - [x] Signal List
-- [ ] Signal Update Logs (on/off)
-- [ ] Graph Visualization
-    - [ ] Structural Graph
-    - [ ] Dependency Graph
+- [x] Signal Update Logs (on/off)
+- [x] Graph Visualization
+    - [x] Structural Graph
+    - [x] Dependency Graph
     - [x] Orientation Adjustment
 <br></br>
 
