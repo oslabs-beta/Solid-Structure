@@ -4,12 +4,11 @@ import {
   portHandler,
   MESSAGE,
 } from './utils/utils';
-console.log('CS SCRIPT WORKING');
 
 const port = chrome.runtime.connect({ name: 'Solid-Structure' });
 if (port) {
-  console.log('CS CONNECTED');
-  console.log(port.name);
+  // console.log('CS CONNECTED');
+  console.log("PORT:", port.name);
 }
 listenToWindowMsgs();
 

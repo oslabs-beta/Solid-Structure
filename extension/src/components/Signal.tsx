@@ -39,7 +39,7 @@ export const Signal: SignalComponent = (props) => {
         </p>
         <br></br>
         <span> ➤ {typeof value()}:</span>
-        <span class="liveSignal">{value()}</span>
+        <span class="liveSignal">{value().toString()}</span>
       </div>
       <div class="logContent">
         <For each={observers}>

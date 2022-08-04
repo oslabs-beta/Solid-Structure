@@ -1,0 +1,1 @@
+import{l as a,p as c,o as s,M as o}from"./utils.4a7bbd0b.js";import"./index.8620d1c0.js";console.log("CS SCRIPT WORKING");const e=chrome.runtime.connect({name:"Solid-Structure"});e&&(console.log("CS CONNECTED"),console.log(e.name));a();const{postPortMsg:n}=c(e);s(o.UpdateRoots,t=>n(o.UpdateRoots,t));s(o.BatchedUpdate,t=>n(o.BatchedUpdate,t));

@@ -17,7 +17,7 @@ export default defineManifest({
   ],
   host_permissions: ['file:///*', 'http://*/*', 'https://*/*'],
   background: {
-    service_worker: './background.js',
+    service_worker: './background.ts',
     type: 'module',
   },
   icons: {

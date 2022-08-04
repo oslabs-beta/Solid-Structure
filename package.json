@@ -6,8 +6,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build ./extension/vite.config.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite -c ./demo-app/vite-demo.config.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "SolidJS",
