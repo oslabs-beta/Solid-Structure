@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "vite",
-    "build": "vite build ./extension/vite.config.ts",
+    "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -31,7 +31,6 @@
   },
   "homepage": "https://github.com/oslabs-beta/Solid-Structure#readme",
   "devDependencies": {
-    "@crxjs/vite-plugin": "^1.0.13",
     "@solid-devtools/debugger": "^0.2.3",
     "@types/d3": "^7.4.0",
     "@types/node": "^18.0.6",

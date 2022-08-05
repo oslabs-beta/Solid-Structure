@@ -150,6 +150,20 @@ $recIn-color: #2f2f33;
       background-color: $tertiary-color;
     }
   }
+
+  $circle-color: white;
+  $stroke-color: orange; 
+  $text-color: white; 
+
+  circle { 
+    fill: $circle-color; 
+  }
+  path { 
+    stroke: $stroke-color;
+  }
+  text{
+    fill: $text-color;
+  }
 }
 
 /* App.tsx */
@@ -182,6 +196,6 @@ $recIn-color: #2f2f33;
 // #mainApp {
 //   top:0;
 //   right:0;
-//   width:74%;
+//   width:78%;
 //   height:100%;
 // }

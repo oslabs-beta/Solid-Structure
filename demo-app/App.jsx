@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from "solid-js";
+import { createSignal, createEffect, For } from "solid-js";
 import './style.css';
 import { Nav } from './Nav';
 
@@ -16,7 +16,7 @@ export const App = (props) => {
 
     const increment = () => setCount(count() + 1);
     const decrement = () => setCount(count() - 1); 
-    const updateGuess = () => setGuess("hi"); 
+    const updateGuess = () => setGuess((g) => (g === 'boo' ? 'hi' : 'boo'));
 
     /* List of random signals */
     const [tab, setTab] = createSignal('graphs');
@@ -24,8 +24,9 @@ export const App = (props) => {
     const [record, setRecord] = createSignal(true);
     const [caches, setCaches] = createSignal([{'cache':1}]);
     const [cache, setCache] = createSignal({0:'zero', 1:'one', 'two':2});
-        const [boxsize, setBoxsize] = createSignal(65);
+    const [boxsize, setBoxsize] = createSignal(65);
     const [onDrag, setOnDrag] = createSignal(false);
+    
     const onMouseMove = (e) => {
       const w = window.innerWidth - e.clientX;
       const wp = Math.floor((w / window.innerWidth) * 100);
@@ -44,15 +45,24 @@ export const App = (props) => {
     });
 
     return (
-      <div id='counter'>
-        <div id='counterBox'>{count}</div>
-        <div id='counterBox'>{guess}</div>
+      <div id='cou'>
+        <h2 id="tophead">SolidJS Application</h2>
+        <div class='counterBox'>{count()}</div>
+        <div class='counterBox'>{guess()}</div>
         <div>
-          <button id="decrementBtn" onClick={decrement} type="button"> Decrement </button>
-          <button id="incrementBtn" onClick={increment} type="button"> Increment </button>
-          <button id="updateGuessBtn" onClick={updateGuess} type="button"> UpdateGuess </button>
+          <button class="buttons" onClick={decrement} type="button"> - </button>
+          <button class="buttons" onClick={increment} type="button"> + </button>
+          <button class="buttons" onClick={updateGuess} type="button"> UpdateGuess </button>
         </div>
-        <Nav tab={tab} setTab={setTab} />
+        <div id="displaytab">{tab()}</div>
+        <div class="boxcont">
+          <Nav tab={tab} setTab={setTab} />
+        </div>
+        <For each={cache()}>
+          {(c) => (
+            <span>{c}</span>
+          )}
+        </For>
       </div>
     );
 };

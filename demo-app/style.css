@@ -1,19 +1,55 @@
-#counter{
+#tophead{ 
+    margin-top: 50px;
+    font-size: 2rem;
+    color:#000;;
+}
+
+#cou{
     position:absolute;
+    padding-left: 20px;
     width:100%; height:100%;
     background: skyblue;
 }
-#counterBox {
+.counterBox {
     width: 180px;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 30px;
     background-color:rgb(250, 250, 250);
     text-align: center;
     font-size: 50px;
+    border:2px solid #000;
 }
 
-#incrementBtn{ padding: 8px; }
-#decrementBtn{
-    padding: 8px;
-    margin-right: 20px;
+.buttons {
+    padding: 11px;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.boxcont{
+    margin-top:20px;
+    font-size: 2rem;
+}
+
+.tb{
+    margin-top:10px;
+    width: 180px;
+    padding: 5px;
+    text-align: center;
+    background-color:rgb(250, 250, 250);
+    cursor:pointer;
+}
+
+.tb:hover{
+    opacity: 0.7;
+}
+
+#displaytab{
+    margin-top: 100px;
+    width:180px;
+    padding: 20px;
+    font-size: 2rem;
+    text-align: center;
+    background-color:white;
+    border:2px solid #000;
 }
