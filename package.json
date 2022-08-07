@@ -9,29 +9,25 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "SolidJS",
-    "signals",
-    "computation",
-    "state",
-    "debug",
-    "solidJS dev tool",
-    "solid dev tool",
-    "solid structure",
-    "performance",
-    "rendering",
-    "optimization"
+    "solidjs",
+    "solidstructure",
+    "devtools",
+    "dependency_graph",
+    "structural_graph",
+    "extension",
+    "inspector"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oslabs-beta/Solid-Structure.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/oslabs-beta/Solid-Structure/issues"
   },
   "homepage": "https://github.com/oslabs-beta/Solid-Structure#readme",
   "devDependencies": {
-    "@solid-devtools/debugger": "^0.2.3",
+    "@solid-devtools/debugger": "^0.3.0",
     "@types/d3": "^7.4.0",
     "@types/node": "^18.0.6",
     "jest": "^28.1.3",

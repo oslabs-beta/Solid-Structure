@@ -8,7 +8,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        panel: 'panel.html',
+        panel: 'index.html',
       },
     },
     target: 'esnext',

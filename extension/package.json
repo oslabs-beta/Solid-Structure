@@ -1,6 +1,6 @@
 {
   "name": "solid-structure",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Solid Structure is a chrome extension developer tool for SolidJS.",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
     "type": "git",
     "url": "git+https://github.com/oslabs-beta/Solid-Structure.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/oslabs-beta/Solid-Structure/issues"
   },

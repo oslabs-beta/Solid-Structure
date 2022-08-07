@@ -22,11 +22,13 @@ const [logs, setLogs] = createSignal([]);
  */
 let appOwner: Owner;
 export function debugComponent() { appOwner = getOwner() };
+
 /**
  * @method signalListeners
  * @description - Object that keeps track of signal updates
  */
 export const signalListeners:Record<number, (newValue: unknown) => void> = {};
+
 /**
  * @method addSignalListener
  * @description - 

@@ -5,7 +5,7 @@ export default defineManifest({
   description: 'DevTool for SolidJS application',
   version: '1.0.0',
   manifest_version: 3,
-  devtools_page: './devtools.html',
+  devtools_page: './index.html',
   permissions: [
     'tabs',
     'activeTab',
@@ -17,7 +17,7 @@ export default defineManifest({
   ],
   host_permissions: ['file:///*', 'http://*/*', 'https://*/*'],
   background: {
-    service_worker: './background.ts',
+    service_worker: './communication/background.ts',
     type: 'module',
   },
   icons: {
@@ -27,7 +27,7 @@ export default defineManifest({
   content_scripts: [
     {
       matches: ['http://*/*', 'https://*/*'],
-      js: ['./contentScript.js'],
+      js: ['./communication/content.ts'],
       run_at: 'document_start',
     },
   ],
