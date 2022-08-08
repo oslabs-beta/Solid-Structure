@@ -1,12 +1,6 @@
 import "solid-js";
-import { render, Portal } from 'solid-js/web';
-import { SolidStructure } from "../extension/src/App";
+import { render } from 'solid-js/web';
 import { App } from './App';
+// import { SolidStructure } from '../extension/src/App';
 
-render(() =>(
-  <>
-    <App/> 
-    <SolidStructure/>
-  </>),
-  document.getElementById('root')
-);
+render(() => <><App/></>, document.getElementById('app'));

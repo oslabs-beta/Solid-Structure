@@ -1,7 +1,6 @@
-import { Show, createSignal, onMount, createEffect } from 'solid-js';
+import { createSignal, onMount } from 'solid-js';
 import * as d3 from 'd3';
 import { GraphBoxComponent, DiagonalLink } from '../types';
-import { svg } from 'd3';
 
 export const GraphBoxStr: GraphBoxComponent = (props) => {
   let svgStr: any;
@@ -138,10 +137,8 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     var width: any = dwidth - margin.left - margin.right;
     var height: number = dheight - margin.top - margin.bottom;
 
-    const data = props.rootTree().children[0].children[0];
-    // console.log(data);
-
-    const dataStructure = d3.hierarchy(data, (d) => d.children);
+    /* Target where to load D3 Graph */
+    const newSvg = d3.select(svgStr);
 
     /* Sample Data */
     // const data = [
@@ -154,10 +151,10 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     //   { child: 'Layer_A3', parent: 'Root' },
     // ];
 
-    /* Target where to load D3 Graph */
-    const newSvg = d3.select(svgStr);
+    const data = props.rootTree().children[0].children[0];
 
     /* Convert Sample Data to data structure for D3 */
+    const dataStructure = d3.hierarchy(data, (d) => d.children);
     // const dataStructure = d3
     //   .stratify()
     //   .id(function(d: any) {

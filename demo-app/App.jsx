@@ -1,13 +1,13 @@
-import { createSignal, createEffect, For, getOwner } from "solid-js";
+import { createSignal, createEffect, For } from "solid-js";
 import './style.css';
 import { Nav } from './Nav';
-import { Debugger } from "@solid-devtools/debugger"
-import { debugComponent } from "../extension/src/App"
+// import { Debugger } from "@solid-devtools/debugger"
+// import { debugComponent } from "../extension/src/App"
 
 /* THIS IS DEMO APP!!! */
 export const App = (props) => {
 
-    const appOwner = getOwner();
+    // debugComponent()
 
     /* ONLY the following 3 signals work */
     const [count, setCount] = createSignal(0); 
@@ -45,7 +45,6 @@ export const App = (props) => {
     });
 
     return (
-      <>
       <div id='cou'>
         <h2 id="tophead">SolidJS Application</h2>
         <div class='counterBox'>{count()}</div>
@@ -64,13 +63,12 @@ export const App = (props) => {
             <span>{c}</span>
           )}
         </For>
+        {/* <Debugger/> */}
       </div>
-      <Debugger/>
-      </>
     );
 };
 
-
+/* DEMO APP VERSION 2 */
 // import { createEffect, DEV, getOwner } from "solid-js";
 // import { createStore } from "solid-js/store"
 // import { render, For } from "solid-js/web";

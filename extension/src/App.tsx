@@ -83,9 +83,6 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
 
 export const SolidStructure: SolidComponent = (props) => {
 
-  // createEffect(() => {
-  //   console.log(loggs);
-  // })
   return createInternalRoot(() => {
     const [mounted, setMounted] = createSignal(false)
     setTimeout(() => setMounted(true))

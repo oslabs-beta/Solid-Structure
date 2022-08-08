@@ -11,7 +11,7 @@ export const Graph: GraphComponent = (props) => {
   const [onDrag, setOnDrag] = createSignal<boolean>(false);
   const onMouseMove = (e: any) => {
     if (props.orientation() === 'horizontal') {
-      const h = window.innerHeight - e.clientY - 34;
+      const h = window.innerHeight - e.clientY - 34 + 12;
       const hp = Math.floor((h / (window.innerHeight - 38)) * 100);
       if (hp < 18 || hp > 80) return;
       setBoxsize(hp);
@@ -19,7 +19,7 @@ export const Graph: GraphComponent = (props) => {
       const leftbox = props.boxsize
         ? ((100 - props.boxsize()) / 100) * window.innerWidth + 4
         : 0;
-      const w = e.clientX - leftbox;
+      const w = e.clientX - leftbox + 4;
       const wp = 100 - Math.floor((w / (window.innerWidth - leftbox)) * 100);
       if (wp < 15 || wp > 85) return;
       setBoxsize(wp);

@@ -3,9 +3,8 @@ import * as d3 from 'd3';
 import { GraphBoxComponent, DiagonalLink } from '../types';
 
 export const GraphBoxDep: GraphBoxComponent = (props) => {
-  /*
-    ISSUE: Not rendering new graph every time; it loads on top of previous graph 
-    EXTENSION: When hover the circle, show more details
+  /* EXTENSION:
+      - When hover the circle, display more details
    */
 
   let svgDep: any;
@@ -16,17 +15,10 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
   let xheight = 50;
 
   createEffect(() => {
-    /*
-
-      1) Logic to remove the previous <g> 
-      2) SolidJS method to replace the previous <g> 
-    
-    */
     /* Target where to load D3 Graph */
     const newSvg = d3.select(svgDep);
 
     /* Format Data to be compatible with D3  */
-    // console.log(props.selectedSig());
     const sgName = Object.keys(props.selectedSig())[0]
     const sgdata = Object.values(props.selectedSig())[0];
     const data = [{child: sgName, parent: ""}];
@@ -38,7 +30,7 @@ export const GraphBoxDep: GraphBoxComponent = (props) => {
       data.push(d)
     }) : null;
 
-    /*Remove previous tree from SVG and add new one upon invocation*/
+    /* Remove previous tree from SVG and add new one upon invocation */
     d3.select(svgDep).selectAll("*").remove();
 
     /* Convert Sample Data to data structure for D3 */
