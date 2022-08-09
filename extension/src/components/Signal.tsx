@@ -38,7 +38,7 @@ export const Signal: SignalComponent = (props) => {
           <span> (id: {props.sigId})</span>
         </p>
         <br></br>
-        <span> ➤ {typeof value()}: </span>
+        <span> ➤ {typeof value()}:</span>
         <span class="liveSignal">
           {typeof value() === 'object'
             ? JSON.stringify(value())

@@ -1,79 +1,18 @@
 /* Reset */
-body,
-div,
-p,
-ul,
-ol,
-li,
-dl,
-dt,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-table,
-tr,
-th,
-td,
-form,
-fieldset,
-legend,
-input,
-label,
-select,
-textarea,
-button,
-header,
-footer,
-nav,
-aside,
-section,
-article,
-main,
-a,
-span,
-strong,
-em,
-b,
-i,
-address {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-  color: #a0a0a0;
+body,div,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,table,tr,th,td,form,fieldset,legend,input,label,select,textarea,button,header,footer,nav,aside,section,article,main,a,span,strong,em,b,i,address {
+  margin:0; padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', sans-serif;
+  color:#A0A0A0;
   line-height: 1;
+  line-height:1;
 }
-html {
-  font-size: 0.625em;
-}
-a {
-  text-decoration: none;
-}
-ul,
-ol,
-li {
-  list-style: none;
-}
-img,
-fieldset {
-  border: none;
-  vertical-align: middle;
-}
-strong,
-em,
-b,
-i,
-address {
-  font-weight: normal;
-  font-style: normal;
-}
-table {
-  border-collapse: collapse;
-}
+html { font-size:0.625em;  }
+a { text-decoration:none; }
+ul,ol,li { list-style:none; }
+img,fieldset { border:none; vertical-align:middle; }
+strong,em,b,i,address { font-weight:normal; font-style:normal; }
+table { border-collapse:collapse; }
 
 /* Scroll Bar Styling */
 ::-webkit-scrollbar {
@@ -111,45 +50,28 @@ $recIn-color: #2f2f33;
 
 // Colors (DarkMode)
 @media (prefers-color-scheme: dark) {
-  $secondary-color: #1f1f1f;
-  $tertiary-color: #3c3c3c;
-  $recOut-color: #3c3c3c;
+  $secondary-color: #1F1F1F;
+  $tertiary-color: #3C3C3C;
+  $recOut-color: #3C3C3C;
   $recIn-color: $active-color;
 
-  #graphContainer {
-    background-color: $secondary-color;
-  }
-  .inspectBox {
-    background-color: $secondary-color;
-    .inspectHead {
-      background-color: $secondary-color;
-    }
+  #graphContainer { background-color: $secondary-color; }
+  .inspectBox { background-color: $secondary-color;
+    .inspectHead { background-color: $secondary-color; }
   }
   #logboxHead {
-    #recordButton {
-      background-color: $recOut-color;
-      span {
-        background-color: $secondary-color;
-        &.active {
-          background-color: $recIn-color;
-        }
+    #recordButton { background-color: $recOut-color; 
+      span { background-color: $secondary-color;
+        &.active { background-color: $recIn-color; }
       }
     }
-    #resetButton {
+    #resetButton{
       color: $recIn-color;
-      border: 0.2rem solid $recIn-color;
+      border:0.2rem solid $recIn-color;
     }
   }
-  #sigboxHead {
-    h3 {
-      color: $recIn-color;
-    }
-  }
-  .logBox {
-    .logTitle {
-      background-color: $tertiary-color;
-    }
-  }
+  #sigboxHead { h3 {color: $recIn-color;} }
+  .logBox { .logTitle {background-color: $tertiary-color;} }
 }
 
 /* App.tsx */
@@ -167,21 +89,7 @@ $recIn-color: #2f2f33;
 }
 .line {
   background-color: $primary-color;
-  &.inspc {
-    cursor: col-resize;
-  }
-  &.v {
-    cursor: col-resize;
-  }
-  &.h {
-    cursor: row-resize;
-  }
-}
-
-/* FOR Demo App */
-#mainApp {
-  top: 0;
-  right: 0;
-  width: 74%;
-  height: 100%;
+  &.inspc { cursor: col-resize;}
+  &.v { cursor: col-resize; }
+  &.h { cursor: row-resize; }
 }

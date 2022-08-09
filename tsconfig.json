@@ -2,13 +2,13 @@
   "compilerOptions": {
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "module": "commonjs",
+    "module": "CommonJS",
     "esModuleInterop": true,
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
-    "target": "es6",
+    "target": "ES6",
     "resolveJsonModule": true
   },
   "include": ["extension/src/**/*"]

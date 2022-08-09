@@ -1,38 +1,35 @@
 {
   "name": "solid-structure",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Solid Structure is a chrome extension developer tool for SolidJS.",
   "main": "index.js",
   "scripts": {
-    "start": "vite",
-    "build": "vite build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite -c ./demo-app/vite-demo.config.js"
-  },
+    "demoapp": "vite",
+    "dev": "vite serve ./extension",
+    "build": "vite build serve ./extension"
+  }, 
+  "author": "SolidStructure",
   "keywords": [
-    "SolidJS",
-    "signals",
-    "computation",
-    "state",
-    "debug",
-    "solidJS dev tool",
-    "solid dev tool",
-    "solid structure",
-    "performance",
-    "rendering",
-    "optimization"
+    "solidjs",
+    "solidstructure",
+    "devtools",
+    "dependency_graph",
+    "structural_graph",
+    "chrome_extension",
+    "inspector"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oslabs-beta/Solid-Structure.git"
+    "url": "https://github.com/oslabs-beta/Solid-Structure.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/oslabs-beta/Solid-Structure/issues"
   },
   "homepage": "https://github.com/oslabs-beta/Solid-Structure#readme",
   "devDependencies": {
-    "@solid-devtools/debugger": "^0.2.3",
+    "@crxjs/vite-plugin": "^1.0.13",
+    "@solid-devtools/debugger": "^0.3.0",
     "@types/d3": "^7.4.0",
     "@types/node": "^18.0.6",
     "jest": "^28.1.3",

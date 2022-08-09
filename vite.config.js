@@ -19,7 +19,7 @@ export default defineConfig({
       sourcemap: false,
       format: 'iife',
       name: 'app',
-      file: 'bundleSolid.js',
+      file: './extension/build/bundleSolid.js',
     },
     rollupOptions: {
       external: ['chrome'],

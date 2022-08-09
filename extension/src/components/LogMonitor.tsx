@@ -17,9 +17,7 @@ export const LogMonitor: LogMonitorComponent = (props) => {
   const handleResetClick: HandleClick = (e) => {
     e.preventDefault();
     console.log('Reset');
-    props.setLogs(() => {
-      return [];
-    });
+    props.setLogs(() => { return [] });
   };
 
   return (

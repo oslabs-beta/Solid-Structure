@@ -3,16 +3,16 @@
 # Solid Structure
 Solid Structure is a Chrome Extension DevTool for [SolidJS](https://www.solidjs.com/) application.
 
-Solid Structure allows developer to oversee a list of signal connections, signal updates, and visualize Structural & Dependency graphs.
+Solid Structure allows developer to oversee a list of signal connections, signal updates, and visualize structural & dependency graphs of an inspected application.
 <br></br>
 
 ## Features
 - [x] Signal List
-- [ ] Signal Update Logs (on/off)
-- [ ] Graph Visualization
-    - [ ] Structural Graph
-    - [ ] Dependency Graph
-    - [x] Orientation Adjustment
+- [x] Signal Update Logs (on/off)
+- [x] Graph Visualization
+    - [x] Structural Graph
+    - [x] Dependency Graph
+    - [x] Box Orientation Adjustment
 <br></br>
 
 ## Getting Started
@@ -25,19 +25,30 @@ Solid Structure allows developer to oversee a list of signal connections, signal
    ```sh
    npm install
    ```
-3. Run Development Environment
+3. Run development environment (HMR with CRX)
    ```sh
-   npm start
+   npm run dev
+   ```
+3. Check for creation of "dist" folder at the root directory
+
+4. Go to "Manage Extension" at Chrome Browser
+
+5. Upload "dist" folder 
+<br></br>
+
+### Checking Connection
+Run a sample SolidJS application from a separate terminal
+   ```sh
+   npm run demoapp
    ```
 <br/>
-
 
 ## Built With
 * Solid.JS
 * TypeScript
 * SCSS
 * D3.JS
-* Vite
+* Vite (CRX)
 * Chrome API DevTool
 <br></br>
 

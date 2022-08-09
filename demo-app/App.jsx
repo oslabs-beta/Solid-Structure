@@ -1,12 +1,13 @@
-import { createSignal, createEffect } from 'solid-js';
+import { createSignal, createEffect, For } from "solid-js";
 import './style.css';
 import { Nav } from './Nav';
-
-import { debugComponent } from '../extension/src/App';
+// import { Debugger } from "@solid-devtools/debugger"
+// import { debugComponent } from "../extension/src/App"
 
 /* THIS IS DEMO APP!!! */
 export const App = (props) => {
-  debugComponent();
+  
+  // debugComponent();
 
   /* ONLY the following 3 signals work */
   const [count, setCount] = createSignal(0);
@@ -21,10 +22,11 @@ export const App = (props) => {
   const [tab, setTab] = createSignal('graphs');
   const [orientation, setOrientation] = createSignal('vertical');
   const [record, setRecord] = createSignal(true);
-  const [caches, setCaches] = createSignal([{ cache: 1 }]);
-  const [cache, setCache] = createSignal({ 0: 'zero', 1: 'one', two: 2 });
+  const [caches, setCaches] = createSignal([{'cache':1}]);
+  const [cache, setCache] = createSignal({0:'zero', 1:'one', 'two':2});
   const [boxsize, setBoxsize] = createSignal(65);
   const [onDrag, setOnDrag] = createSignal(false);
+  
   const onMouseMove = (e) => {
     const w = window.innerWidth - e.clientX;
     const wp = Math.floor((w / window.innerWidth) * 100);
@@ -43,28 +45,30 @@ export const App = (props) => {
   });
 
   return (
-    <div id="counter">
-      <div id="counterBox">{count()}</div>
-      <div id="counterBox2">{guess}</div>
+    <div id='cou'>
+      <h2 id="tophead">SolidJS Application</h2>
+      <div class='counterBox'>{count()}</div>
+      <div class='counterBox'>{guess()}</div>
       <div>
-        <div id="decrementBtn" onClick={decrement}>
-          {' '}
-          Decrement{' '}
-        </div>
-        <div id="incrementBtn" onClick={increment}>
-          {' '}
-          Increment{' '}
-        </div>
-        <button id="updateGuessBtn" onClick={updateGuess} type="button">
-          {' '}
-          UpdateGuess{' '}
-        </button>
+        <button class="buttons" onClick={decrement} type="button"> - </button>
+        <button class="buttons" onClick={increment} type="button"> + </button>
+        <button class="buttons" onClick={updateGuess} type="button"> UpdateGuess </button>
       </div>
-      <Nav tab={tab} setTab={setTab} />
+      <div id="displaytab">{tab()}</div>
+      <div class="boxcont">
+        <Nav tab={tab} setTab={setTab} />
+      </div>
+      <For each={cache()}>
+        {(c) => (
+          <span>{c}</span>
+        )}
+      </For>
+      {/* <Debugger/> */}
     </div>
   );
 };
 
+/* DEMO APP VERSION 2 */
 // import { createEffect, DEV, getOwner } from "solid-js";
 // import { createStore } from "solid-js/store"
 // import { render, For } from "solid-js/web";
