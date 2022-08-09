@@ -1,4 +1,4 @@
-import { For, createSignal, createEffect } from 'solid-js';
+import { For, createSignal, createEffect, Show } from 'solid-js';
 import { SignalComponent } from '../types';
 import '../styles/components/_log.scss';
 import { addSignalListener } from '../App';
@@ -13,13 +13,13 @@ export const Signal: SignalComponent = (props) => {
 
   const handleClick = (e) => {
     const id = e.target.id;
-    const selected:object = {};
+    const selected: object = {};
     selected[id] = observers;
     props.setSelectedSig(selected);
   };
 
   /*
-    IMPROVMENTS: 
+    IMPROVEMENTS: 
       1) "array" is also considered "object"
       2) display as collapsible when "array of object" or "object of array/object"
   */
@@ -29,7 +29,7 @@ export const Signal: SignalComponent = (props) => {
         <p
           class="sigName"
           classList={{
-            active: Object.keys(props.selectedSig())[0] === props.signal.name
+            active: Object.keys(props.selectedSig())[0] === props.signal.name,
           }}
           id={props.signal.name}
           onClick={handleClick}
