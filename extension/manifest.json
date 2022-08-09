@@ -22,6 +22,9 @@
       "run_at": "document_start"
     }
   ],
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
   "icons": {
     "48": "assets/logo48-off.png",
     "128": "assets/logo128-off.png"

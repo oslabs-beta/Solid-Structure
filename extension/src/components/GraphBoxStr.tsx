@@ -151,7 +151,7 @@ export const GraphBoxStr: GraphBoxComponent = (props) => {
     //   { child: 'Layer_A3', parent: 'Root' },
     // ];
 
-    const data = props.rootTree().children[0].children[0];
+    const data = props.rootTree() ? props.rootTree().children[0].children[0] : {};
 
     /* Convert Sample Data to data structure for D3 */
     const dataStructure = d3.hierarchy(data, (d) => d.children);
