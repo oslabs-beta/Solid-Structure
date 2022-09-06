@@ -24,8 +24,8 @@ let appOwner: Owner;
 export function debugComponent() { appOwner = getOwner() };
 
 /**
- * @method signalListeners
- * @description - Object that keeps track of signal updates
+ * @variable signalListeners
+ * @description - (Logs) Object that keeps track of signal updates
  */
 export const signalListeners:Record<number, (newValue: unknown) => void> = {};
 
@@ -58,7 +58,7 @@ registerDebuggerPlugin(({ roots, makeBatchUpdateListener }) => {
      */
     makeBatchUpdateListener((updates) => {
       updates.forEach(update => {
-        // UpdateType.Signal = 0 ; UpdateType.Computation = 1
+        // UpdateType.Signal = 0; UpdateType.Computation = 1
         if (update.type !== 0) return
         if (record()){
           // Signal
