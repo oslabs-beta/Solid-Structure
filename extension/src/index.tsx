@@ -12,7 +12,7 @@ chrome.devtools.panels.create(
         chrome.runtime.onConnect.addListener(function(port) {
             console.log(port.name);
             port.onMessage.addListener(function(message) {
-                console.log(message);
+                // console.log(message);
             });
         });
 
@@ -22,5 +22,3 @@ chrome.devtools.panels.create(
 );
 
 render(() => <SolidStructure />, document.getElementById('root'));
-
-
