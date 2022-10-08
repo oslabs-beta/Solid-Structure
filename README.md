@@ -14,7 +14,7 @@ Solid Structure allows developer to oversee a list of signal connections, signal
     - [x] Dependency Graph
     - [x] Box Orientation Adjustment
 - [x] Dark Mode
-- [ ] Chrome Extension
+- [ ] Chrome Extension Release
 <br></br>
 
 <p align="center">
@@ -73,7 +73,7 @@ Contributions are what make the open source community such an amazing place to l
 
 ## Basic Rules
 * All types are managed in **types.ts** file
-* Overall color-scheme and basic stylings should be controlled in **main.scss** file
+* Overall color-scheme and basic stylings are controlled in **main.scss** file
 <br></br>
 
 <!-- LICENSE -->
@@ -92,4 +92,3 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 * [thetarnav/solid-devtools](https://github.com/thetarnav/solid-devtools)
 * [CM-Tech/solid-debugger](https://github.com/CM-Tech/solid-debugger)
 * [Best README Template](https://github.com/othneildrew/Best-README-Template)
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
