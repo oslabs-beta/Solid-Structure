@@ -7,13 +7,22 @@ Solid Structure allows developer to oversee a list of signal connections, signal
 <br></br>
 
 ## Features
-- [x] Signal List
+- [x] Signal Tracker (Signal List)
 - [x] Signal Update Logs (on/off)
-- [x] Graph Visualization
+- [x] Signal Visualizations
     - [x] Structural Graph
     - [x] Dependency Graph
     - [x] Box Orientation Adjustment
+- [x] Dark Mode
+- [ ] Chrome Extension
 <br></br>
+
+<p align="center">
+  <img width="900" src="public/assets/demo_MVP.gif">
+  <br></br>
+  <img width="900" src="public/assets/demo_UIUX.gif">
+</p>
+<br/>
 
 ## Getting Started
 ### Installation
@@ -67,6 +76,11 @@ Contributions are what make the open source community such an amazing place to l
 * Overall color-scheme and basic stylings should be controlled in **main.scss** file
 <br></br>
 
+<!-- LICENSE -->
+## License
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+<br></br>
+
 ## Authors
 * Matthew Yeon [@myeon7](https://github.com/myeon7)
 * Brandon Brighi [@Bbrighi2](https://github.com/Bbrighi2)
@@ -75,4 +89,7 @@ Contributions are what make the open source community such an amazing place to l
 <br></br>
 
 ## Acknowledgements
+* [thetarnav/solid-devtools](https://github.com/thetarnav/solid-devtools)
+* [CM-Tech/solid-debugger](https://github.com/CM-Tech/solid-debugger)
 * [Best README Template](https://github.com/othneildrew/Best-README-Template)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
