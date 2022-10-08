@@ -5,19 +5,19 @@ export const Nav = (props) => {
       <div id="navb-btns">
         <div 
           class="tb" 
-          classList={{active: props.tab() === "inspector"}} 
-          onClick={() => props.setTab('inspector')}
-        >Inspector</div>
+          classList={{active: props.tab() === "Apple"}} 
+          onClick={() => props.setTab('Apple')}
+        >Apple</div>
         <div 
           class="tb" 
-          classList={{active: props.tab() === "graph"}} 
-          onClick={() => props.setTab('graph')}
-        >Graph</div>
+          classList={{active: props.tab() === "Orange"}} 
+          onClick={() => props.setTab('Orange')}
+        >Orange</div>
         <div 
           class="tb" 
-          classList={{active: props.tab() === "logmonitor"}} 
-          onClick={() => props.setTab('logmonitor')}
-        >Log Monitor</div>
+          classList={{active: props.tab() === "Banana"}} 
+          onClick={() => props.setTab('Banana')}
+        >Banana</div>
       </div>
     </div>
   )
