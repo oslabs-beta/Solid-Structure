@@ -1,18 +1,12 @@
-![](./extension/assets/SolidStructure.png)
-
 # Solid Structure
 Solid Structure is a Chrome Extension DevTool for [SolidJS](https://www.solidjs.com/) application.
 
 Solid Structure allows developer to oversee a list of signal connections, signal updates, and visualize structural & dependency graphs of an inspected application.
+
+![](./extension/assets/SolidStructure.png)
 <br></br>
 
 ## Features
-<p align="center">
-  <img width="900" src="public/assets/demo_MVP.gif">
-  <br></br>
-  <img width="900" src="public/assets/demo_UIUX.gif">
-</p>
-
 ### Current Features
 - [x] Signal Tracker (Signal List)
 - [x] Signal Update Logs (on/off)
@@ -23,14 +17,20 @@ Solid Structure allows developer to oversee a list of signal connections, signal
 - [x] Dark Mode
 <br/>
 
+<p align="center">
+  <img width="900" src="public/assets/demo_MVP.gif">
+  <br></br>
+  <img width="900" src="public/assets/demo_UIUX.gif">
+</p>
+
 ### Area of Improvement
-- Signal Flow: Unidrectional to Bidirectional
+- <span style="font-weight:bold">Signal Flow: Unidrectional to Bidirectional</span>
    - Current loading methodology of signal information from a SolidJS application to the tool's Signal Tracker is unidirectional. All of application's signal information is lively updated to the Signal Tracker upon signal changes in the application, but its signals cannot be modified from the developer tool. Modifying the tool's root data access method to allow developer to change application signals directly from the tool would be very useful in debugging process and could eventually lead to time travel debugging through the log records in the Log Monitor section as well. 
-- Establishing Connection Between Structural Graph & Dependency Graph
+- <span style="font-weight:bold">Establishing Connection Between Structural Graph & Dependency Graph</span>
    - Currently, the tool only allows to see dependency graph of selected signals from the Signal Tracker, which is "signal → component" relationship. In order to see a dependency graph of signals for a selected component from a Structural Graph ("component → signal" relationship), the two graphs data needs be connected
-- More Information on Graph Nodes
+- <span style="font-weight:bold">More Information on Graph Nodes</span>
    - Current nodes on each graph only show names for what it represents: signal or component name. Displaying more detailed information on hover of each graph node would provide better context in the debugging process. 
-- Visual Indicator On Graphs
+- <span style="font-weight:bold">Visual Indicator On Graphs</span>
    - Including visual indicator to help identify where in both structural and dependency graph the signal is being updated would make interpreation of graphs much easier for developers.
 <br></br>
 
@@ -42,7 +42,7 @@ The Inspector section is composed of three main features: <b>Signal Tracker</b>,
 
 - <b>Dependency Graph</b> is a visualization of reactivity in a SolidJS application. It helps to identify and visualize where the selected signal is being invoked at a component level. It currently only shows "signal → component" relationship, but it should also show "component → signal" relationship when the component is selected from the <b>Structural Graph</b> in our future updates. 
 <p align="center">
-  <img width="900" src="public/assets/logic_dependencyGraph.png">
+  <img width="800" src="public/assets/logic_dependencyGraph.png">
   <br/>
 </p>
 
